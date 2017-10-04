@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_home"
+            android:title="Trang chủ" />
+        <item
+            android:id="@+id/nav_category"
+            android:icon="@drawable/ic_menu_category"
+            android:title="Danh mục" />
+        <item
+            android:id="@+id/nav_cart"
+            android:icon="@drawable/ic_menu_mycart"
+            android:title="Giỏ hàng của tôi" />
+        <item
+            android:id="@+id/nav_order"
+            android:icon="@drawable/ic_menu_myorder"
+            android:title="Đơn hàng của tôi" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_menu_settings"
+            android:title="Cài đặt" />
+    </group>
+
+    <item android:title="Hỗ trợ">
+        <menu>
+            <item
+                android:id="@+id/nav_info"
+                android:icon="@drawable/ic_menu_call"
+                android:title="HOTLINE: 0263.50.50.90" />
+            <item
+                android:id="@+id/nav_email"
+                android:icon="@drawable/ic_menu_email"
+                android:title="Gửi email hỗ trợ" />
+            <item
+                android:id="@+id/nav_instruc"
+                android:icon="@drawable/ic_menu_info"
+                android:title="Về DALATLAPTOP" />
+
+
+        </menu>
+    </item>
+
+</menu>

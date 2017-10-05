@@ -101,7 +101,13 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
-
+    public fun showFragment2(fragment: Fragment) {
+        var TAG= fragment.javaClass.simpleName
+        var fragmentTransaction= supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.contentFrame,fragment,TAG)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commitAllowingStateLoss()
+    }
     public fun showFragment(fragment: Fragment) {
         var TAG= fragment.javaClass.simpleName
         var fragmentTransaction= supportFragmentManager.beginTransaction()

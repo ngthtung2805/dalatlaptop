@@ -49,7 +49,7 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
         when(item.itemId){
             R.id.nav_category->                animateMenuShow()
             R.id.nav_cart-> {
-                drawerListener?.onCartSelected()
+                drawerListener?.onDrawerCartSelected()
             }
             }
 

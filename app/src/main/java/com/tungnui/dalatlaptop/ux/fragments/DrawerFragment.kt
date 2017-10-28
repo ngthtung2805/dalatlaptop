@@ -50,6 +50,7 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
             R.id.nav_category->                animateMenuShow()
             R.id.nav_cart-> {
                 drawerListener?.onDrawerCartSelected()
+                toggleDrawerMenu()
             }
             }
 

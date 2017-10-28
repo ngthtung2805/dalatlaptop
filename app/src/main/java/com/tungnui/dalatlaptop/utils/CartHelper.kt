@@ -103,8 +103,18 @@ fun CartDatabaseOpenHelper.total(): Int {
     return total
 }
 
-fun CartDatabaseOpenHelper.totalItem(): Int = this.getAll().count()
-
+fun CartDatabaseOpenHelper.totalItem(): Int {
+    var total = 0
+    this.use {
+        var cart = getAll()
+        for (item in cart) {
+            ifNotNull(item.price, item.quantity) { price, quantity ->
+                total += quantity
+            }
+        }
+    }
+    return total
+}
 // Access property for Context
 val Context.cartHelper: CartDatabaseOpenHelper
     get() = CartDatabaseOpenHelper.getInstance(getApplicationContext())

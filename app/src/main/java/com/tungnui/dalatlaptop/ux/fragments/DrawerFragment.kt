@@ -32,6 +32,7 @@ import com.tungnui.dalatlaptop.api.CategoryService
 import com.tungnui.dalatlaptop.api.ServiceGenerator
 import com.tungnui.dalatlaptop.models.Category
 import com.tungnui.dalatlaptop.utils.loadImg
+import com.tungnui.dalatlaptop.ux.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -46,9 +47,9 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.nav_category->{
-                animateMenuShow()
-                Log.i("ERROR","Lỗi rồi")
+            R.id.nav_category->                animateMenuShow()
+            R.id.nav_cart-> {
+                drawerListener?.onCartSelected()
             }
             }
 
@@ -372,37 +373,12 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
      * Interface defining events initiated by [DrawerFragment].
      */
     interface FragmentDrawerListener {
-
-        /**
-         * Launch [BannersFragment]. If fragment is already launched nothing happen.
-         */
         fun onDrawerBannersSelected()
-
-        /**
-         * Launch [CategoryFragment].
-         *
-         * @param drawerItemCategory object specifying selected item in the drawer.
-         */
         fun onDrawerItemCategorySelected(category: Category)
-
-        /**
-         * Launch [PageFragment], with downloadable content.
-         *
-         * @param drawerItemPage id of page for download and display. (Define in OpenShop server administration)
-         */
         fun onDrawerItemPageSelected(drawerItemPage: DrawerItemPage)
-
-        /**
-         * Launch [AccountFragment].
-         */
         fun onAccountSelected()
-
-        /**
-         * Prepare all search strings for search whisperer.
-         *
-         * @param navigation items for suggestions generating.
-         */
         fun prepareSearchSuggestions(navigation: List<DrawerItemCategory>)
+        fun onDrawerCartSelected()
     }
 
 

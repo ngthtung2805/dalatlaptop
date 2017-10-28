@@ -1,4 +1,3 @@
-
 package com.tungnui.dalatlaptop.ux
 
 import android.app.SearchManager
@@ -65,36 +64,14 @@ import com.tungnui.dalatlaptop.ux.fragments.OrdersHistoryFragment
 import com.tungnui.dalatlaptop.ux.fragments.PageFragment
 import com.tungnui.dalatlaptop.ux.fragments.ProductFragment
 import com.tungnui.dalatlaptop.ux.fragments.SettingsFragment
+import kotlinx.android.synthetic.main.action_icon_shopping_cart.*
 import timber.log.Timber
 
-/**
- * Application is based on one core activity, which handles fragment operations.
- */
 class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener {
-
-    /**
-     * Reference tied drawer menu, represented as fragment.
-     */
     var drawerFragment: DrawerFragment? = null
-    /**
-     * Indicate that app will be closed on next back press
-     */
     private var isAppReadyToFinish = false
-    /**
-     * Reference view showing number of products in shopping cart.
-     */
-    private var cartCountView: TextView? = null
-    /**
-     * Reference number of products in shopping cart.
-     */
     private var cartCountNotificationValue = CONST.DEFAULT_EMPTY_ID
-
-    /**
-     * BroadcastReceiver used in service for Gcm registration.
-     */
     private val mRegistrationBroadcastReceiver: BroadcastReceiver? = null
-
-    // Fields used in searchView.
     private val searchSuggestionsAdapter: SimpleCursorAdapter? = null
     private var searchSuggestionsList: ArrayList<String>? = null
 
@@ -136,7 +113,6 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
         val cartItem = menu.findItem(R.id.action_cart)
         MenuItemCompat.setActionView(cartItem, R.layout.action_icon_shopping_cart)
         val view = MenuItemCompat.getActionView(cartItem)
-        cartCountView = view.findViewById<View>(R.id.shopping_cart_notify) as TextView
         showNotifyCount(cartCountNotificationValue)
         view.setOnClickListener { onCartSelected() }
         if (cartCountNotificationValue == CONST.DEFAULT_EMPTY_ID) {
@@ -151,9 +127,7 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
      *
      */
     private fun getCartCount() {
-        if (cartCountView != null) {
-            showNotifyCount(this.cartHelper.totalItem());
-        }
+        showNotifyCount(this.cartHelper.totalItem());
     }
 
     /**
@@ -163,19 +137,13 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
      */
     private fun showNotifyCount(newCartCount: Int) {
         cartCountNotificationValue = newCartCount
-        Timber.d("Update cart count notification: %d", cartCountNotificationValue)
-        if (cartCountView != null) {
-            runOnUiThread {
-                if (cartCountNotificationValue != 0 && cartCountNotificationValue != CONST.DEFAULT_EMPTY_ID) {
-                    cartCountView!!.text = getString(R.string.format_number, cartCountNotificationValue)
-                    cartCountView!!.visibility = View.VISIBLE
-                } else {
-                    cartCountView!!.visibility = View.GONE
-                }
-            }
+        if (cartCountNotificationValue != 0 && cartCountNotificationValue != CONST.DEFAULT_EMPTY_ID) {
+            shopping_cart_notify.text = getString(R.string.format_number, cartCountNotificationValue)
+            shopping_cart_notify.visibility = View.VISIBLE
         } else {
-            Timber.e("Cannot update cart count notification. Cart count view is null.")
+            shopping_cart_notify.visibility = View.GONE
         }
+
     }
 
     /**
@@ -437,11 +405,11 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
      * If user is logged in then [CartFragment] is launched . Otherwise is showed a login dialog.
      */
     fun onCartSelected() {
-        replaceFragment(CartFragment(),CartFragment::class.java.simpleName)
-       /* launchUserSpecificFragment(CartFragment(), CartFragment::class.java.simpleName, LoginDialogInterface { (id, dateCreated, dateCreatedGmt, dateModified, dateModifiedGmt, email, firstName, lastName, role, username, password, billing, shipping, isPayingCustomer, ordersCount, totalSpent, avatarUrl) ->
-            // If login was successful launch CartFragment.
-            onCartSelected()
-        })*/
+        replaceFragment(CartFragment(), CartFragment::class.java.simpleName)
+        /* launchUserSpecificFragment(CartFragment(), CartFragment::class.java.simpleName, LoginDialogInterface { (id, dateCreated, dateCreatedGmt, dateModified, dateModifiedGmt, email, firstName, lastName, role, username, password, billing, shipping, isPayingCustomer, ordersCount, totalSpent, avatarUrl) ->
+             // If login was successful launch CartFragment.
+             onCartSelected()
+         })*/
     }
 
 
@@ -565,7 +533,7 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
         }
 
         fun setActionBarTitle(title: String?) {
-           MainActivity.instance?.title = title
+            MainActivity.instance?.title = title
         }
 
 

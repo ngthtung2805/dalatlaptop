@@ -96,8 +96,7 @@ class CartFragment : Fragment() {
         } else {
             setCartVisibility(true);
             cartRecyclerAdapter.refreshItems(carts);
-            var qty = carts.count()
-            cart_footer_quantity.text="Tổng số sản phẩm {$qty}"
+            cart_footer_quantity.text="Tổng số sản phẩm: ${context.cartHelper.totalItem()}"
             val formatter = DecimalFormat("#,###")
             cart_footer_price.text = "${formatter.format(context.cartHelper.total())}đ"
         }

@@ -44,30 +44,29 @@ class CartDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "Shopp
 fun CartDatabaseOpenHelper.addToCart(cart: Cart) {
     this.use {
         // check if product already exist
-        var quantity :Int?= 0
-      cart.productId?.let{
-          quantity = select("cart", "quantity")
-                  .whereArgs("productId ={ID}", "ID" to it)
-                  .exec { parseOpt(org.jetbrains.anko.db.IntParser) }
-          quantity?.let{
-              if(quantity==null){
-
-              }
-          }
-      }
-
-                cart.productId?.let {
-            quantity = select("cart", "quantity").whereArgs(
-                    "productId ={ID}", "ID" to it)
-                    .exec { parseOpt(org.jetbrains.anko.db.IntParser) }
-            if (quantity != null) {
+        insert("cart",
+                "productId" to cart.productId,
+                "quantity" to cart.quantity,
+                "productName" to cart.productName,
+                "price" to cart.price,
+                "image" to cart.image)
+        /*var cart =
+        cart.productId?.let {
+            quantity = select("cart")
+                    .whereArgs("productId ={ID}", "ID" to it)
+                    .exec { parseOpt() }
+            if (quantity == null) {
 
             } else {
 
+                quantity?.let {
+                    update("cart","quantity" to it + 1).whereArgs("id = {cartId}", "cartId" to cart.id!!).exec()
+                }
             }
-        }
+        }*/
     }
 }
+
 
 fun CartDatabaseOpenHelper.getAll(): List<Cart> = this.use {
     select("cart").exec { parseList(org.jetbrains.anko.db.classParser()) }

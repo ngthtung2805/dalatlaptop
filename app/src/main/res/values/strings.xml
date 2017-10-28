@@ -168,7 +168,7 @@
     <string name="Privacy_policy">Privacy policy</string>
     <string name="Basic_information_about_Privacy_Policy">Basic information about Privacy Policy</string>
     <string name="App_needs_to_be_restarted">To change the shop an app restart is needed.</string>
-    <string name="including_VAT">inc. VAT</string>
+    <string name="including_VAT">(đã bao gồm VAT)</string>
     <string name="Thank_you_for_your_order">Thank you for your order</string>
     <string name="Wait_for_sms_or_email_order_confirmation">Wait for &lt;b>SMS&lt;/b> or &lt;b>email&lt;/b> order confirmation.</string>
     <string name="This_is_a_sample_app">This is a sample app</string>

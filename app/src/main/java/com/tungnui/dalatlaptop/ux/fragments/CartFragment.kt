@@ -26,6 +26,8 @@ import com.travijuu.numberpicker.library.Enums.ActionEnum
 import com.travijuu.numberpicker.library.Interface.ValueChangedListener
 import com.tungnui.dalatlaptop.models.Cart
 import kotlinx.android.synthetic.main.list_item_cart_discount.*
+import kotlinx.android.synthetic.main.list_item_products.view.*
+import java.text.DecimalFormat
 
 
 /**
@@ -94,8 +96,10 @@ class CartFragment : Fragment() {
         } else {
             setCartVisibility(true);
             cartRecyclerAdapter.refreshItems(carts);
-            cart_footer_quantity.text=carts.count().toString()
-            cart_footer_price.text =context.cartHelper.total().toString()
+            var qty = carts.count()
+            cart_footer_quantity.text="Tổng số sản phẩm {$qty}"
+            val formatter = DecimalFormat("#,###")
+            cart_footer_price.text = "${formatter.format(context.cartHelper.total())}đ"
         }
     }
 

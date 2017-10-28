@@ -1,123 +1,204 @@
 <resources>
-    <string name="app_name">DALATLAPTOP</string>
-    <string name="action_settings">About</string>
-    <string name="api_base_url">https://dalatlaptop.tungnui.com</string>
-    <string name="consumer_key">ck_9c06a645be257c36f5b8545064559caf7d7eab05</string>
-    <string name="consumer_secret">ck_9c06a645be257c36f5b8545064559caf7d7eab05</string>
-    <string name="empty_text">Select song from below to play</string>
-    <string name="standard">Standard</string>
-    <string name="title_changelog">Change log</string>
-    <string name="changelog_close">Close</string>
-    <string name="action_hide">Hide Panel</string>
-    <string name="action_show">Show Panel</string>
-    <string name="action_anchor_enable">Enable Anchor Point</string>
-    <string name="action_anchor_disable">Disable Anchor Point</string>
-    <string name="idle">Idle</string>
-    <string name="crash_toast_text">Oops Crashe Occurred</string>
-    <string name="offer_banner">"Shop for 2000 to get Rs 100 discount and shop for 3000 to get Rs 200 discount"</string>
-    <string name="checkout">CheckOut</string>
-    <string name="similar_product">You may also like</string>
-    <string name="slogan">Assignment</string>
-    <string name="email_developer_">Email Developer:</string>
-    <string name="personal_website_">Personal Website :</string>
-    <string name="site_hitesh">www.hiteshsahu.com</string>
-    <string name="contact_number">Contact Number</string>
-    <string name="mob_num">8888813275</string>
-    <string name="lab_locations">Locations</string>
-    <string name="pune">Pune</string>
-    <string name="address_value">C 1002, Lorelle Socity Wakad Pune</string>
-    <string name="title_activity_main2">Main2Activity</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="toolbar_search">Tìm kiếm sản phẩm</string>
-    <string name="title_activity_settings">Settings</string>
+    <string name="app_name" translatable="false">Đà Lạt Laptop</string>
+    <string name="facebook_app_id" translatable="false">183521248888183</string>
+    <string name="android_key" translatable="false">AIzaSyB4b2hBDqGh6yakmERv95JNMuSGbvf20jo</string>
 
-    <!-- Strings related to Settings -->
+    <!-- General strings-->
+    <string name="No_network_connection">Không có kết nối mạng</string>
+    <string name="Internal_error">Kết nối bị lỗi, vui lòng thử lại sau</string>
+    <string name="Loading">Đang tải...</string>
+    <string name="Retry">Thử lại</string>
+    <string name="Ok">Đồng ý</string>
+    <string name="Cancel">Hủy</string>
+    <string name="Close">Đóng</string>
+    <string name="Clear">Xóa</string>
+    <string name="Undo">Undo</string>
+    <string name="Required_field">Không được bỏ trống</string>
+    <string name="The_entries_must_match">The entries must match</string>
+    <string name="Content_is_empty">Content is empty.</string>
 
-    <!-- Example General settings -->
-    <string name="pref_header_general">General</string>
+    <!-- Strings related to splash screen -->
+    <string name="Select_shop">Select shop</string>
+    <string name="Select_the_country_where_you_want_to_shop">Select the country \n where you want to shop </string>
+    <string name="Continue">Continue</string>
 
-    <string name="pref_title_social_recommendations">Enable social recommendations</string>
-    <string name="pref_description_social_recommendations">Recommendations for people to contact
-        based on your message history
-    </string>
+    <!-- Main activity related -->
+    <string name="Another_click_for_leaving_app">Another click for leaving app</string>
+    <string name="All_categories">Danh mục sản phẩm</string>
+    <string name="menu_action_search">Tìm kiếm</string>
+    <string name="Type_your_wish">Nhập nội dung tìm kiếm</string>
+    <string name="menu_action_cart">Giỏ hàng</string>
+    <string name="menu_action_wishlist">Wishlist</string>
 
-    <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">John Smith</string>
 
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
-    <string-array name="pref_example_list_titles">
-        <item>Always</item>
-        <item>When possible</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_example_list_values">
-        <item>1</item>
-        <item>0</item>
-        <item>-1</item>
-    </string-array>
+    <!-- Products related strings -->
+    <string name="Just_arrived">Sản phẩm mới nhất</string>
+    <string name="No_banners">No banners</string>
+    <string name="Show_offers">Show offers</string>
+    <string name="FILTER">FILTER</string>
+    <string name="Apply">Apply</string>
+    <string name="Restart">Restart</string>
+    <string name="Filter_unavailable">Filter is unavailable</string>
+    <string name="Products_not_found">Không tìm thấy sản phẩm nào.</string>
+    <string name="Product_not_found">Sản phẩm không tồn tại</string>
+    <string name="ADD_TO_CART">THÊM VÀO GIỎ HÀNG</string>
+    <string name="SEND_TO_A_FRIEND">CHIA SẺ</string>
+    <string name="RECOMMENDED">SẢN PHẨM LIÊN QUAN</string>
+    <string name="Select_size">Select size</string>
+    <string name="Product">Product</string>
+    <string name="All">All</string>
 
-    <!-- Example settings for Data & Sync -->
-    <string name="pref_header_data_sync">Data &amp; sync</string>
+    <!-- Products sort options -->
+    <string name="Recommended">Nổi bật</string>
+    <string name="Whats_new">Mới nhất</string>
+    <string name="Highest_price">Giá tăng dần</string>
+    <string name="Lowest_price">Giá giảm dần</string>
 
-    <string name="pref_title_sync_frequency">Sync frequency</string>
-    <string-array name="pref_sync_frequency_titles">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_sync_frequency_values">
-        <item>15</item>
-        <item>30</item>
-        <item>60</item>
-        <item>180</item>
-        <item>360</item>
-        <item>-1</item>
-    </string-array>
 
-    <string-array name="list_preference_entries">
-        <item>Entry 1</item>
-        <item>Entry 2</item>
-        <item>Entry 3</item>
-    </string-array>
+    <!-- User related strings -->
+    <string name="Unknown_user">Xin chào, Khách!</string>
+    <string name="Profile">Thông tin tài khoản</string>
+    <string name="Name_colon">Họ tên:</string>
+    <string name="Address_colon">Địa chỉ:</string>
+    <string name="Email_colon">Email:</string>
+    <string name="Phone_colon">SĐT:</string>
 
-    <string-array name="list_preference_entry_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
+    <string name="Account">Account</string>
+    <string name="Email">Email</string>
+    <string name="Phone">Phone</string>
+    <string name="Street">Street</string>
+    <string name="House_code">House code</string>
+    <string name="City">City</string>
+    <string name="ZIP">ZIP</string>
 
-    <string-array name="multi_select_list_preference_default_value" />
+    <string name="Changing_the_password">Thay đổi mật khẩu</string>
+    <string name="FirstName">Tên</string>
+    <string name="LastName">Họ</string>
+    <string name="Password">Mật khẩu</string>
+    <string name="Repassword">Nhập lại mật khẩu</string>
+    <string name="New_password">Mật khẩu mới</string>
+    <string name="Password_again">Nhập lại mật khẩu</string>
+    <string name="Change_password">Đổi mật khẩu</string>
+    <string name="Save">Lưu</string>
 
-    <string name="pref_title_system_sync_settings">System sync settings</string>
+    <string name="My_orders">Đơn hàng của tôi</string>
+    <string name="Branches">Branches</string>
+    <string name="Settings">Cài đặt</string>
 
-    <!-- Example settings for Notifications -->
-    <string name="pref_header_notifications">Notifications</string>
 
-    <string name="pref_title_new_message_notifications">New message notifications</string>
+    <!-- Login related strings-->
+    <string name="Log_in">Đăng nhập</string>
+    <string name="Log_out">Đăng xuất</string>
+    <string name="Log_in_to_shop_via">Đăng nhập vào shop bằng:</string>
+    <string name="Skip">Bỏ qua</string>
+    <string name="Forgot_your_password">Quên mật khẩu?</string>
+    <string name="Email_for_recovery">Nhập email để khôi phục mật khẩu</string>
+    <string name="Reset">Đặt lại</string>
+    <string name="Log_me_in">Đăng nhập</string>
+    <string name="E_MAIL">E-MAIL</string>
+    <string name="FACEBOOK">FACEBOOK</string>
+    <string name="Register">Đăng kí</string>
+    <string name="Male">Male</string>
+    <string name="Female">Female</string>
+    <string name="Check_your_email_we_sent_you_an_confirmation_email">Check your email. We sent you an confirmation email about reseting password</string>
+    <string name="Facebook_login_failed">Facebook login failed.</string>
+    <string name="Receiving_facebook_profile_failed">Receiving facebook profile failed</string>
+    <string name="Oops_login_expired">Oops login expired</string>
+    <string name="Your_session_has_expired_Please_log_in_again">Your session has expired Please log in again.</string>
 
-    <string name="pref_title_ringtone">Ringtone</string>
-    <string name="pref_ringtone_silent">Silent</string>
 
-    <string name="pref_title_vibrate">Vibrate</string>
-    <string name="search_title">Tìm kiếm sản phẩm</string>
-    <string name="title_activity_login">Sign in</string>
+    <!-- Cart and order related strings -->
+    <string name="Shopping_cart">Giỏ hàng</string>
+    <string name="Your_cart_is_empty">Giỏ hàng trống</string>
+    <string name="START_SHOPPING">BẮT ĐẦU MUA SẮM</string>
+    <string name="SHIPPING_AND_PAYMENT">THANH TOÁN</string>
+    <string name="Please_select_a_size">Please select a size.</string>
+    <string name="added_to_cart">thêm vào giỏ hàng.</string>
+    <string name="Go_to_cart">Đến giỏ hàng</string>
+    <string name="Delete">Xóa</string>
+    <string name="Edit">Sửa</string>
+    <string name="Update_item">Cập nhật:</string>
+    <string name="The_item_has_been_successfully_removed">Sản phẩm được xóa thành công</string>
+    <string name="Discount_code">Mã giảm giá</string>
+    <string name="Do_you_have_a_discount_code">Bạn có mã giảm giá?</string>
+    <string name="Enter_the_discount_code">Nhận mã giảm giá</string>
+    <string name="Internal_error_reload_cart_please">Lỗi kết nối. Vui lòng tải lại giỏ hàng.</string>
 
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-    <string name="shopping_cart_title">Giỏ hàng</string>
+    <!-- Order related strings-->
+    <string name="Order">Order</string>
+    <string name="Order_colon">Order:</string>
+    <string name="Date_created">Date created</string>
+    <string name="Date_created_colon">Date created:</string>
+    <string name="Total_price">Total price</string>
+    <string name="Order_summary">Order summary</string>
+    <string name="Order_history">Order history</string>
+    <string name="Your_orders_history_is_empty">Your order history is empty</string>
+    <string name="Order_details">Order details</string>
+    <string name="Shipping">Shipping</string>
+    <string name="Payment">Payment</string>
+    <string name="Shipping_method">Shipping method</string>
+    <string name="Choose_shipping_method">Choose shipping method</string>
+    <string name="Choose_payment_method">Choose payment method</string>
+    <string name="Shipping_details">Shipping details</string>
+    <string name="Note">Note</string>
+    <string name="Click_on_Order_to_allow_our_Terms_and_Conditions">Click on Order to allow our <![CDATA[<b><font color=#ee1f65>Terms and Conditions</b>]]></string>
+    <string name="Finish_order">Finish order</string>
+    <string name="Shipping_is_empty">Shipping is empty</string>
+    <string name="Personal_pickup">Personal pickup</string>
+    <string name="Shipping_type_colon">Shipping type:</string>
+    <string name="Shipping_price_colon">Shipping price:</string>
+    <string name="free">free</string>
+    <string name="Summary">Summary</string>
+    <string name="Total_colon">Total:</string>
+
+
+    <!-- Wishlist related -->
+    <string name="Your_wishlist_is_empty">Your wishlist is empty.</string>
+    <string name="Wishlist">Wishlist</string>
+    <string name="Product_deleted_from_wishlist">Product deleted from wishlist</string>
+    <string name="Product_added_to_wishlist">Product added to wishlist</string>
+    <string name="Go_to_wishlist">Go to wishlist</string>
+
+
+    <!-- Others -->
+    <string name="Select">Select</string>
+    <string name="Open_source_libraries">Open source libraries</string>
+    <string name="License_details_for_open_source_software">License details for open source software</string>
+    <string name="Privacy_policy">Privacy policy</string>
+    <string name="Basic_information_about_Privacy_Policy">Basic information about Privacy Policy</string>
+    <string name="App_needs_to_be_restarted">To change the shop an app restart is needed.</string>
+    <string name="including_VAT">inc. VAT</string>
+    <string name="Thank_you_for_your_order">Thank you for your order</string>
+    <string name="Wait_for_sms_or_email_order_confirmation">Wait for &lt;b>SMS&lt;/b> or &lt;b>email&lt;/b> order confirmation.</string>
+    <string name="This_is_a_sample_app">This is a sample app</string>
+    <string name="Sample_app_description">Thank you for your time. To find out more about this project, please visit us here: <a href="http://openshop.io/">Openshop.io</a>.</string>
+    <string name="Link_is_invalid">Link is invalid</string>
+    <string name="Min">Min</string>
+    <string name="Max">Max</string>
+
+
+    <!-- Format strings -->
+    <string name="format_space_prefix"> %1$s</string>
+    <string name="format_comma_prefix">, %1$s</string>
+    <string name="format_string_division">%1$s / %2$s</string>
+    <string name="format_quantity">%1$d pcs</string>
+    <string name="format_string_quantity">%1$s %2$dx</string>
+    <string name="format_plus">+ %1$s</string>
+    <string name="format_number">%1$d</string>
+    <string name="format_price_range">%1$d %2$s - %3$d %4$s</string>
+    <string name="format_price_discount_percents">-%1$d %%</string>
+
+    <!-- Content description strings -->
+    <string name="content_description_open_navigation_drawer">Open navigation drawer</string>
+    <string name="content_description_close_navigation_drawer">Close navigation drawer</string>
+    <string name="content_description_submenu">Populate submenu</string>
+    <string name="content_description_move_right">Move righ</string>
+    <string name="content_description_move_left">Move left</string>
+    <string name="content_description_background">Background</string>
+    <string name="content_description_back_arrow">Back arrow</string>
+    <string name="content_description_intro_screen">Intro screen</string>
+    <string name="content_description_product_image">Product image</string>
+    <string name="content_description_shipping_info">Shipping info</string>
+    <string name="Not_password_repassword">Mật khẩu nhập lại không khớp</string>
 </resources>

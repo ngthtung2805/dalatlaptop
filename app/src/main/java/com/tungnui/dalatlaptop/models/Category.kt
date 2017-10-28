@@ -6,8 +6,7 @@ package com.tungnui.dalatlaptop.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import com.tungnui.dalatlaptop.utils.adapter.AdapterConstants
-import com.tungnui.dalatlaptop.utils.adapter.ViewType
+
 
 
 data class Category(
@@ -38,8 +37,9 @@ data class Category(
         @SerializedName("count")
         @Expose
         var count: Int? = null
-) : ViewType {
-    override fun getViewType(): Int {
-        return AdapterConstants.ITEM
+)  {
+
+    fun hasChildren():Boolean{
+        return true;
     }
 }

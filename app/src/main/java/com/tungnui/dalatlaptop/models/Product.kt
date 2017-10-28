@@ -6,8 +6,6 @@ package com.tungnui.dalatlaptop.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import com.tungnui.dalatlaptop.utils.adapter.AdapterConstants
-import com.tungnui.dalatlaptop.utils.adapter.ViewType
 
 data class Product(
         @SerializedName("id")
@@ -199,9 +197,4 @@ data class Product(
         @SerializedName("menu_order")
         @Expose
         var menuOrder: Int? = null
-) : ViewType {
-    override fun getViewType(): Int {
-        return AdapterConstants.ITEM
-    }
-
-}
+)

@@ -139,9 +139,9 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
         cartCountNotificationValue = newCartCount
         if (cartCountNotificationValue != 0 && cartCountNotificationValue != CONST.DEFAULT_EMPTY_ID) {
             shopping_cart_notify.text = getString(R.string.format_number, cartCountNotificationValue)
-            shopping_cart_notify.visibility = View.VISIBLE
+            shopping_cart_notify?.let{it.visibility = View.VISIBLE}
         } else {
-            shopping_cart_notify.visibility = View.GONE
+            shopping_cart_notify?.let{it.visibility = View.INVISIBLE}
         }
 
     }

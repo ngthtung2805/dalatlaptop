@@ -1,55 +1,51 @@
 package com.tungnui.dalatlaptop.ux.fragments
 
 
-import android.app.Activity
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
+import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 
 import com.tungnui.dalatlaptop.CONST
 import com.tungnui.dalatlaptop.MyApplication
 import com.tungnui.dalatlaptop.R
-import com.tungnui.dalatlaptop.entities.Banner
-import com.tungnui.dalatlaptop.entities.Metadata
-import com.tungnui.dalatlaptop.interfaces.BannersRecyclerInterface
+import com.tungnui.dalatlaptop.api.ProductService
+import com.tungnui.dalatlaptop.api.ServiceGenerator
 import com.tungnui.dalatlaptop.listeners.OnSingleClickListener
-import com.tungnui.dalatlaptop.utils.EndlessRecyclerScrollListener
 import com.tungnui.dalatlaptop.utils.Utils
 import com.tungnui.dalatlaptop.utils.loadImg
 import com.tungnui.dalatlaptop.ux.MainActivity
-import com.tungnui.dalatlaptop.ux.adapters.BannersRecyclerAdapter
+import com.tungnui.dalatlaptop.ux.adapters.HomeProductRecyclerAdapter
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_banners.*
-import timber.log.Timber
+import org.jetbrains.anko.support.v4.toast
 
 /**
  * Provides "welcome" screen customizable from web administration. Often contains banners with sales or best products.
  */
 class BannersFragment : Fragment() {
-
+    private var mCompositeDisposable: CompositeDisposable
+    val productService: ProductService
+    init {
+        mCompositeDisposable = CompositeDisposable()
+        productService = ServiceGenerator.createService(ProductService::class.java)
+    }
     private var progressDialog: ProgressDialog? = null
 
-    // content related fields.
-    private var bannersRecycler: RecyclerView? = null
-    private var bannersRecyclerAdapter: BannersRecyclerAdapter? = null
-    private var endlessRecyclerScrollListener: EndlessRecyclerScrollListener? = null
-    private val bannersMetadata: Metadata? = null
 
-    /**
-     * Indicates if user data should be loaded from server or from memory.
-     */
+    private lateinit var newestRecyclerAdapter: HomeProductRecyclerAdapter
+    private lateinit var saleRecycleAdapter:HomeProductRecyclerAdapter
+    private lateinit var featuredRecycleAdapter:HomeProductRecyclerAdapter
     private var mAlreadyLoaded = false
-
-    /**
-     * Holds reference for empty view. Show to user when no data loaded.
-     */
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_banners, container, false)
@@ -59,62 +55,97 @@ class BannersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         MainActivity.setActionBarTitle(getString(R.string.app_name))
         progressDialog = Utils.generateProgressDialog(activity, false)
-
-        prepareEmptyContent()
         initCarousel()
-        // Don't reload data when return from backStack. Reload if a new instance was created or data was empty.
-      /*  if (savedInstanceState == null && !mAlreadyLoaded || bannersRecyclerAdapter == null || bannersRecyclerAdapter!!.isEmpty) {
-            Timber.d("Reloading banners.")
-            mAlreadyLoaded = true
-
-            // Prepare views and listeners
-            prepareContentViews(view, true)
-            loadBanners(null)
-        } else {
-            Timber.d("Banners already loaded.")
-            prepareContentViews(view, false)
-            // Already loaded
-        }
-*/
+        prepareAction()
+        prepareEmptyContent()
+        prepareFeaturedProduct()
+        prepareNewestAdapter()
+        prepareSaleAdapter()
 
     }
 
+    private fun prepareAction() {
+        home_hot_sale_title.setOnClickListener {
+            (activity as MainActivity).onCategorySelected("sale", "Khuyến mãi tốt nhất")
+        }
+        home_featured_title.setOnClickListener {
+            (activity as MainActivity).onCategorySelected("featured", "Sản phẩm nổi bật nhất")
+        }
+        home_newest_title.setOnClickListener {
+            (activity as MainActivity).onCategorySelected("newest", "Sản phẩm mới nhất")
+        }
+    }
 
-    /**
-     * Prepares views and listeners associated with content.
-     *
-     * @param view       fragment root view.
-     * @param freshStart indicates when everything should be recreated.
-     */
-    /*private fun prepareContentViews(freshStart: Boolean) {
-        bannersRecycler = view.findViewById<View>(R.id.banners_recycler) as RecyclerView
-        if (freshStart) {
-            bannersRecyclerAdapter = BannersRecyclerAdapter(activity, BannersRecyclerInterface { banner ->
-                val activity = activity
-                (activity as? MainActivity)?.onBannerSelected(banner)
-            })
+    private fun prepareNewestAdapter() {
+        newestRecyclerAdapter = HomeProductRecyclerAdapter {
+            product-> product.id?.let{(activity as MainActivity).onProductSelected(it)}
         }
-        val layoutManager = LinearLayoutManager(banners_recycler.context)
-        bannersRecycler!!.layoutManager = layoutManager
-        bannersRecycler!!.itemAnimator = DefaultItemAnimator()
-        bannersRecycler!!.setHasFixedSize(true)
-        bannersRecycler!!.adapter = bannersRecyclerAdapter
-        endlessRecyclerScrollListener = object : EndlessRecyclerScrollListener(layoutManager) {
-            override fun onLoadMore(currentPage: Int) {
-                if (bannersMetadata != null && bannersMetadata.links != null && bannersMetadata.links.next != null) {
-                    loadBanners(bannersMetadata.links.next)
-                } else {
-                    Timber.d("CustomLoadMoreDataFromApi NO MORE DATA")
-                }
-            }
+        home_newest_recycler.setHasFixedSize(true)
+        home_newest_recycler.setLayoutManager(LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false))
+        val snapHelperStart = GravitySnapHelper(Gravity.START)
+        snapHelperStart.attachToRecyclerView(home_newest_recycler)
+        home_newest_recycler.itemAnimator = DefaultItemAnimator()
+        home_newest_recycler.adapter =  newestRecyclerAdapter
+
+        loadNewest()
+    }
+    private fun prepareSaleAdapter() {
+        saleRecycleAdapter = HomeProductRecyclerAdapter {
+            product-> product.id?.let{(activity as MainActivity).onProductSelected(it)}
         }
-        bannersRecycler!!.addOnScrollListener(endlessRecyclerScrollListener)
-    }*/
-    /**
-     * Prepares views and listeners associated with empty content. Visible only when no content loads.
-     *
-     * @param view fragment root view.
-     */
+        home_sale_recycler.setHasFixedSize(true)
+        home_sale_recycler.setLayoutManager(LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false))
+        val snapHelperStart = GravitySnapHelper(Gravity.START)
+        snapHelperStart.attachToRecyclerView(home_newest_recycler)
+        home_sale_recycler.itemAnimator = DefaultItemAnimator()
+        home_sale_recycler.adapter =  saleRecycleAdapter
+        loadSale()
+    }
+    private fun prepareFeaturedProduct(){
+        featuredRecycleAdapter = HomeProductRecyclerAdapter {
+            product-> product.id?.let{(activity as MainActivity).onProductSelected(it)}
+        }
+        home_featured_recycler.setHasFixedSize(true)
+        home_featured_recycler.setLayoutManager(LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false))
+        val snapHelperStart = GravitySnapHelper(Gravity.START)
+        snapHelperStart.attachToRecyclerView(home_featured_recycler)
+        home_featured_recycler.itemAnimator = DefaultItemAnimator()
+        home_featured_recycler.adapter =  featuredRecycleAdapter
+        loadFeatured()
+    }
+
+    private fun loadFeatured() {
+        progressDialog?.show()
+        var disposable = productService.getFeatured()
+                .subscribeOn((Schedulers.io()))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ response ->
+                    featuredRecycleAdapter.addProducts(response)
+                    progressDialog?.cancel()
+                },
+                        { error ->
+                            progressDialog?.cancel()
+                            toast("Lỗi kết nối")
+                        })
+        mCompositeDisposable.add(disposable)
+    }
+
+    private fun loadSale() {
+        progressDialog?.show()
+        var disposable = productService.getSale()
+                .subscribeOn((Schedulers.io()))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ response ->
+                    saleRecycleAdapter.addProducts(response)
+                    progressDialog?.cancel()
+                },
+                        { error ->
+                            progressDialog?.cancel()
+                            toast("Lỗi kết nối")
+                        })
+        mCompositeDisposable.add(disposable)
+    }
+
     private fun prepareEmptyContent() {
         banners_empty_action.setOnClickListener(object : OnSingleClickListener() {
             override fun onSingleClick(v: View) {
@@ -122,7 +153,7 @@ class BannersFragment : Fragment() {
                 val activity = activity
                 if (activity is MainActivity) {
                     if (activity.drawerFragment != null)
-                        activity.drawerFragment!!.toggleDrawerMenu()
+                        activity.drawerFragment?.toggleDrawerMenu()
                 }
             }
         })
@@ -134,66 +165,39 @@ class BannersFragment : Fragment() {
                 "https://dalatlaptop.com/images/slider/image-slide-3.png",
                 "https://dalatlaptop.com/images/slider/image-slide-4.png"
         )
-        carouselView.setImageListener { position, imageView ->
+        home_carousel_banner.setImageListener { position, imageView ->
             imageView.loadImg(adImages[position])
             imageView.scaleType = ImageView.ScaleType.FIT_XY
 
         }
-        carouselView.setPageCount(adImages.size)
+        home_carousel_banner.setPageCount(adImages.size)
     }
-    /**
-     * Endless content loader. Should be used after views inflated.
-     *
-     * @param url null for fresh load. Otherwise use URLs from response metadata.
-     */
-    private fun loadBanners(url: String?) {
-        // progressDialog.show();
-        if (url == null) {
-            bannersRecyclerAdapter!!.clear()
-            // url = String.format(EndPoints.BANNERS, SettingsMy.getActualNonNullShop(getActivity()).getId());
-        }
-        /* GsonRequest<BannersResponse> getBannersRequest = new GsonRequest<>(Request.Method.GET, url, null, BannersResponse.class,
-                new Response.Listener<BannersResponse>() {
-                    @Override
-                    public void onResponse(@NonNull BannersResponse response) {
-                        Timber.d("response: %s", response.toString());
-                        bannersMetadata = response.getMetadata();
-                        bannersRecyclerAdapter.addBanners(response.getRecords());
-
-                        if (bannersRecyclerAdapter.getItemCount() > 0) {
-                            banners_empty.setVisibility(View.INVISIBLE);
-                            bannersRecycler.setVisibility(View.VISIBLE);
-                        } else {
-                            banners_empty.setVisibility(View.VISIBLE);
-                            bannersRecycler.setVisibility(View.INVISIBLE);
-                        }
-
-                        progressDialog.cancel();
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                if (progressDialog != null) progressDialog.cancel();
-                MsgUtils.logAndShowErrorMessage(getActivity(), error);
-            }
-        });*/
+    private fun loadNewest(){
+        progressDialog?.show()
+        var disposable = productService.getNewest()
+                .subscribeOn((Schedulers.io()))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ response ->
+                   newestRecyclerAdapter?.addProducts(response)
+                    progressDialog?.cancel()
+                },
+                        { error ->
+                            progressDialog?.cancel()
+                            toast("Lỗi kết nối")
+                        })
+        mCompositeDisposable.add(disposable)
     }
+
 
     override fun onStop() {
         if (progressDialog != null) {
-            // Hide progress dialog if exist.
-            if (progressDialog!!.isShowing && endlessRecyclerScrollListener != null) {
-                // Fragment stopped during loading data. Allow new loading on return.
-                endlessRecyclerScrollListener!!.resetLoading()
-            }
-            progressDialog!!.cancel()
+            progressDialog?.cancel()
         }
         MyApplication.getInstance().cancelPendingRequests(CONST.BANNER_REQUESTS_TAG)
         super.onStop()
     }
 
     override fun onDestroyView() {
-        if (bannersRecycler != null) bannersRecycler!!.clearOnScrollListeners()
-        super.onDestroyView()
+          super.onDestroyView()
     }
 }

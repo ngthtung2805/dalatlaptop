@@ -50,32 +50,16 @@ class CategoryFragment : Fragment() {
         mCompositeDisposable = CompositeDisposable()
         productService = ServiceGenerator.createService(ProductService::class.java)
     }
-    /**
-     * Prevent the sort selection callback during initialization.
-     */
     private var firstTimeSort = true
     private var categoryId: Int = 0
-    /**
-     * Search string. The value is set only if the fragment is launched in order to searching.
-     */
+    private var type:String? = null
     private var searchQuery: String? = null
-
-    /**
-     * Request metadata containing URLs for endlessScroll.
-     */
     private var productsNextLink: String? = null
-
-
     private lateinit var productsRecyclerLayoutManager: GridLayoutManager
     private lateinit var productsRecyclerAdapter: ProductsRecyclerAdapter
     private var endlessRecyclerScrollListener: EndlessRecyclerScrollListener? = null
-
-    // Filters parameters
     private var filters: Filters? = null
     private var filterParameters: String? = null
-
-
-    // Properties used to restore previous state
     private var toolbarOffset = -1
     private var isList = false
 
@@ -95,6 +79,7 @@ class CategoryFragment : Fragment() {
             categoryId = startBundle.getInt(CATEGORY_ID, 0)
             var categoryName = startBundle.getString(CATEGORY_NAME, "")
             searchQuery = startBundle.getString(SEARCH_QUERY, null)
+            type = startBundle.getString(TYPE,null)
             if (toolbarOffset != -1) category_appbar_layout.offsetTopAndBottom(toolbarOffset)
             category_appbar_layout.addOnOffsetChangedListener { _, i -> toolbarOffset = i }
             MainActivity.setActionBarTitle(categoryName)
@@ -200,7 +185,6 @@ class CategoryFragment : Fragment() {
     private fun prepareRecyclerAdapter() {
         productsRecyclerAdapter = ProductsRecyclerAdapter(){
             product-> product.id?.let {  (activity as MainActivity).onProductSelected(it) }
-
         }
     }
 
@@ -285,10 +269,15 @@ class CategoryFragment : Fragment() {
                     newSearchQueryString = URLEncoder.encode(searchQuery)
                 }
                 url += "?search=" + newSearchQueryString
-            } else {
+            } else  if(categoryId != 0) {
                 url += "?category=$categoryId"
+            } else  if(type!=null){
+                when(type){
+                    "featured"-> url += "?featured=true"
+                    "sale"->url +="?on_sale=true"
+                    "newest"-> url +="?order=desc&order_by=date"
+                }
             }
-
             // Add filters parameter if exist
             if (filterParameters != null && !filterParameters!!.isEmpty()) {
                 url += filterParameters
@@ -353,21 +342,26 @@ class CategoryFragment : Fragment() {
         private val CATEGORY_ID = "categoryId"
         private val SEARCH_QUERY = "search_query"
 
-        fun newInstance(categoryId: Int, name: String, type: String): CategoryFragment {
+        fun newInstance(categoryId: Int, name: String): CategoryFragment {
             val args = Bundle()
             args.putInt(CATEGORY_ID, categoryId)
             args.putString(CATEGORY_NAME, name)
-            args.putString(TYPE, type)
             args.putString(SEARCH_QUERY, null)
-
             val fragment = CategoryFragment()
             fragment.arguments = args
             return fragment
         }
-           fun newInstance(searchQuery: String): CategoryFragment {
+        fun newInstance(searchQuery: String): CategoryFragment {
             val args = Bundle()
             args.putString(SEARCH_QUERY, searchQuery)
-
+            val fragment = CategoryFragment()
+            fragment.arguments = args
+            return fragment
+        }
+        fun newInstance(type:String,name:String):CategoryFragment{
+            val args = Bundle()
+            args.putString(TYPE, type)
+            args.putString(CATEGORY_NAME, name)
             val fragment = CategoryFragment()
             fragment.arguments = args
             return fragment

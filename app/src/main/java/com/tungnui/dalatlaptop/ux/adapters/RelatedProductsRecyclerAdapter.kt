@@ -52,7 +52,10 @@ class RelatedProductsRecyclerAdapter(val listener: (Product)->Unit) : RecyclerVi
         relatedProducts.add(position, product)
         notifyItemInserted(position)
     }
-
+    fun addProducts(items:List<Product>){
+        relatedProducts.addAll(items)
+        notifyDataSetChanged()
+    }
     /**
      * Add the product at the end of the list.
      *

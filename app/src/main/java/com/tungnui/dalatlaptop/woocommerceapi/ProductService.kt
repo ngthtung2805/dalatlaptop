@@ -40,4 +40,6 @@ interface ProductService{
 
     @GET("/wp-json/wc/v2/products?on_sale=true")
     fun getSale(@Query("page") page:Int=1, @Query("per_page") perPage: Int=15):Observable<List<Product>>
+    @GET("/wp-json/wc/v2/products?featured=true")
+    fun getFeatured(@Query("page") page:Int=1, @Query("per_page") perPage: Int=15):Observable<List<Product>>
 }

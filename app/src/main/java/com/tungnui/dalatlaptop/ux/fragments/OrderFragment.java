@@ -35,7 +35,7 @@ public class OrderFragment extends Fragment {
      * @param orderId id of the order to load from server.
      * @return new fragment instance.
      */
-    public static OrderFragment newInstance(long orderId) {
+    public static OrderFragment newInstance(int orderId) {
         Bundle args = new Bundle();
         args.putLong(ORDER_ID, orderId);
         OrderFragment fragment = new OrderFragment();

@@ -17,7 +17,7 @@
         android:layout_margin="0dp"
         android:contentDescription="@string/Shopping_cart"
         android:gravity="center"
-        android:padding="3dp"
+        android:padding="2dp"
         android:src="@drawable/ic_shopping_cart_white_24dp"/>
 
     <TextView
@@ -33,7 +33,9 @@
         android:paddingBottom="2dp"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:textColor="@color/colorAccent"
-        android:textSize="12sp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:shadowColor="@color/background_grey"
         android:visibility="visible"/>
 </RelativeLayout>

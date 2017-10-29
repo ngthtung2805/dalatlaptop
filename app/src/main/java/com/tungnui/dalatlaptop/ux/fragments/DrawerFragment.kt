@@ -41,18 +41,28 @@ import kotlinx.android.synthetic.main.fragment_drawer.*
 class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener {
     private var mCompositeDisposable: CompositeDisposable
     val categoryService: CategoryService
+
     init {
         mCompositeDisposable = CompositeDisposable()
         categoryService = ServiceGenerator.createService(CategoryService::class.java)
     }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.nav_category->                animateMenuShow()
-            R.id.nav_cart-> {
+        when (item.itemId) {
+            R.id.nav_home->{
+                drawerListener?.onDrawerHomeSelected()
+                toggleDrawerMenu()
+            }
+            R.id.nav_category -> animateMenuShow()
+            R.id.nav_cart -> {
                 drawerListener?.onDrawerCartSelected()
                 toggleDrawerMenu()
             }
+            R.id.nav_order->{
+                drawerListener?.onDrawerOrderSelected()
+                toggleDrawerMenu()
             }
+        }
 
         return true;
     }
@@ -113,10 +123,10 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
             }
         })
         val headerView = nav_view.getHeaderView(0)
-       headerView.setOnClickListener {
-           _->drawerListener?.onAccountSelected()
-           toggleDrawerMenu()
-       }
+        headerView.setOnClickListener { _ ->
+            drawerListener?.onAccountSelected()
+            toggleDrawerMenu()
+        }
         invalidateHeader()
     }
 
@@ -127,12 +137,10 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
      */
     private fun prepareDrawerRecycler() {
         drawerMenuRecyclerAdapter = DrawerRecyclerAdapter { category ->
-            if (category.display!="subcategories"){
+            if (category.display != "subcategories") {
                 drawerListener?.onDrawerItemCategorySelected(category)
                 toggleDrawerMenu()
-            }
-
-            else
+            } else
                 animateSubMenuShow(category)
         }
         drawer_menu_recycler.layoutManager = LinearLayoutManager(context)
@@ -227,13 +235,13 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
     fun invalidateHeader() {
         val headerView = nav_view.getHeaderView(0)
         val user = SettingsMy.getActiveUser()
-        if(user!=null){
+        if (user != null) {
             val txtUserName = headerView.findViewById<TextView>(R.id.navigation_drawer_list_header_text)
-            txtUserName.text  = user.username
+            txtUserName.text = user.username
             val avatarImage = headerView.findViewById<ImageView>(R.id.navigation_drawer_header_avatar)
-            if(user.avatarUrl ==null){
+            if (user.avatarUrl == null) {
                 avatarImage.setImageResource(R.drawable.user)
-            }else{
+            } else {
                 avatarImage.loadImg(user.avatarUrl)
             }
         }
@@ -260,6 +268,7 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
         })
         drawer_submenu_layout.startAnimation(slideAwayDisappear)
     }
+
     private fun animateMenuHide() {
         val slideAwayDisappear = AnimationUtils.loadAnimation(activity, R.anim.slide_away_disappear)
         val slideAwayAppear = AnimationUtils.loadAnimation(activity, R.anim.slide_away_appear)
@@ -277,6 +286,7 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
         })
         drawer_menu_layout.startAnimation(slideAwayDisappear)
     }
+
     private fun animateMenuShow() {
         val slideInDisappear = AnimationUtils.loadAnimation(activity, R.anim.slide_in_disappear)
         val slideInAppear = AnimationUtils.loadAnimation(activity, R.anim.slide_in_appear)
@@ -294,7 +304,7 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
         })
         nav_view.startAnimation(slideInDisappear)
         drawerLoading = true
-        if(drawerMenuRecyclerAdapter.itemCount == 0)
+        if (drawerMenuRecyclerAdapter.itemCount == 0)
             drawer_menu_progress.visibility = View.VISIBLE
         var disposable = categoryService.getCategory()
                 .subscribeOn((Schedulers.io()))
@@ -304,7 +314,7 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
                     drawer_menu_retry_btn.visibility = View.GONE
                     drawerMenuRecyclerAdapter.changeDrawerItems(items)
                     drawerLoading = false
-                 },
+                },
                         { _ ->
                             drawerLoading = false
                             drawer_menu_progress.visibility = View.GONE
@@ -312,6 +322,7 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
                         })
         mCompositeDisposable.add(disposable)
     }
+
     private fun animateSubMenuShow(category: Category) {
         val slideInDisappear = AnimationUtils.loadAnimation(activity, R.anim.slide_in_disappear)
         val slideInAppear = AnimationUtils.loadAnimation(activity, R.anim.slide_in_appear)
@@ -329,7 +340,7 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
         })
         drawer_menu_layout.startAnimation(slideInDisappear)
         drawer_submenu_back_btn.text = category.name
-        if(drawerSubmenuRecyclerAdapter.itemCount == 0)
+        if (drawerSubmenuRecyclerAdapter.itemCount == 0)
             drawer_submenu_progress.visibility = View.VISIBLE
         var disposable = categoryService.getChildrenCategory(category.id!!)
                 .subscribeOn((Schedulers.io()))
@@ -380,6 +391,9 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
         fun onAccountSelected()
         fun prepareSearchSuggestions(navigation: List<DrawerItemCategory>)
         fun onDrawerCartSelected()
+        fun onDrawerOrderSelected()
+        fun onDrawerHomeSelected()
+        fun onDrawerSettingSelected()
     }
 
 

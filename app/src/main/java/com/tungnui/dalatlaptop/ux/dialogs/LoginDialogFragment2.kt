@@ -55,7 +55,7 @@ import java.util.*
 /**
  * Dialog handles user login, registration and forgotten password function.
  */
-class LoginDialogFragment : DialogFragment(), FacebookCallback<LoginResult> {
+class LoginDialogFragment2 : DialogFragment(), FacebookCallback<LoginResult> {
     private var mCompositeDisposable: CompositeDisposable
     val jsonAuthService: JSONAuthService
     val customerService: CustomerServices
@@ -79,7 +79,7 @@ class LoginDialogFragment : DialogFragment(), FacebookCallback<LoginResult> {
 
     override fun onStart() {
         super.onStart()
-        val d = dialog
+      /*  val d = dialog
         if (d != null) {
             val width = ViewGroup.LayoutParams.MATCH_PARENT
             val height = ViewGroup.LayoutParams.MATCH_PARENT
@@ -104,25 +104,25 @@ class LoginDialogFragment : DialogFragment(), FacebookCallback<LoginResult> {
                             }
                             return@OnKeyListener true
                         }
-                            else -> return@OnKeyListener false
+                        else -> return@OnKeyListener false
                     }
                 }
                 false
             })
-        }
+        }*/
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.dialog_login, container, false)
+        return inflater.inflate(R.layout.dialog_login2, container, false)
 
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         callbackManager = CallbackManager.Factory.create()
-        prepareLoginFormNavigation()
-        prepareInputBoxes()
-        prepareActionButtons()
+       // prepareLoginFormNavigation()
+       // prepareInputBoxes()
+        //prepareActionButtons()
     }
 
     private fun prepareInputBoxes() {
@@ -282,10 +282,10 @@ class LoginDialogFragment : DialogFragment(), FacebookCallback<LoginResult> {
         }
     }
     private fun isRegisterRequiredFields(firstNameWrapper: TextInputLayout,
-                                         lastNameWrapper:TextInputLayout,
-                                         emailWrapper:TextInputLayout,
-                                         passwordWrapper:TextInputLayout,
-                                         repasswordWrapper:TextInputLayout): Boolean {
+                                         lastNameWrapper: TextInputLayout,
+                                         emailWrapper: TextInputLayout,
+                                         passwordWrapper: TextInputLayout,
+                                         repasswordWrapper: TextInputLayout): Boolean {
         val email = emailWrapper.editText
         val password = passwordWrapper.editText
         val firstname = firstNameWrapper.editText
@@ -353,24 +353,24 @@ class LoginDialogFragment : DialogFragment(), FacebookCallback<LoginResult> {
         return false
     }
 
-    private fun registerNewUser(editTextFirstName:EditText?,editTextLastName:EditText?,
+    private fun registerNewUser(editTextFirstName: EditText?, editTextLastName: EditText?,
                                 editTextEmail: EditText?, editTextPassword: EditText?) {
         progressDialog.show()
         var customer = Customer(firstName = editTextFirstName?.text.toString(),
                 lastName = editTextLastName?.text.toString(),
                 email=editTextEmail?.text.toString(),
                 password = editTextPassword?.text.toString())
-            var disposable = customerService.create(customer)
-                    .subscribeOn((Schedulers.io()))
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ customer ->
-                        Toast.makeText(context,"Đăng kí thành công. Đăng nhập ngay", Toast.LENGTH_SHORT).show()
-                        handleUserLogin(customer)
-                    },
-                            { _ ->
-                                progressDialog.cancel()
-                            })
-            mCompositeDisposable.add(disposable)
+        var disposable = customerService.create(customer)
+                .subscribeOn((Schedulers.io()))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ customer ->
+                    Toast.makeText(context,"Đăng kí thành công. Đăng nhập ngay", Toast.LENGTH_SHORT).show()
+                    handleUserLogin(customer)
+                },
+                        { _ ->
+                            progressDialog.cancel()
+                        })
+        mCompositeDisposable.add(disposable)
     }
 
     private fun logInWithEmail(editTextEmail: EditText?, editTextPassword: EditText?) {
@@ -462,13 +462,13 @@ class LoginDialogFragment : DialogFragment(), FacebookCallback<LoginResult> {
     private fun setVisibilityOfRegistrationForm(setVisible: Boolean) {
         if (setVisible) {
             actualFormState = FormState.REGISTRATION
-            login_registration_close_button.visibility=View.VISIBLE
+            login_registration_close_button.visibility= View.VISIBLE
             login_registration_form.visibility = View.VISIBLE
             login_email_form.visibility = View.INVISIBLE
         } else {
             actualFormState = FormState.EMAIL
             login_registration_form.visibility = View.INVISIBLE
-            login_registration_close_button.visibility=View.INVISIBLE
+            login_registration_close_button.visibility= View.INVISIBLE
             login_email_form.visibility = View.VISIBLE
             hideSoftKeyboard()
         }
@@ -562,7 +562,7 @@ class LoginDialogFragment : DialogFragment(), FacebookCallback<LoginResult> {
      * Volley request that sends FB_ID and FB_ACCESS_TOKEN to API
      */
     private fun verifyUserOnApi(userProfileObject: JSONObject, fbAccessToken: AccessToken) {
-       val jo = JSONObject()
+        val jo = JSONObject()
         try {
             jo.put(JsonUtils.TAG_FB_ID, userProfileObject.getString("id"))
             jo.put(JsonUtils.TAG_FB_ACCESS_TOKEN, fbAccessToken.token)
@@ -612,7 +612,6 @@ class LoginDialogFragment : DialogFragment(), FacebookCallback<LoginResult> {
          */
         fun newInstance(loginDialogInterface: LoginDialogInterface): LoginDialogFragment {
             val frag = LoginDialogFragment()
-            frag.loginDialogInterface = loginDialogInterface
             return frag
         }
 

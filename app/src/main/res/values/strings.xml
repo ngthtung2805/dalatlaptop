@@ -132,9 +132,9 @@
     <string name="Date_created_colon">Date created:</string>
     <string name="Total_price">Total price</string>
     <string name="Order_summary">Order summary</string>
-    <string name="Order_history">Order history</string>
+    <string name="Order_history">Lịch sử đơn hàng</string>
     <string name="Your_orders_history_is_empty">Your order history is empty</string>
-    <string name="Order_details">Order details</string>
+    <string name="Order_details">Chi tiết đơn hàng</string>
     <string name="Shipping">Shipping</string>
     <string name="Payment">Payment</string>
     <string name="Shipping_method">Shipping method</string>
@@ -201,4 +201,7 @@
     <string name="content_description_product_image">Product image</string>
     <string name="content_description_shipping_info">Shipping info</string>
     <string name="Not_password_repassword">Mật khẩu nhập lại không khớp</string>
+    <string name="featured_product">Sản phẩm nổi bật</string>
+    <string name="newest_product">Sản phẩm mới nhất</string>
+    <string name="hot_sale_product">Khuyến mãi hot nhất</string>
 </resources>

@@ -1,102 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/banners_root"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/banners_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/background_grey">
 
-    <com.synnapps.carouselview.CarouselView
-        android:id="@+id/carouselView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:fillColor="#FFFFFFFF"
-        app:pageColor="#00000000"
-        app:radius="6dp"
-        app:slideInterval="3000"
-        app:strokeColor="#FF777777"
-        app:strokeWidth="1dp" />
-
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/product_scroll_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="vertical">
+        android:visibility="visible"
+        tools:visibility="visible">
 
-        <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Sản phẩm mới nhất"
-            android:textAlignment="center"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/home_newest_recycler"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="vertical">
-
-        <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Khuyến mãi hot nhất"
-            android:textAlignment="center"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rcvSaleProduct"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="XEM THÊM"
-            android:textAlignment="center"
-            android:textColor="#119fd7" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/banners_empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="invisible">
-
-        <TextView
-            style="@style/emptyLayoutText"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="20dp"
-            android:drawableTop="@drawable/loyalty_tag_black_48dp"
-            android:padding="20dp"
-            android:text="@string/No_banners"/>
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/banners_empty_action"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="20dp"
-            android:text="@string/Show_offers"
-            android:textColor="@color/colorAccent"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
-    </LinearLayout>
-</LinearLayout>
+            <com.synnapps.carouselview.CarouselView
+                android:id="@+id/home_carousel_banner"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:autoPlay="false"
+                app:fillColor="#FFFFFFFF"
+                app:pageColor="#00000000"
+                app:radius="6dp"
+                app:slideInterval="3000"
+                app:strokeColor="#FF777777"
+                app:strokeWidth="1dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/home_featured_title"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/featured_product"
+                    android:textAlignment="center"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:padding="10dp"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/white" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/home_featured_recycler"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/home_newest_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/newest_product"
+                    android:textAlignment="center"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:padding="10dp"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/white"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/home_newest_recycler"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/home_hot_sale_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/hot_sale_product"
+                    android:textAlignment="center"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:padding="10dp"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/white" />
+               <android.support.v7.widget.RecyclerView
+                    android:id="@+id/home_sale_recycler"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/banners_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/emptyLayoutText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="20dp"
+                    android:drawableTop="@drawable/loyalty_tag_black_48dp"
+                    android:padding="20dp"
+                    android:text="@string/No_banners" />
+
+                <TextView
+                    android:id="@+id/banners_empty_action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="20dp"
+                    android:text="@string/Show_offers"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

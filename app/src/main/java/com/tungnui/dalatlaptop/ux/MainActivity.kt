@@ -39,12 +39,13 @@ import com.tungnui.dalatlaptop.SettingsMy
 import com.tungnui.dalatlaptop.entities.Banner
 import com.tungnui.dalatlaptop.entities.drawerMenu.DrawerItemCategory
 import com.tungnui.dalatlaptop.entities.drawerMenu.DrawerItemPage
-import com.tungnui.dalatlaptop.entities.order.Order
 import com.tungnui.dalatlaptop.interfaces.LoginDialogInterface
+import com.tungnui.dalatlaptop.models.Order
 import com.tungnui.dalatlaptop.utils.MsgUtils
 import com.tungnui.dalatlaptop.utils.cartHelper
 import com.tungnui.dalatlaptop.utils.totalItem
 import com.tungnui.dalatlaptop.ux.dialogs.LoginDialogFragment
+import com.tungnui.dalatlaptop.ux.dialogs.LoginDialogFragment2
 import com.tungnui.dalatlaptop.ux.fragments.AccountEditFragment
 import com.tungnui.dalatlaptop.ux.fragments.AccountFragment
 import com.tungnui.dalatlaptop.ux.fragments.BannersFragment
@@ -66,6 +67,7 @@ import timber.log.Timber
 class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener {
 
 
+
     /**
      * Reference tied drawer menu, represented as fragment.
      */
@@ -78,10 +80,6 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
      * Reference view showing number of products in shopping cart.
      */
     private var cartCountView: TextView? = null
-    /**
-     * Reference number of products in shopping cart.
-     */
-    private var cartCountNotificationValue = CONST.DEFAULT_EMPTY_ID
 
     /**
      * BroadcastReceiver used in service for Gcm registration.
@@ -131,36 +129,20 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
         MenuItemCompat.setActionView(cartItem, R.layout.action_icon_shopping_cart)
         val view = MenuItemCompat.getActionView(cartItem)
         cartCountView = view.findViewById<View>(R.id.shopping_cart_notify) as TextView
-        showNotifyCount(cartCountNotificationValue)
+        showNotifyCount()
         view.setOnClickListener { onCartSelected() }
-        if (cartCountNotificationValue == CONST.DEFAULT_EMPTY_ID) {
-            // If first cart count check, then sync server cart data.
-            getCartCount()
-        }
         return super.onCreateOptionsMenu(menu)
     }
 
-    /**
-     * Loads cart count
-     *
-     */
-    private fun getCartCount() {
-        showNotifyCount(this.cartHelper.totalItem());
-    }
 
-    /**
-     * Method display cart count notification. Cart count notification remains hide if cart count is negative number.
-     *
-     * @param newCartCount cart count to show.
-     */
-    private fun showNotifyCount(newCartCount: Int) {
-        cartCountNotificationValue = newCartCount
-            runOnUiThread {
-                if (cartCountNotificationValue != 0 && cartCountNotificationValue != CONST.DEFAULT_EMPTY_ID) {
-                    shopping_cart_notify?.let{it.text = getString(R.string.format_number, cartCountNotificationValue)}
-                    shopping_cart_notify?.let{it.visibility = View.VISIBLE}
+    private fun showNotifyCount() {
+       var  newCartCount =  this.cartHelper.totalItem();
+             runOnUiThread {
+                if (newCartCount != 0) {
+                    cartCountView?.text = getString(R.string.format_number, newCartCount)
+                    cartCountView?.visibility = View.VISIBLE
                 } else {
-                    shopping_cart_notify?.let{it.visibility = View.INVISIBLE}
+                         cartCountView?.visibility = View.GONE
                 }
             }
     }
@@ -382,7 +364,7 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
             if (targetParams.size >= 2) {
                 when (targetParams[0]) {
                     "list" -> {
-                        val fragment = CategoryFragment.newInstance(Integer.parseInt(targetParams[1]), banner.name, null!!)
+                        val fragment = CategoryFragment.newInstance(Integer.parseInt(targetParams[1]), banner.name)
                         replaceFragment(fragment, CategoryFragment::class.java.simpleName + " - banner")
                     }
                     "detail" -> {
@@ -483,13 +465,26 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
      */
     fun onOrderSelected(order: Order?) {
         if (order != null) {
-            val fragment = OrderFragment.newInstance(order.id)
+            val fragment = OrderFragment.newInstance(order.id!!)
             replaceFragment(fragment, OrderFragment::class.java.simpleName)
         } else {
             Timber.e("Creating order detail with null data.")
         }
     }
 
+    override fun onDrawerOrderSelected() {
+        launchUserSpecificFragment(OrdersHistoryFragment(), OrdersHistoryFragment::class.java.simpleName, LoginDialogInterface { (id, dateCreated, dateCreatedGmt, dateModified, dateModifiedGmt, email, firstName, lastName, role, username, password, billing, shipping, isPayingCustomer, ordersCount, totalSpent, avatarUrl) ->
+            // If login was successful launch orderHistoryFragment.
+            onOrdersHistory()
+        })
+    }
+    override fun onDrawerHomeSelected() {
+        replaceFragment(BannersFragment(),BannersFragment::class.java.simpleName)
+    }
+
+    override fun onDrawerSettingSelected() {
+        replaceFragment(SettingsFragment(),SettingsFragment::class.java.simpleName)
+    }
     override fun onBackPressed() {
         // If back button pressed, try close drawer if exist and is open. If drawer is already closed continue.
         if (drawerFragment == null || !drawerFragment!!.onBackHide()) {
@@ -527,15 +522,19 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
 
     override fun onDrawerItemCategorySelected(category: Category) {
         clearBackStack()
-        Log.i("URL", category.name)
-        val fragment = CategoryFragment.newInstance(category.id!!, category.name!!, category.name!!)
+        val fragment = CategoryFragment.newInstance(category.id!!, category.name!!)
         replaceFragment(fragment, CategoryFragment::class.java.simpleName)
     }
+
     override fun onDrawerCartSelected() {
         onCartSelected()
     }
     override fun prepareSearchSuggestions(navigation: List<DrawerItemCategory>) {
 
+    }
+    fun onCategorySelected(type:String, name:String){
+        val fragment = CategoryFragment.newInstance(type, name)
+        replaceFragment(fragment, CategoryFragment::class.java.simpleName)
     }
 
     companion object {
@@ -545,7 +544,7 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
         fun updateCartCountNotification() {
             val instance = MainActivity.instance
             if (instance != null) {
-                instance.getCartCount()
+                instance.showNotifyCount()
             } else {
                 Timber.e(MSG_MAIN_ACTIVITY_INSTANCE_IS_NULL)
             }

@@ -110,9 +110,7 @@ public class MsgUtils {
             case TOAST_TYPE_NO_NETWORK:
                 str = activity.getString(R.string.No_network_connection);
                 break;
-            case TOAST_TYPE_NO_SIZE_SELECTED:
-                str = activity.getString(R.string.Please_select_a_size);
-                break;
+
         }
 
         text.setText(str);

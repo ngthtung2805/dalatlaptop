@@ -416,10 +416,11 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
 
 
     fun onOrderCreateSelected() {
-        launchUserSpecificFragment(OrderCreateFragment(), OrderCreateFragment::class.java.simpleName, LoginDialogInterface { (id, dateCreated, dateCreatedGmt, dateModified, dateModifiedGmt, email, firstName, lastName, role, username, password, billing, shipping, isPayingCustomer, ordersCount, totalSpent, avatarUrl) ->
+        replaceFragment(OrderCreateFragment(),OrderCreateFragment::class.java.simpleName)
+     /*   launchUserSpecificFragment(OrderCreateFragment(), OrderCreateFragment::class.java.simpleName, LoginDialogInterface { (id, dateCreated, dateCreatedGmt, dateModified, dateModifiedGmt, email, firstName, lastName, role, username, password, billing, shipping, isPayingCustomer, ordersCount, totalSpent, avatarUrl) ->
             // If login was successful launch CartFragment.
             onCartSelected()
-        })
+        })*/
     }
 
     /**

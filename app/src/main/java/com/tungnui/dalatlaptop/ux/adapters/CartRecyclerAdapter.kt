@@ -14,6 +14,7 @@ import com.tungnui.dalatlaptop.entities.cart.CartDiscountItem
 import com.tungnui.dalatlaptop.interfaces.CartRecyclerInterface
 import com.tungnui.dalatlaptop.listeners.OnSingleClickListener
 import com.tungnui.dalatlaptop.models.Cart
+import com.tungnui.dalatlaptop.utils.formatPrice
 import com.tungnui.dalatlaptop.utils.inflate
 import com.tungnui.dalatlaptop.utils.loadImg
 import kotlinx.android.synthetic.main.list_item_cart_product.view.*
@@ -95,7 +96,7 @@ class CartRecyclerAdapter( private val cartRecyclerInterface: CartRecyclerInterf
         fun blind(cart: Cart, cartRecyclerInterface: CartRecyclerInterface) = with(itemView){
             cart_product_image.loadImg(cart.image);
             cart_product_name.text = cart.productName
-            cart_product_price.text = cart.price.toString()
+            cart_product_price.text = cart.price.toString().formatPrice()
             cart.quantity?.let{cart_product_quantity.value = it}
             cart_product_quantity.setValueChangedListener(object :ValueChangedListener{
                 override fun valueChanged(value: Int, action: ActionEnum) {

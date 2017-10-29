@@ -12,6 +12,7 @@ import com.tungnui.dalatlaptop.R
 import com.tungnui.dalatlaptop.interfaces.OrdersRecyclerInterface
 import com.tungnui.dalatlaptop.models.Order
 import com.tungnui.dalatlaptop.utils.Utils
+import com.tungnui.dalatlaptop.utils.formatPrice
 import com.tungnui.dalatlaptop.utils.inflate
 import kotlinx.android.synthetic.main.list_item_orders_history.view.*
 import timber.log.Timber
@@ -51,7 +52,7 @@ class OrdersHistoryRecyclerAdapter( val listener: (Order) -> Unit) : RecyclerVie
         fun blind(order:Order,listener: (Order) -> Unit)= with(itemView){
             order_history_item_id.text = order.id.toString()
             order_history_item_dateCreated.text = order.dateCreated
-            order_history_item_totalPrice.text = order.total
+            order_history_item_totalPrice.text = order.total?.formatPrice()
             setOnClickListener { listener }
         }
      }

@@ -10,6 +10,7 @@ import java.util.ArrayList
 
 import com.tungnui.dalatlaptop.R
 import com.tungnui.dalatlaptop.models.Product
+import com.tungnui.dalatlaptop.utils.formatPrice
 import com.tungnui.dalatlaptop.utils.getFeaturedImage
 import com.tungnui.dalatlaptop.utils.inflate
 import com.tungnui.dalatlaptop.utils.loadImg
@@ -54,16 +55,14 @@ class ProductsRecyclerAdapter(val listener: (Product) -> Unit) : RecyclerView.Ad
             if(item.onSale){
                 product_item_price.visibility = View.VISIBLE
                 product_item_discount.visibility = View.VISIBLE
-                val formatter = DecimalFormat("#,###")
-                product_item_price.text = formatter.format(item.regularPrice?.toDouble()) + "đ"
+                product_item_price.text = item.regularPrice?.formatPrice()
                 product_item_price.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG or Paint.ANTI_ALIAS_FLAG
                 product_item_price.setTextColor(ContextCompat.getColor(context, R.color.textSecondary))
-                product_item_discount.text = formatter.format(item.salePrice?.toDouble()) + "đ"
+                product_item_discount.text = item.salePrice?.formatPrice()
             }else{
                 product_item_price.visibility = View.VISIBLE
                 product_item_discount.visibility = View.GONE
-                val formatter = DecimalFormat("#,###")
-                product_item_price.text = "${formatter.format(item.price?.toDouble())}đ"
+                product_item_price.text =item.price?.formatPrice()
              //   product_item_price.setTextColor(ContextCompat.getColor(context, R.color.textPrimary))
             }
              setOnClickListener { listener(item) }

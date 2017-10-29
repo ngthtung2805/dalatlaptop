@@ -21,7 +21,9 @@ import com.tungnui.dalatlaptop.CONST
 import com.tungnui.dalatlaptop.MyApplication
 import com.tungnui.dalatlaptop.R
 import com.tungnui.dalatlaptop.SettingsMy
+import com.tungnui.dalatlaptop.api.EndPoints
 import com.tungnui.dalatlaptop.api.GsonRequest
+import com.tungnui.dalatlaptop.api.ServiceGenerator
 import com.tungnui.dalatlaptop.entities.User
 import com.tungnui.dalatlaptop.entities.cart.Cart
 import com.tungnui.dalatlaptop.entities.cart.CartProductItem
@@ -32,19 +34,31 @@ import com.tungnui.dalatlaptop.entities.order.Order
 import com.tungnui.dalatlaptop.interfaces.PaymentDialogInterface
 import com.tungnui.dalatlaptop.interfaces.ShippingDialogInterface
 import com.tungnui.dalatlaptop.listeners.OnSingleClickListener
-import com.tungnui.dalatlaptop.utils.MsgUtils
-import com.tungnui.dalatlaptop.utils.Utils
+import com.tungnui.dalatlaptop.models.ShippingMethod
+import com.tungnui.dalatlaptop.utils.*
 import com.tungnui.dalatlaptop.ux.MainActivity
 import com.tungnui.dalatlaptop.ux.dialogs.LoginExpiredDialogFragment
 import com.tungnui.dalatlaptop.ux.dialogs.PaymentDialogFragment
 import com.tungnui.dalatlaptop.ux.dialogs.ShippingDialogFragment
+import com.tungnui.dalatlaptop.woocommerceapi.OrderServices
+import com.tungnui.dalatlaptop.woocommerceapi.ShippingMethodService
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_order_create.*
+import kotlinx.android.synthetic.main.fragment_orders_history.*
 import timber.log.Timber
 
 /**
  * Fragment allowing the user to create order.
  */
 class OrderCreateFragment : Fragment() {
+    private var mCompositeDisposable: CompositeDisposable
+    val shippingMethodService: ShippingMethodService
+    init {
+        mCompositeDisposable = CompositeDisposable()
+        shippingMethodService = ServiceGenerator.createService(ShippingMethodService::class.java)
+    }
     private lateinit var progressDialog: ProgressDialog
 
 
@@ -61,7 +75,7 @@ class OrderCreateFragment : Fragment() {
     private val emailInputWrapper: TextInputLayout? = null
 
     // Shipping and payment
-    private val delivery: Delivery? = null
+    private var delivery: ShippingMethod? = null
     private var selectedPayment: Payment? = null
     private var selectedShipping: Shipping? = null
     private val postOrderRequest: GsonRequest<Order>? = null
@@ -183,7 +197,7 @@ class OrderCreateFragment : Fragment() {
 
 
     private fun prepareDeliveryLayout() {
-        order_create_delivery_shipping_layout.setOnClickListener {
+       /* order_create_delivery_shipping_layout.setOnClickListener {
             val shippingDialogFragment = ShippingDialogFragment.newInstance(delivery, selectedShipping) { shipping ->
                 // Save selected value
                 selectedShipping = shipping
@@ -198,7 +212,7 @@ class OrderCreateFragment : Fragment() {
                 order_create_delivery_payment_layout.performClick()
             }
             shippingDialogFragment.show(fragmentManager, ShippingDialogFragment::class.java.simpleName)
-        }
+        }*/
 
         order_create_delivery_payment_layout.setOnClickListener {
             val paymentDialogFragment = PaymentDialogFragment.newInstance(selectedShipping, selectedPayment) { payment ->
@@ -256,59 +270,27 @@ class OrderCreateFragment : Fragment() {
     }
 
     private fun getUserCart() {
-        /*  final User user = SettingsMy.getActiveUser();
-        if (user != null) {
-            String url = String.format(EndPoints.CART, SettingsMy.getActualNonNullShop(getActivity()).getId());
-
-            progressDialog.show();
-            GsonRequest<Cart> getCart = new GsonRequest<>(Request.Method.GET, url, null, Cart.class,
-                    new Response.Listener<Cart>() {
-                        @Override
-                        public void onResponse(@NonNull Cart cart) {
-                            if (progressDialog != null) progressDialog.cancel();
-                            refreshScreenContent(cart, user);
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    if (progressDialog != null) progressDialog.cancel();
-                    Timber.e("Get request cart error: %s", error.getMessage());
-                    MsgUtils.logAndShowErrorMessage(getActivity(), error);
-                    if (getActivity() instanceof MainActivity) ((MainActivity) getActivity()).onDrawerBannersSelected();
-                }
-            }, getFragmentManager(), user.getAccessToken());
-            getCart.setRetryPolicy(MyApplication.getDefaultRetryPolice());
-            getCart.setShouldCache(false);
-            MyApplication.getInstance().addToRequestQueue(getCart, CONST.ORDER_CREATE_REQUESTS_TAG);
-        } else {
-            LoginExpiredDialogFragment loginExpiredDialogFragment = new LoginExpiredDialogFragment();
-            loginExpiredDialogFragment.show(getFragmentManager(), MSG_LOGIN_EXPIRED_DIALOG_FRAGMENT);
-        }*/
+        refreshScreenContent()
     }
 
-    private fun refreshScreenContent(cart: Cart, user: User) {
-        this.cart = cart
-        val cartProductItems = cart.items
-        if (cartProductItems == null || cartProductItems.isEmpty()) {
+    private fun refreshScreenContent() {
+        var carts = context.cartHelper.getAll()
+        if (carts.count() == 0) {
             Timber.e(RuntimeException(), "Received null cart during order creation.")
             if (activity is MainActivity) (activity as MainActivity).onDrawerBannersSelected()
         } else {
-
             val inflater = activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            for (i in cartProductItems.indices) {
+            for (cart in carts) {
                 val llRow = inflater.inflate(R.layout.order_create_cart_item, order_create_cart_items_layout, false) as LinearLayout
                 val tvItemName = llRow.findViewById<View>(R.id.order_create_cart_item_name) as TextView
-                tvItemName.text = cartProductItems[i].variant.name
+                tvItemName.text = cart.productName
                 val tvItemPrice = llRow.findViewById<View>(R.id.order_create_cart_item_price) as TextView
-                tvItemPrice.text = cartProductItems[i].totalItemPriceFormatted
+                tvItemPrice.text = cart.price.toString().formatPrice()
                 val tvItemQuantity = llRow.findViewById<View>(R.id.order_create_cart_item_quantity) as TextView
-                tvItemQuantity.text = getString(R.string.format_quantity, cartProductItems[i].quantity)
-                val tvItemDetails = llRow.findViewById<View>(R.id.order_create_cart_item_details) as TextView
-                tvItemDetails.text = getString(R.string.format_string_division, cartProductItems[i].variant.color.value,
-                        cartProductItems[i].variant.size.value)
+                tvItemQuantity.text = getString(R.string.format_quantity, cart.quantity)
                 order_create_cart_items_layout.addView(llRow)
             }
-            if (cart.discounts != null) {
+           /* if (cart?.discounts != null) {
                 for (i in 0 until cart.discounts.size) {
                     val llRow = inflater.inflate(R.layout.order_create_cart_item, order_create_cart_items_layout, false) as LinearLayout
                     val tvItemName = llRow.findViewById<View>(R.id.order_create_cart_item_name) as TextView
@@ -318,36 +300,27 @@ class OrderCreateFragment : Fragment() {
                     tvItemPrice.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
                     order_create_cart_items_layout.addView(llRow)
                 }
-            }
+            }*/
 
-            order_create_total_price.text = cart.totalPriceFormatted
-            order_create_summary_total_price.text = cart.totalPriceFormatted
+            order_create_total_price.text = context.cartHelper.total().toString().formatPrice()
+            order_create_summary_total_price.text = context.cartHelper.total().toString().formatPrice()
 
-            // TODO pull to scroll could be cool here
-            /*
+
             delivery_progress.setVisibility(View.VISIBLE);
-            GsonRequest<DeliveryRequest> getDelivery = new GsonRequest<>(Request.Method.GET, url, null, DeliveryRequest.class,
-                    new Response.Listener<DeliveryRequest>() {
-                        @Override
-                        public void onResponse(@NonNull DeliveryRequest deliveryResp) {
-                            Timber.d("GetDelivery: %s", deliveryResp.toString());
-                            delivery = deliveryResp.getDelivery();
-                            delivery_progress.setVisibility(View.GONE);
-                            order_create_delivery_shipping_layout.visibility = View.VISIBLE;
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Timber.e("Get request cart error: %s", error.getMessage());
-                    MsgUtils.logAndShowErrorMessage(getActivity(), error);
+            var disposable = shippingMethodService.getAll()
+                    .subscribeOn((Schedulers.io()))
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ response ->
+                        delivery = response
+                        delivery_progress.setVisibility(View.GONE);
+                        order_create_delivery_shipping_layout.visibility = View.VISIBLE
+                    },
+                            { error ->
+                                delivery_progress.setVisibility(View.GONE);
+                            })
 
-                    delivery_progress.setVisibility(View.GONE);
-                    if (getActivity() instanceof MainActivity) ((MainActivity) getActivity()).onDrawerBannersSelected();
-                }
-            }, getFragmentManager(), user.getAccessToken());
-            getDelivery.setRetryPolicy(MyApplication.getDefaultRetryPolice());
-            getDelivery.setShouldCache(false);
-            MyApplication.getInstance().addToRequestQueue(getDelivery, CONST.ORDER_CREATE_REQUESTS_TAG);*/
+            mCompositeDisposable.add(disposable)
+
         }
     }
 

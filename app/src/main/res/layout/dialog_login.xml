@@ -183,7 +183,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/LastName"
+                android:hint="@string/last_name"
                 android:inputType="text"
                 android:maxLines="1"
                 android:paddingEnd="@dimen/base_margin_horizontal_half"
@@ -202,7 +202,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/FirstName"
+                android:hint="@string/first_name"
                 android:inputType="text"
                 android:maxLines="1"
                 android:paddingEnd="@dimen/base_margin_horizontal_half"
@@ -273,7 +273,7 @@
                 android:layout_height="wrap_content"
                 android:drawableEnd="@android:drawable/ic_menu_view"
                 android:drawableRight="@android:drawable/ic_menu_view"
-                android:hint="@string/Repassword"
+                android:hint="@string/repassword"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:paddingEnd="@dimen/base_margin_horizontal_half"

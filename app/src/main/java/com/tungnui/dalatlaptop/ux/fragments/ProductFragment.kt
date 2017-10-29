@@ -251,7 +251,6 @@ class ProductFragment : Fragment() {
             val formatter = DecimalFormat("#,###")
             if (product.onSale) {
                 product_price_discount.text = "${formatter.format(product.salePrice?.toDouble())}đ"
-                product_price_discount.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
                 product_price.visibility = View.VISIBLE
                 product_price.text = "${formatter.format(product.regularPrice?.toDouble())}đ"
                 product_price.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG or Paint.ANTI_ALIAS_FLAG
@@ -288,7 +287,6 @@ class ProductFragment : Fragment() {
         MainActivity.updateCartCountNotification()
         val result = getString(R.string.Product) + " " + getString(R.string.added_to_cart)
         val snackbar = Snackbar.make(product_container, result, Snackbar.LENGTH_LONG)
-                .setActionTextColor(ContextCompat.getColor(activity, R.color.colorAccent))
                 .setAction(R.string.Go_to_cart) {
                     if (activity is MainActivity)
                         (activity as MainActivity).onCartSelected()

@@ -14,6 +14,7 @@ import com.tungnui.dalatlaptop.views.ResizableImageViewHeight
 import com.squareup.picasso.Picasso
 import com.tungnui.dalatlaptop.R
 import com.tungnui.dalatlaptop.models.Image
+import java.text.DecimalFormat
 import java.util.regex.Pattern
 
 
@@ -45,6 +46,10 @@ fun List<Image>.getFeaturedImage():Image{
             return item
     }
     return Image()
+}
+fun String.formatPrice():String{
+    val formatter = DecimalFormat("#,###")
+    return formatter.format(this.toDouble()) + "đ"
 }
 /*
 * GET NEXT URL FROM LINK IN HEADER

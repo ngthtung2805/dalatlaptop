@@ -1,45 +1,55 @@
-
+{
   "project_info": {
-    "project_id": "openshop-bf-1216",
-    "project_number": "325761325996",
-    "name": "dalatlaptop"
+    "project_number": "1021234967604",
+    "firebase_url": "https://dalatlaptop-8d032.firebaseio.com",
+    "project_id": "dalatlaptop-8d032",
+    "storage_bucket": "dalatlaptop-8d032.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:325761325996:android:88c2d391918f6b36",
-        "client_id": "android:com.tungnui.dalatlaptop",
-        "client_type": 1,
+        "mobilesdk_app_id": "1:1021234967604:android:9c98e32bc5098184",
         "android_client_info": {
-          "package_name": "android:com.tungnui.dalatlaptop"
+          "package_name": "com.tungnui.dalatlaptop"
         }
       },
-      "oauth_client": [],
-      "api_key": [{ "current_key": "" }],
-      "services": {
-        "analytics_service": {
-          "status": 2,
-          "analytics_property":{
-            "tracking_id":"UA-73690730-2"
+      "oauth_client": [
+        {
+          "client_id": "1021234967604-bpkd5dk2itb10fv3ojbv5rhpckeimdcj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tungnui.dalatlaptop",
+            "certificate_hash": "926d076fd79f6286814a22686191d22fef6f0c19"
           }
         },
-        "cloud_messaging_service": {
-          "status": 2,
-          "apns_config": []
+        {
+          "client_id": "1021234967604-hgnlsl24u7rdpk4hq9pb6dulpiqu1iqc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3tC5zclcQkxB2AqvrymjHYaABJXwFzwM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "google_signin_service": {
-          "status": 1
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021234967604-hgnlsl24u7rdpk4hq9pb6dulpiqu1iqc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }
   ],
-  "client_info": [],
-  "ARTIFACT_VERSION": "1"
+  "configuration_version": "1"
 }

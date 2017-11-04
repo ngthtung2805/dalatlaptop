@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/order_create_scroll_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/base_margin_vertical"
+            android:paddingTop="@dimen/base_margin_vertical"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/base_margin_horizontal"
+                android:paddingRight="@dimen/base_margin_horizontal">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/order_create_add_name_wrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColorHint="@color/colorPrimaryLight">
+
+                    <EditText
+                        android:id="@+id/order_create_add_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:hint="@string/Name_colon"
+                        android:inputType="textPersonName"
+                        android:nextFocusForward="@+id/order_create_street"
+                        android:singleLine="true"
+                        android:textColor="@color/textPrimary" />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/order_create_add_street_wrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.65"
+                    android:textColorHint="@color/colorPrimaryLight">
+
+                    <EditText
+                        android:id="@+id/order_create_add_street"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:hint="@string/Street"
+                        android:inputType="textPostalAddress"
+                        android:nextFocusDown="@+id/order_create_houseNumber"
+                        android:nextFocusForward="@+id/order_create_houseNumber"
+                        android:nextFocusRight="@+id/order_create_houseNumber"
+                        android:singleLine="true"
+                        android:textColor="@color/textPrimary" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/order_create_add_city_wrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.65"
+                    android:textColorHint="@color/colorPrimaryLight">
+
+                    <EditText
+                        android:id="@+id/order_create_add_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:hint="@string/City"
+                        android:inputType="textPostalAddress"
+                        android:nextFocusDown="@+id/order_create_zip"
+                        android:nextFocusForward="@+id/order_create_zip"
+                        android:nextFocusLeft="@+id/order_create_houseNumber"
+                        android:nextFocusRight="@+id/order_create_zip"
+                        android:singleLine="true"
+                        android:textColor="@color/textPrimary" />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/order_create_add_province_wrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.65"
+                    android:textColorHint="@color/colorPrimaryLight">
+
+                    <EditText
+                        android:id="@+id/order_create_add_province"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:hint="@string/City"
+                        android:inputType="textPostalAddress"
+                        android:nextFocusDown="@+id/order_create_zip"
+                        android:nextFocusForward="@+id/order_create_zip"
+                        android:nextFocusLeft="@+id/order_create_houseNumber"
+                        android:nextFocusRight="@+id/order_create_zip"
+                        android:singleLine="true"
+                        android:textColor="@color/textPrimary" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/order_create_add_email_wrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/colorPrimaryLight">
+
+                    <EditText
+                        android:id="@+id/order_create_add_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:hint="@string/Email"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true"
+                        android:textColor="@color/textPrimary" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/order_create_add_phone_wrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/colorPrimaryLight">
+
+                    <EditText
+                        android:id="@+id/order_create_add_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:hint="@string/Phone"
+                        android:inputType="phone"
+                        android:singleLine="true"
+                        android:textColor="@color/textPrimary" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <!-- Visual screen divider-->
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/base_margin_vertical"
+                android:layout_marginBottom="@dimen/base_margin_vertical_half"
+                android:layout_marginTop="@dimen/base_margin_vertical_half"
+                android:background="@color/background_grey" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/order_create_add_save"
+        style="@style/buttonPrimaryStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="@string/Save_address" />
+</LinearLayout>

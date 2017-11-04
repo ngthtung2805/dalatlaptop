@@ -3,9 +3,6 @@ package com.tungnui.dalatlaptop.utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.tungnui.dalatlaptop.entities.order.Order;
-import timber.log.Timber;
-
 public class JsonUtils {
 
     // Server specific JSON tags
@@ -46,41 +43,6 @@ public class JsonUtils {
 
     private JsonUtils() {}
 
-
-    /**
-     * @param order
-     * @return
-     * @throws JSONException
-     */
-    public static JSONObject createOrderJson(Order order) throws JSONException {
-        JSONObject jo = new JSONObject();
-
-        jo.put(TAG_SHIPPING_TYPE, order.getShippingType());
-        if (order.getPaymentType() == -1) {
-            jo.put(TAG_PAYMENT_TYPE, null);
-        } else {
-            jo.put(TAG_PAYMENT_TYPE, order.getPaymentType());
-        }
-
-        jo.put(TAG_NAME, order.getName());
-        jo.put(TAG_STREET, order.getStreet());
-        jo.put(TAG_HOUSE_NUMBER, order.getHouseNumber());
-        jo.put(TAG_CITY, order.getCity());
-        jo.put(TAG_ZIP, order.getZip());
-        jo.put(TAG_EMAIL, order.getEmail());
-        jo.put(TAG_PHONE, order.getPhone());
-
-        if (order.getNote() != null) {
-            jo.put(TAG_NOTE, order.getNote());
-        }
-
-        if (order.getRegion() != null) {
-            jo.put(TAG_REGION, order.getRegion().getId());
-        }
-
-        Timber.d("JSONParser postOrder: %s", jo.toString());
-        return jo;
-    }
 
     public static JSONObject createUserAuthentication(String email, String password) throws JSONException {
         JSONObject jo = new JSONObject();

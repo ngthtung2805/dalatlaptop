@@ -71,7 +71,7 @@ class ProductFragment : Fragment() {
         MainActivity.setActionBarTitle(getString(R.string.Product))
         prepareButtons()
         prepareProductImagesLayout()
-        prepareScrollViewAndWishlist()
+        prepareScrollView()
 
         val productId = arguments.getInt(PRODUCT_ID, 0)
         getProduct(productId)
@@ -92,7 +92,7 @@ class ProductFragment : Fragment() {
 
         product_send_to_a_friend.setOnClickListener(object : OnSingleClickListener() {
             override fun onSingleClick(v: View) {
-                if (MyApplication.getInstance().isDataConnected) {
+                if (MyApplication.instance!!.isDataConnected) {
                     Timber.d("FragmentProductDetail share link clicked")
                     // send message with prepared content
                     try {
@@ -171,18 +171,12 @@ class ProductFragment : Fragment() {
      *
      * @param view fragment base view.
      */
-    private fun prepareScrollViewAndWishlist() {
+    private fun prepareScrollView() {
         scrollViewListener = object : ViewTreeObserver.OnScrollChangedListener {
             private var alphaFull = false
             override fun onScrollChanged() {
                 val scrollY = product_scroll_layout.scrollY
                 if (product_images_recycler_view != null) {
-                    if (product_add_to_wish_list.width * 2 > scrollY) {
-                        product_add_to_wish_list.translationX = (scrollY / 4).toFloat()
-                    } else {
-                        product_add_to_wish_list.translationX = (product_add_to_wish_list.width / 2).toFloat()
-                    }
-
                     val alphaRatio: Float
                     if (product_images_recycler_view.height > scrollY) {
                         product_images_recycler_view.translationY = (scrollY / 2).toFloat()
@@ -338,7 +332,6 @@ class ProductFragment : Fragment() {
     }
 
     override fun onStop() {
-        MyApplication.getInstance().cancelPendingRequests(CONST.PRODUCT_REQUESTS_TAG)
         setContentVisible(CONST.VISIBLE.CONTENT)
         product_add_to_cart_image.visibility = View.VISIBLE
         product_add_to_cart_progress.visibility = View.INVISIBLE

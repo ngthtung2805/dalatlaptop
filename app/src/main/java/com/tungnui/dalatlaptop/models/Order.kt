@@ -2,7 +2,6 @@ package com.tungnui.dalatlaptop.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import com.tungnui.dalatlaptop.entities.Links
 
 data class Order (
     @SerializedName("id")

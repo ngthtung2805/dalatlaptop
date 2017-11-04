@@ -36,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun init() {
         // Check if data connected.
-        if (!MyApplication.getInstance().isDataConnected) {
+        if (MyApplication.instance?.isDataConnected == false) {
             progressDialog.hide()
             initSplashLayout()
             splash_content.visibility = View.VISIBLE
@@ -64,12 +64,7 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * Check if shop is selected. If so then start [MainActivity]. If no then show form with selection.
-     *
-     * @param bundle notification specific data.
-     */
-    private fun startMainActivity(bundle: Bundle?) {
+      private fun startMainActivity(bundle: Bundle?) {
         val mainIntent = Intent(this@SplashActivity, MainActivity::class.java)
         startActivity(mainIntent)
         finish()

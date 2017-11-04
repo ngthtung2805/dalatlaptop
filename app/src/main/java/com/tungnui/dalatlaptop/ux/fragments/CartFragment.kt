@@ -1,6 +1,7 @@
 package com.tungnui.dalatlaptop.ux.fragments
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
@@ -78,9 +79,10 @@ class CartFragment : Fragment() {
 
         cart_order.setOnClickListener(object : OnSingleClickListener() {
             override fun onSingleClick(v: View) {
-                if (activity is MainActivity) {
+               if (activity is MainActivity) {
                     (activity as MainActivity).onOrderCreateSelected()
                 }
+
             }
         })
 

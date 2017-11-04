@@ -1,17 +1,13 @@
 package com.tungnui.dalatlaptop.ux.adapters
 
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 
 import java.util.ArrayList
 
 import com.tungnui.dalatlaptop.R
-import com.tungnui.dalatlaptop.interfaces.OrdersRecyclerInterface
 import com.tungnui.dalatlaptop.models.Order
-import com.tungnui.dalatlaptop.utils.Utils
 import com.tungnui.dalatlaptop.utils.formatPrice
 import com.tungnui.dalatlaptop.utils.inflate
 import kotlinx.android.synthetic.main.list_item_orders_history.view.*

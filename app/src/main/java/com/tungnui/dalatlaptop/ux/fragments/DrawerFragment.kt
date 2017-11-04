@@ -25,8 +25,6 @@ import com.tungnui.dalatlaptop.CONST
 import com.tungnui.dalatlaptop.MyApplication
 import com.tungnui.dalatlaptop.R
 import com.tungnui.dalatlaptop.SettingsMy
-import com.tungnui.dalatlaptop.entities.drawerMenu.DrawerItemCategory
-import com.tungnui.dalatlaptop.entities.drawerMenu.DrawerItemPage
 import com.tungnui.dalatlaptop.ux.adapters.DrawerRecyclerAdapter
 import com.tungnui.dalatlaptop.api.CategoryService
 import com.tungnui.dalatlaptop.api.ServiceGenerator
@@ -47,43 +45,12 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
         categoryService = ServiceGenerator.createService(CategoryService::class.java)
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.nav_home->{
-                drawerListener?.onDrawerHomeSelected()
-                toggleDrawerMenu()
-            }
-            R.id.nav_category -> animateMenuShow()
-            R.id.nav_cart -> {
-                drawerListener?.onDrawerCartSelected()
-                toggleDrawerMenu()
-            }
-            R.id.nav_order->{
-                drawerListener?.onDrawerOrderSelected()
-                toggleDrawerMenu()
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * Indicates that menu is currently loading.
-     */
     private var drawerLoading = false
-
-    /**
-     * Listener indicating events that occurred on the menu.
-     */
-    private var drawerListener: FragmentDrawerListener? = null
-
-    private var mDrawerToggle: ActionBarDrawerToggle? = null
-
-    // Drawer top menu fields.
-    private var mDrawerLayout: DrawerLayout? = null
+    private lateinit var drawerListener: FragmentDrawerListener
+    private lateinit var mDrawerToggle: ActionBarDrawerToggle
+    private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var drawerMenuRecyclerAdapter: DrawerRecyclerAdapter
-
-    private var drawerSubmenuLayout: LinearLayout? = null
+    private lateinit var drawerSubmenuLayout: LinearLayout
     private lateinit var drawerSubmenuRecyclerAdapter: DrawerRecyclerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -187,44 +154,34 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
 
         toolbar.setOnClickListener { toggleDrawerMenu() }
 
-        mDrawerLayout!!.addDrawerListener(mDrawerToggle!!)
-        mDrawerLayout!!.post { mDrawerToggle!!.syncState() }
+        mDrawerLayout.addDrawerListener(mDrawerToggle)
+        mDrawerLayout.post { mDrawerToggle.syncState() }
     }
 
     /**
      * When the drawer menu is open, close it. Otherwise open it.
      */
     fun toggleDrawerMenu() {
-        if (mDrawerLayout != null) {
-            if (mDrawerLayout!!.isDrawerVisible(GravityCompat.START)) {
-                mDrawerLayout!!.closeDrawer(GravityCompat.START)
-            } else {
-                mDrawerLayout!!.openDrawer(GravityCompat.START)
-            }
+        if (mDrawerLayout.isDrawerVisible(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            mDrawerLayout.openDrawer(GravityCompat.START)
         }
     }
 
-    /**
-     * When the drawer menu is open, close it.
-     */
     fun closeDrawerMenu() {
-        if (mDrawerLayout != null) {
-            mDrawerLayout!!.closeDrawer(GravityCompat.START)
-        }
+            mDrawerLayout.closeDrawer(GravityCompat.START)
     }
 
-    /**
-     * Check if drawer is open. If so close it.
-     *
-     * @return false if drawer was already closed
-     */
     fun onBackHide(): Boolean {
-        if (mDrawerLayout != null && mDrawerLayout!!.isDrawerVisible(GravityCompat.START)) {
-            if (drawerSubmenuLayout!!.visibility == View.VISIBLE)
-                animateSubMenuHide()
-            else
-                mDrawerLayout!!.closeDrawer(GravityCompat.START)
-            return true
+        mDrawerLayout.let {
+            if (it.isDrawerVisible(GravityCompat.START)) {
+                if (drawerSubmenuLayout.visibility == View.VISIBLE) {
+                    animateSubMenuHide()
+                } else
+                    it.closeDrawer(GravityCompat.START)
+                return true
+            }
         }
         return false
     }
@@ -234,16 +191,19 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
     */
     fun invalidateHeader() {
         val headerView = nav_view.getHeaderView(0)
+        val txtUserName = headerView.findViewById<TextView>(R.id.navigation_drawer_list_header_text)
+        val avatarImage = headerView.findViewById<ImageView>(R.id.navigation_drawer_header_avatar)
         val user = SettingsMy.getActiveUser()
         if (user != null) {
-            val txtUserName = headerView.findViewById<TextView>(R.id.navigation_drawer_list_header_text)
             txtUserName.text = user.username
-            val avatarImage = headerView.findViewById<ImageView>(R.id.navigation_drawer_header_avatar)
             if (user.avatarUrl == null) {
                 avatarImage.setImageResource(R.drawable.user)
             } else {
                 avatarImage.loadImg(user.avatarUrl)
             }
+        }else{
+            txtUserName.text = "Xin chào, Khách!"
+            avatarImage.setImageResource(R.drawable.user)
         }
     }
 
@@ -359,9 +319,27 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
 
     }
 
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_home -> {
+                drawerListener.onDrawerHomeSelected()
+                toggleDrawerMenu()
+            }
+            R.id.nav_category -> animateMenuShow()
+            R.id.nav_cart -> {
+                drawerListener.onDrawerCartSelected()
+                toggleDrawerMenu()
+            }
+            R.id.nav_order -> {
+                drawerListener.onDrawerOrderSelected()
+                toggleDrawerMenu()
+            }
+        }
+
+        return true;
+    }
+
     override fun onPause() {
-        // Cancellation during onPause is needed because of app restarting during changing shop.
-        MyApplication.getInstance().cancelPendingRequests(CONST.DRAWER_REQUESTS_TAG)
         if (drawerLoading) {
             drawer_menu_progress.visibility = View.GONE
             drawer_menu_retry_btn.visibility = View.VISIBLE
@@ -371,7 +349,7 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
     }
 
     override fun onDestroy() {
-        mDrawerLayout!!.removeDrawerListener(mDrawerToggle!!)
+        mDrawerLayout?.removeDrawerListener(mDrawerToggle)
         super.onDestroy()
     }
 
@@ -385,11 +363,8 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
      * Interface defining events initiated by [DrawerFragment].
      */
     interface FragmentDrawerListener {
-        fun onDrawerBannersSelected()
         fun onDrawerItemCategorySelected(category: Category)
-        fun onDrawerItemPageSelected(drawerItemPage: DrawerItemPage)
         fun onAccountSelected()
-        fun prepareSearchSuggestions(navigation: List<DrawerItemCategory>)
         fun onDrawerCartSelected()
         fun onDrawerOrderSelected()
         fun onDrawerHomeSelected()

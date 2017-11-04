@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import com.tungnui.dalatlaptop.R
 import com.tungnui.dalatlaptop.SettingsMy
 import com.tungnui.dalatlaptop.api.EndPoints
 import com.tungnui.dalatlaptop.api.ServiceGenerator
-import com.tungnui.dalatlaptop.entities.Metadata
 import com.tungnui.dalatlaptop.models.Order
 import com.tungnui.dalatlaptop.utils.EndlessRecyclerScrollListener
 import com.tungnui.dalatlaptop.utils.RecyclerMarginDecorator
@@ -23,13 +21,11 @@ import com.tungnui.dalatlaptop.utils.getNextUrl
 import com.tungnui.dalatlaptop.ux.MainActivity
 import com.tungnui.dalatlaptop.ux.adapters.OrdersHistoryRecyclerAdapter
 import com.tungnui.dalatlaptop.ux.dialogs.LoginExpiredDialogFragment
-import com.tungnui.dalatlaptop.woocommerceapi.OrderServices
+import com.tungnui.dalatlaptop.api.OrderServices
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_orders_history.*
-import org.jetbrains.anko.support.v4.longToast
-import org.jetbrains.anko.support.v4.toast
 import timber.log.Timber
 
 class OrdersHistoryFragment : Fragment() {
@@ -41,10 +37,6 @@ class OrdersHistoryFragment : Fragment() {
     }
     private var progressDialog: ProgressDialog? = null
 
-    /**
-     * Request metadata containing urls for endlessScroll.
-     */
-    private val ordersMetadata: Metadata? = null
     private var order: Order? = null
     private var orderNextLink:String? = null
 

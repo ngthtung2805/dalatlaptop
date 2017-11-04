@@ -5,48 +5,30 @@ import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
 import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.ScrollView
 import android.widget.TextView
 
-import com.tungnui.dalatlaptop.CONST
-import com.tungnui.dalatlaptop.MyApplication
 import com.tungnui.dalatlaptop.R
 import com.tungnui.dalatlaptop.SettingsMy
-import com.tungnui.dalatlaptop.api.EndPoints
-import com.tungnui.dalatlaptop.api.GsonRequest
 import com.tungnui.dalatlaptop.api.ServiceGenerator
-import com.tungnui.dalatlaptop.entities.User
-import com.tungnui.dalatlaptop.entities.cart.Cart
-import com.tungnui.dalatlaptop.entities.cart.CartProductItem
-import com.tungnui.dalatlaptop.entities.delivery.Delivery
-import com.tungnui.dalatlaptop.entities.delivery.Payment
-import com.tungnui.dalatlaptop.entities.delivery.Shipping
-import com.tungnui.dalatlaptop.entities.order.Order
-import com.tungnui.dalatlaptop.interfaces.PaymentDialogInterface
-import com.tungnui.dalatlaptop.interfaces.ShippingDialogInterface
 import com.tungnui.dalatlaptop.listeners.OnSingleClickListener
 import com.tungnui.dalatlaptop.models.ShippingMethod
 import com.tungnui.dalatlaptop.utils.*
 import com.tungnui.dalatlaptop.ux.MainActivity
 import com.tungnui.dalatlaptop.ux.dialogs.LoginExpiredDialogFragment
-import com.tungnui.dalatlaptop.ux.dialogs.PaymentDialogFragment
-import com.tungnui.dalatlaptop.ux.dialogs.ShippingDialogFragment
-import com.tungnui.dalatlaptop.woocommerceapi.OrderServices
-import com.tungnui.dalatlaptop.woocommerceapi.ShippingMethodService
+import com.tungnui.dalatlaptop.api.ShippingMethodService
+import com.tungnui.dalatlaptop.models.Cart
+import com.tungnui.dalatlaptop.models.Order
+import com.tungnui.dalatlaptop.models.Shipping
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_order_create.*
-import kotlinx.android.synthetic.main.fragment_orders_history.*
 import timber.log.Timber
 
 /**
@@ -76,9 +58,8 @@ class OrderCreateFragment : Fragment() {
 
     // Shipping and payment
     private var delivery: ShippingMethod? = null
-    private var selectedPayment: Payment? = null
+   // private var selectedPayment: Payment? = null
     private var selectedShipping: Shipping? = null
-    private val postOrderRequest: GsonRequest<Order>? = null
 
     /**
      * Check if all input fields are filled and also that is selected shipping and payment.
@@ -106,11 +87,11 @@ class OrderCreateFragment : Fragment() {
                     return false
                 }
 
-                if (selectedPayment == null) {
+             /*   if (selectedPayment == null) {
                     MsgUtils.showToast(activity, MsgUtils.TOAST_TYPE_MESSAGE, getString(R.string.Choose_payment_method), MsgUtils.ToastLength.SHORT)
                     order_create_scroll_layout.smoothScrollTo(0, order_create_delivery_shipping_layout.top)
                     return false
-                }
+                }*/
                 return true
             } else {
                 return false
@@ -126,13 +107,7 @@ class OrderCreateFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         MainActivity.setActionBarTitle(getString(R.string.Order_summary))
         progressDialog = Utils.generateProgressDialog(activity, false)
-        order_create_summary_terms_and_condition.text = Html.fromHtml(getString(R.string.Click_on_Order_to_allow_our_Terms_and_Conditions))
-        order_create_summary_terms_and_condition.setOnClickListener(object : OnSingleClickListener() {
-            override fun onSingleClick(view: View) {
-                if (activity is MainActivity)
-                    (activity as MainActivity).onTermsAndConditionsSelected()
-            }
-        })
+
 
         prepareFields()
         prepareDeliveryLayout()
@@ -142,7 +117,7 @@ class OrderCreateFragment : Fragment() {
                 if (isRequiredFieldsOk) {
                     // Prepare data
                     val order = Order()
-                    order.name = Utils.getTextFromInputLayout(nameInputWrapper)
+              /*      order.name = Utils.getTextFromInputLayout(nameInputWrapper)
                     order.city = Utils.getTextFromInputLayout(cityInputWrapper)
                     order.street = Utils.getTextFromInputLayout(streetInputWrapper)
                     order.houseNumber = Utils.getTextFromInputLayout(houseNumberInputWrapper)
@@ -162,13 +137,13 @@ class OrderCreateFragment : Fragment() {
                     val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(v.windowToken, 0)
 
-                    postOrder(order)
+                    postOrder(order)*/
                 }
             }
         })
 
         showSelectedShipping(selectedShipping)
-        showSelectedPayment(selectedPayment)
+      //  showSelectedPayment(selectedPayment)
 
         getUserCart()
     }
@@ -214,13 +189,13 @@ class OrderCreateFragment : Fragment() {
             shippingDialogFragment.show(fragmentManager, ShippingDialogFragment::class.java.simpleName)
         }*/
 
-        order_create_delivery_payment_layout.setOnClickListener {
-            val paymentDialogFragment = PaymentDialogFragment.newInstance(selectedShipping, selectedPayment) { payment ->
+        /*order_create_delivery_payment_layout.setOnClickListener {
+            val paymentDialogFragment = PaymentDialogFragment.newInstance(selectedShipping!!, selectedPayment!!) { payment ->
                 selectedPayment = payment
                 showSelectedPayment(payment)
             }
             paymentDialogFragment.show(fragmentManager, "PaymentDialog")
-        }
+        }*/
     }
 
     /**
@@ -229,7 +204,7 @@ class OrderCreateFragment : Fragment() {
      * @param shipping values to show.
      */
     private fun showSelectedShipping(shipping: Shipping?) {
-        if (shipping != null && order_create_delivery_shipping_name != null && order_create_delivery_shipping_price != null) {
+       /* if (shipping != null && order_create_delivery_shipping_name != null && order_create_delivery_shipping_price != null) {
             order_create_delivery_shipping_name.text = shipping.name
             if (shipping.price != 0) {
                 order_create_delivery_shipping_price.text = shipping.priceFormatted
@@ -243,7 +218,7 @@ class OrderCreateFragment : Fragment() {
             order_create_delivery_payment_layout.visibility = View.VISIBLE
         } else {
             Timber.e("Showing selected shipping with null values.")
-        }
+        }*/
     }
 
 
@@ -252,7 +227,7 @@ class OrderCreateFragment : Fragment() {
      *
      * @param payment values to show.
      */
-    private fun showSelectedPayment(payment: Payment?) {
+   /* private fun showSelectedPayment(payment: Payment?) {
         if (payment != null && order_create_delivery_payment_name != null && order_create_delivery_payment_price != null) {
             order_create_delivery_payment_name.text = payment.name
             if (payment.price != 0.0) {
@@ -267,7 +242,7 @@ class OrderCreateFragment : Fragment() {
         } else {
             Timber.e("Showing selected payment with null values.")
         }
-    }
+    }*/
 
     private fun getUserCart() {
         refreshScreenContent()
@@ -277,7 +252,7 @@ class OrderCreateFragment : Fragment() {
         var carts = context.cartHelper.getAll()
         if (carts.count() == 0) {
             Timber.e(RuntimeException(), "Received null cart during order creation.")
-            if (activity is MainActivity) (activity as MainActivity).onDrawerBannersSelected()
+            if (activity is MainActivity) (activity as MainActivity).onDrawerHomeSelected()
         } else {
             val inflater = activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             for (cart in carts) {
@@ -303,7 +278,6 @@ class OrderCreateFragment : Fragment() {
             }*/
 
             order_create_total_price.text = context.cartHelper.total().toString().formatPrice()
-            order_create_summary_total_price.text = context.cartHelper.total().toString().formatPrice()
 
 
             delivery_progress.setVisibility(View.VISIBLE);
@@ -382,7 +356,7 @@ class OrderCreateFragment : Fragment() {
      * @param user  actual user which will be updated
      * @param order order response for obtain user information
      */
-    private fun updateUserData(user: User, order: Order) {
+  /*  private fun updateUserData(user: User, order: Order) {
         /*   if (user != null) {
             if (order.getName() != null && !order.getName().isEmpty()) {
                 user.setName(order.getName());
@@ -397,11 +371,10 @@ class OrderCreateFragment : Fragment() {
         } else {
             Timber.e(new NullPointerException(), "Null user after successful order.");
         }*/
-    }
+    }*/
 
     override fun onStop() {
         super.onStop()
-        MyApplication.getInstance().cancelPendingRequests(CONST.ORDER_CREATE_REQUESTS_TAG)
         if (progressDialog != null) progressDialog!!.cancel()
         delivery_progress.visibility = View.GONE
     }

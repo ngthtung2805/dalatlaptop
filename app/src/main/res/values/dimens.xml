@@ -16,6 +16,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
 
     <dimen name="base_recycler_margin">8dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 
 </resources>

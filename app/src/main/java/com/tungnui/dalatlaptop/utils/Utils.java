@@ -22,8 +22,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import com.tungnui.dalatlaptop.R;
-import com.tungnui.dalatlaptop.entities.filtr.DeserializerFilters;
-import com.tungnui.dalatlaptop.entities.filtr.Filters;
 import timber.log.Timber;
 
 public class Utils {
@@ -40,8 +38,7 @@ public class Utils {
     public static Gson getGsonParser() {
         if (gson == null) {
             GsonBuilder gsonBuilder = new GsonBuilder();
-            gsonBuilder.registerTypeAdapter(Filters.class, new DeserializerFilters());
-            gson = gsonBuilder.create();
+           gson = gsonBuilder.create();
         }
         return gson;
     }

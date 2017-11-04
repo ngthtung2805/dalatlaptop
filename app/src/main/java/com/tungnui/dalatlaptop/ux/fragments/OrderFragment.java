@@ -108,7 +108,6 @@ public class OrderFragment extends Fragment {
     @Override
     public void onStop() {
         if (progressDialog != null) progressDialog.cancel();
-        MyApplication.getInstance().cancelPendingRequests(CONST.ORDERS_HISTORY_REQUESTS_TAG);
         super.onStop();
     }
 

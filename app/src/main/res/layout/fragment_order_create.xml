@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
-
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:src="@drawable/order_create_step" />
     <ScrollView
         android:id="@+id/order_create_scroll_layout"
         android:layout_width="match_parent"
@@ -33,7 +36,7 @@
                     android:textAllCaps="true"
                     android:textColor="@color/textBlack"
                     android:textSize="14sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <!-- Cart content-->
                 <LinearLayout
@@ -41,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:orientation="vertical"/>
+                    android:orientation="vertical" />
 
                 <!-- Total cart price-->
                 <TextView
@@ -53,7 +56,7 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    tools:text="15212 USD"/>
+                    tools:text="15212 USD" />
             </LinearLayout>
 
             <!-- Visual screen divider-->
@@ -62,7 +65,7 @@
                 android:layout_height="@dimen/base_margin_vertical"
                 android:layout_marginBottom="@dimen/base_margin_vertical"
                 android:layout_marginTop="@dimen/base_margin_vertical"
-                android:background="@color/background_grey"/>
+                android:background="@color/background_grey" />
 
             <!-- Delivery part -->
             <RelativeLayout
@@ -87,7 +90,7 @@
                         android:textAllCaps="true"
                         android:textColor="@color/textBlack"
                         android:textSize="14sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -104,7 +107,7 @@
                             android:text="@string/Choose_shipping_method"
                             android:textColor="@color/textPrimary"
                             android:textSize="14sp"
-                            tools:text="Ostrava poruba por dasokaf "/>
+                            tools:text="Ostrava poruba por dasokaf " />
 
                         <TextView
                             android:id="@+id/order_create_delivery_shipping_price"
@@ -113,7 +116,7 @@
                             android:textColor="@color/colorAccent"
                             android:textSize="13sp"
                             android:textStyle="bold"
-                            tools:text="free"/>
+                            tools:text="free" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -135,7 +138,7 @@
                         android:textAllCaps="true"
                         android:textColor="@color/textBlack"
                         android:textSize="15sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -152,7 +155,7 @@
                             android:text="@string/Choose_payment_method"
                             android:textColor="@color/textPrimary"
                             android:textSize="14sp"
-                            tools:text="Ostrava poruba por dasokaf "/>
+                            tools:text="Ostrava poruba por dasokaf " />
 
                         <TextView
                             android:id="@+id/order_create_delivery_payment_price"
@@ -161,7 +164,7 @@
                             android:textColor="@color/colorAccent"
                             android:textSize="13sp"
                             android:textStyle="bold"
-                            tools:text="free"/>
+                            tools:text="free" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -170,7 +173,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:visibility="visible"/>
+                    android:visibility="visible" />
             </RelativeLayout>
 
             <!-- Visual screen divider-->
@@ -179,7 +182,7 @@
                 android:layout_height="@dimen/base_margin_vertical"
                 android:layout_marginBottom="@dimen/base_margin_vertical"
                 android:layout_marginTop="@dimen/base_margin_vertical"
-                android:background="@color/background_grey"/>
+                android:background="@color/background_grey" />
 
             <!-- Shipping details part -->
             <LinearLayout
@@ -196,7 +199,7 @@
                     android:textAllCaps="true"
                     android:textColor="@color/textBlack"
                     android:textSize="14sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/order_create_name_wrapper"
@@ -214,15 +217,15 @@
                         android:inputType="textPersonName"
                         android:nextFocusForward="@+id/order_create_street"
                         android:singleLine="true"
-                        android:textColor="@color/textPrimary"/>
+                        android:textColor="@color/textPrimary" />
                 </android.support.design.widget.TextInputLayout>
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:baselineAligned="false"
+                    android:orientation="horizontal"
                     android:weightSum="1">
 
                     <android.support.design.widget.TextInputLayout
@@ -243,7 +246,7 @@
                             android:nextFocusForward="@+id/order_create_houseNumber"
                             android:nextFocusRight="@+id/order_create_houseNumber"
                             android:singleLine="true"
-                            android:textColor="@color/textPrimary"/>
+                            android:textColor="@color/textPrimary" />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -265,7 +268,7 @@
                             android:nextFocusLeft="@+id/order_create_street"
                             android:nextFocusRight="@+id/order_create_city"
                             android:singleLine="true"
-                            android:textColor="@color/textPrimary"/>
+                            android:textColor="@color/textPrimary" />
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
@@ -295,7 +298,7 @@
                             android:nextFocusLeft="@+id/order_create_houseNumber"
                             android:nextFocusRight="@+id/order_create_zip"
                             android:singleLine="true"
-                            android:textColor="@color/textPrimary"/>
+                            android:textColor="@color/textPrimary" />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -317,7 +320,7 @@
                             android:nextFocusLeft="@+id/order_create_city"
                             android:nextFocusRight="@+id/order_create_email"
                             android:singleLine="true"
-                            android:textColor="@color/textPrimary"/>
+                            android:textColor="@color/textPrimary" />
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
@@ -335,7 +338,7 @@
                         android:hint="@string/Email"
                         android:inputType="textEmailAddress"
                         android:singleLine="true"
-                        android:textColor="@color/textPrimary"/>
+                        android:textColor="@color/textPrimary" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -352,7 +355,7 @@
                         android:hint="@string/Phone"
                         android:inputType="phone"
                         android:singleLine="true"
-                        android:textColor="@color/textPrimary"/>
+                        android:textColor="@color/textPrimary" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -371,7 +374,7 @@
                         android:maxLength="1024"
                         android:minHeight="50dp"
                         android:textColor="@color/textPrimary"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
@@ -381,66 +384,14 @@
                 android:layout_height="@dimen/base_margin_vertical"
                 android:layout_marginBottom="@dimen/base_margin_vertical_half"
                 android:layout_marginTop="@dimen/base_margin_vertical_half"
-                android:background="@color/background_grey"/>
-
-            <!-- Price, Terms and finish order -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/base_margin_horizontal"
-                android:paddingRight="@dimen/base_margin_horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/base_margin_vertical"
-                    android:layout_marginTop="@dimen/base_margin_vertical"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/order_create_summary_terms_and_condition"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-light"
-                        android:text="@string/Click_on_Order_to_allow_our_Terms_and_Conditions"
-                        android:textColor="@color/textSecondary"
-                        android:textSize="10sp"/>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/base_margin_horizontal_half"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/order_create_summary_total_price"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:textColor="@color/textPrimary"
-                            android:textSize="14sp"
-                            tools:text="9995 USD"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:text="@string/including_VAT"
-                            android:textColor="@color/textSecondary"
-                            android:textSize="13sp"/>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <Button
-                    android:id="@+id/order_create_finish"
-                    style="@style/buttonPrimaryStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Finish_order"/>
-            </LinearLayout>
+                android:background="@color/background_grey" />
         </LinearLayout>
     </ScrollView>
+    <Button
+        android:id="@+id/order_create_finish"
+        style="@style/buttonPrimaryStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Next_step"
+        android:layout_gravity="bottom"/>
 </LinearLayout>

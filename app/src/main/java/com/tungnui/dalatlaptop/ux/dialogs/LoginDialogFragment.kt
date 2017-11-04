@@ -30,8 +30,6 @@ import org.json.JSONException
 import org.json.JSONObject
 
 import com.tungnui.dalatlaptop.BuildConfig
-import com.tungnui.dalatlaptop.CONST
-import com.tungnui.dalatlaptop.MyApplication
 import com.tungnui.dalatlaptop.R
 import com.tungnui.dalatlaptop.SettingsMy
 import com.tungnui.dalatlaptop.interfaces.LoginDialogInterface
@@ -42,8 +40,8 @@ import com.tungnui.dalatlaptop.utils.JsonUtils
 import com.tungnui.dalatlaptop.utils.MsgUtils
 import com.tungnui.dalatlaptop.utils.Utils
 import com.tungnui.dalatlaptop.ux.MainActivity
-import com.tungnui.dalatlaptop.woocommerceapi.CustomerServices
-import com.tungnui.dalatlaptop.woocommerceapi.JSONAuthService
+import com.tungnui.dalatlaptop.api.CustomerServices
+import com.tungnui.dalatlaptop.api.JSONAuthService
 import com.tungnui.dalatlaptop.api.ServiceGenerator
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -132,7 +130,7 @@ class LoginDialogFragment : DialogFragment(), FacebookCallback<LoginResult> {
 
         // Login email form
         val loginEmail = login_email_email_wrapper.editText
-        loginEmail?.setText(SettingsMy.getUserEmailHint())
+        loginEmail?.setText(SettingsMy.userEmailHint)
         val emailPassword = login_email_password_wrapper.editText
         if (emailPassword != null) {
             emailPassword.setOnTouchListener(OnTouchPasswordListener(emailPassword))
@@ -146,7 +144,7 @@ class LoginDialogFragment : DialogFragment(), FacebookCallback<LoginResult> {
         }
 
         val emailForgottenPassword = login_email_forgotten_email_wrapper.editText
-        emailForgottenPassword?.setText(SettingsMy.getUserEmailHint())
+        emailForgottenPassword?.setText(SettingsMy.userEmailHint)
 
         // Simple accounts whisperer.
         val accounts = AccountManager.get(activity).accounts
@@ -374,7 +372,7 @@ class LoginDialogFragment : DialogFragment(), FacebookCallback<LoginResult> {
     }
 
     private fun logInWithEmail(editTextEmail: EditText?, editTextPassword: EditText?) {
-        SettingsMy.setUserEmailHint(editTextEmail?.text.toString())
+        SettingsMy.userEmailHint = editTextEmail?.text.toString()
         progressDialog.show()
         var email = editTextEmail?.text.toString()
         var password = editTextPassword?.text.toString()
@@ -508,7 +506,6 @@ class LoginDialogFragment : DialogFragment(), FacebookCallback<LoginResult> {
 
     override fun onStop() {
         super.onStop()
-        MyApplication.getInstance().requestQueue.cancelAll(CONST.LOGIN_DIALOG_REQUESTS_TAG)
     }
 
     override fun onDetach() {

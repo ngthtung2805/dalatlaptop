@@ -15,8 +15,7 @@ import com.tungnui.dalatlaptop.models.Customer
 import com.tungnui.dalatlaptop.utils.Utils
 import com.tungnui.dalatlaptop.ux.MainActivity
 import com.tungnui.dalatlaptop.ux.dialogs.LoginDialogFragment
-import com.tungnui.dalatlaptop.ux.dialogs.ShippingDialogFragment
-import com.tungnui.dalatlaptop.woocommerceapi.CustomerServices
+import com.tungnui.dalatlaptop.api.CustomerServices
 import com.tungnui.dalatlaptop.api.ServiceGenerator
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -69,8 +68,8 @@ class AccountFragment : Fragment() {
                 (getActivity() as MainActivity).startSettingsFragment()
         }
         account_dispensing_places.setOnClickListener {
-            val shippingDialogFragment = ShippingDialogFragment.newInstance { }
-            shippingDialogFragment.show(fragmentManager, "shippingDialogFragment")
+           /* val shippingDialogFragment = ShippingDialogFragment.newInstance { }
+            shippingDialogFragment.show(fragmentManager, "shippingDialogFragment")*/
         }
 
         account_login_logout_btn.setOnClickListener(object : OnSingleClickListener() {
@@ -80,7 +79,7 @@ class AccountFragment : Fragment() {
                     refreshScreen(null)
                 } else {
                     val loginDialogFragment = LoginDialogFragment.newInstance (object:LoginDialogInterface{
-                        override fun successfulLoginOrRegistration(customer: Customer?) {
+                        override fun successfulLoginOrRegistration(customer: Customer) {
                             refreshScreen(customer)
                             MainActivity.updateCartCountNotification()
                         }

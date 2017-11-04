@@ -40,8 +40,8 @@ class ProductImagesDialogFragment : DialogFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val mPagerAdapter = ProductImagesPagerAdapter(activity, images)
-        dialog_product_detail_images_pager.adapter = mPagerAdapter
+        var mPagerAdapter = ProductImagesPagerAdapter(activity, images)
+       // dialog_product_detail_images_pager.adapter = mPagerAdapter
 
         if (defaultPosition > 0 && defaultPosition < images.size)
             dialog_product_detail_images_pager.currentItem = defaultPosition

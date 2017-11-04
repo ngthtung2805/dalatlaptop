@@ -32,7 +32,7 @@
             <item
                 android:id="@+id/nav_info"
                 android:icon="@drawable/ic_menu_call"
-                android:title="HOTLINE: 0263.50.50.90" />
+                android:title="HOTLINE: 0123.456.789" />
             <item
                 android:id="@+id/nav_email"
                 android:icon="@drawable/ic_menu_email"
@@ -40,9 +40,7 @@
             <item
                 android:id="@+id/nav_instruc"
                 android:icon="@drawable/ic_menu_info"
-                android:title="Về DALATLAPTOP" />
-
-
+                android:title="Về Tiki" />
         </menu>
     </item>
 

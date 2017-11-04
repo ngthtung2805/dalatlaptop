@@ -35,4 +35,8 @@
     <color name="grey">#d7666666</color>
 
     <color name="white">#FFFFFF</color>
+    <color name="organe">#F60</color>
+    <color name="product_price">#B00</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

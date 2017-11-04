@@ -54,16 +54,14 @@ class HomeProductRecyclerAdapter(val listener: (Product) -> Unit) : RecyclerView
             home_product_item_rating_count.text = "(" + item.ratingCount + ")"
             if(item.onSale){
                 home_product_item_price.visibility = View.VISIBLE
-                home_product_item_discount.visibility = View.VISIBLE
-                home_product_item_price.text = item.regularPrice?.formatPrice()
-                home_product_item_price.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG or Paint.ANTI_ALIAS_FLAG
-                home_product_item_price.setTextColor(ContextCompat.getColor(context, R.color.textSecondary))
-                home_product_item_discount.text = item.salePrice?.formatPrice()
+                home_product_item_regular_price.visibility = View.VISIBLE
+                home_product_item_regular_price.text = item.regularPrice?.formatPrice()
+                home_product_item_regular_price.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG or Paint.ANTI_ALIAS_FLAG
+                  home_product_item_price.text = item.salePrice?.formatPrice()
             }else{
                 home_product_item_price.visibility = View.VISIBLE
-                home_product_item_discount.visibility = View.GONE
+                home_product_item_regular_price.visibility = View.GONE
                 home_product_item_price.text = item.price?.formatPrice()
-                //   product_item_price.setTextColor(ContextCompat.getColor(context, R.color.textPrimary))
             }
             setOnClickListener { listener(item) }
         }

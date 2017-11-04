@@ -24,7 +24,7 @@
             <com.synnapps.carouselview.CarouselView
                 android:id="@+id/home_carousel_banner"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="170dp"
                 app:autoPlay="false"
                 app:fillColor="#FFFFFFFF"
                 app:pageColor="#00000000"
@@ -35,7 +35,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/home_featured_title"
@@ -45,12 +44,10 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:text="@string/featured_product"
-                    android:textAlignment="center"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
+                    android:textSize="15sp"
                     android:padding="10dp"
-                    android:background="@color/colorPrimary"
-                    android:textColor="@color/white" />
+                    android:background="#FAFAFA"
+                    android:textColor="#000" />
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/home_featured_recycler"
                     android:layout_width="wrap_content"
@@ -63,16 +60,16 @@
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/home_newest_title"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:layout_width="fill_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:text="@string/newest_product"
-                    android:textAlignment="center"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
+                    android:textSize="15sp"
                     android:padding="10dp"
-                    android:background="@color/colorPrimary"
-                    android:textColor="@color/white"/>
+                    android:background="#FAFAFA"
+                    android:textColor="#000"/>
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/home_newest_recycler"
                     android:layout_width="wrap_content"
@@ -86,51 +83,44 @@
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/home_hot_sale_title"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:layout_width="fill_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:text="@string/hot_sale_product"
-                    android:textAlignment="center"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
+                    android:textSize="15sp"
                     android:padding="10dp"
-                    android:background="@color/colorPrimary"
-                    android:textColor="@color/white" />
+                    android:background="#FAFAFA"
+                    android:textColor="#000" />
                <android.support.v7.widget.RecyclerView
                     android:id="@+id/home_sale_recycler"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
-
             <LinearLayout
-                android:id="@+id/banners_empty"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:visibility="gone">
-
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
                 <TextView
-                    style="@style/emptyLayoutText"
+                    android:id="@+id/home_recent_view"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/recent_view_product"
+                    android:textSize="15sp"
+                    android:padding="10dp"
+                    android:background="#FAFAFA"
+                    android:textColor="#000" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/home_recent_recycler"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="20dp"
-                    android:drawableTop="@drawable/loyalty_tag_black_48dp"
-                    android:padding="20dp"
-                    android:text="@string/No_banners" />
-
-                <TextView
-                    android:id="@+id/banners_empty_action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:padding="20dp"
-                    android:text="@string/Show_offers"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
 </RelativeLayout>

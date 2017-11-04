@@ -21,15 +21,12 @@ import java.net.URLEncoder
 
 import com.tungnui.dalatlaptop.R
 import com.tungnui.dalatlaptop.api.EndPoints
-import com.tungnui.dalatlaptop.entities.filtr.Filters
-import com.tungnui.dalatlaptop.interfaces.FilterDialogInterface
 import com.tungnui.dalatlaptop.listeners.OnSingleClickListener
 import com.tungnui.dalatlaptop.utils.EndlessRecyclerScrollListener
 import com.tungnui.dalatlaptop.utils.MsgUtils
 import com.tungnui.dalatlaptop.utils.RecyclerMarginDecorator
 import com.tungnui.dalatlaptop.ux.MainActivity
 import com.tungnui.dalatlaptop.ux.adapters.ProductsRecyclerAdapter
-import com.tungnui.dalatlaptop.ux.dialogs.FilterDialogFragment
 import com.tungnui.dalatlaptop.api.ProductService
 import com.tungnui.dalatlaptop.api.ServiceGenerator
 import com.tungnui.dalatlaptop.utils.getNextUrl
@@ -58,7 +55,6 @@ class CategoryFragment : Fragment() {
     private lateinit var productsRecyclerLayoutManager: GridLayoutManager
     private lateinit var productsRecyclerAdapter: ProductsRecyclerAdapter
     private var endlessRecyclerScrollListener: EndlessRecyclerScrollListener? = null
-    private var filters: Filters? = null
     private var filterParameters: String? = null
     private var toolbarOffset = -1
     private var isList = false
@@ -85,28 +81,8 @@ class CategoryFragment : Fragment() {
             MainActivity.setActionBarTitle(categoryName)
             category_filter_button.setOnClickListener(object : OnSingleClickListener() {
                 override fun onSingleClick(view: View) {
-                    if (filters == null) {
-                        MsgUtils.showToast(activity, MsgUtils.TOAST_TYPE_MESSAGE, getString(R.string.Filter_unavailable), MsgUtils.ToastLength.SHORT)
-                    } else {
-                        val filterDialogFragment = FilterDialogFragment.newInstance(filters, object : FilterDialogInterface {
-                            override fun onFilterSelected(newFilterUrl: String) {
-                                filterParameters = newFilterUrl
-                                category_filter_button.setImageResource(R.drawable.filter_selected)
-                                getProducts(null)
-                            }
 
-                            override fun onFilterCancelled() {
-                                filterParameters = null
-                                category_filter_button.setImageResource(R.drawable.filter_unselected)
-                                getProducts(null)
-                            }
-                        })
-                   /*     if (filterDialogFragment != null)
-                            filterDialogFragment.show(fragmentManager, "filterDialogFragment")
-                        else {
-                            MsgUtils.showToast(activity, MsgUtils.TOAST_TYPE_INTERNAL_ERROR, null, MsgUtils.ToastLength.SHORT)
-                        }*/
-                    }
+
                 }
             })
 

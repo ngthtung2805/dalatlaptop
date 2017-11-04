@@ -15,7 +15,6 @@
         android:name="com.tungnui.dalatlaptop.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-
     <application
         android:name=".MyApplication"
         android:allowBackup="false"
@@ -24,8 +23,10 @@
         android:largeHeap="true"
         android:theme="@style/MaterialTheme">
 
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <!--
+             Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
@@ -34,21 +35,23 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name="com.tungnui.dalatlaptop.ux.SplashActivity"
+            android:name=".ux.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data android:scheme="openshop" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.tungnui.dalatlaptop.ux.MainActivity"
+            android:name=".ux.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
@@ -60,7 +63,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name="com.tungnui.dalatlaptop.ux.RestartAppActivity"
+            android:name=".ux.RestartAppActivity"
             android:screenOrientation="portrait" />
 
         <!-- Facebook activity used for FB login -->
@@ -73,6 +76,16 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/android_key" />
+
+        <activity
+            android:name=".ux.Order.OrderActivity"
+            android:label="@string/title_activity_order"
+            android:theme="@style/MaterialTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.tungnui.dalatlaptop.ux.MainActivity" />
+
+        </activity>
     </application>
 
 </manifest>

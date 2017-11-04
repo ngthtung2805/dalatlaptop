@@ -288,14 +288,16 @@
         <!--android:imeOptions="actionSend"-->
 
 
-
         <Button
             android:id="@+id/login_registration_confirm"
             style="@style/buttonPrimaryStyle"
             android:layout_width="290dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:layout_gravity="center_horizontal"
-            android:text="@string/Register"/>
+            android:layout_toEndOf="@+id/login_registration_form"
+            android:layout_toRightOf="@+id/login_registration_form"
+            android:text="@string/Register" />
     </LinearLayout>
     <!-- /////////////////////////////////////////////////////////////////////////////////////// -->
 

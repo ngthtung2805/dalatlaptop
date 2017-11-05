@@ -1,11 +1,10 @@
 package com.tungnui.dalatlaptop.ux.Order
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v4.app.NavUtils
 import android.support.v7.app.AppCompatActivity
 import com.tungnui.dalatlaptop.R
-import com.tungnui.dalatlaptop.ux.fragments.OrderCreateFragment
 import kotlinx.android.synthetic.main.activity_order.*
 
 class OrderActivity : AppCompatActivity() {
@@ -42,14 +41,21 @@ class OrderActivity : AppCompatActivity() {
         var fragment = OrderCreateAddAddressFragment()
         replaceFragment(fragment, OrderCreateAddAddressFragment::class.java.simpleName)
     }
+    fun onNextStep2(note:String){
+        var fragment = OrderCreatePaymentFragment.newInstance(note)
+        replaceFragment(fragment, OrderCreatePaymentFragment::class.java.simpleName)
+
+    }
+    fun onNextStep3(note:String, paymentMethod:String){
+        var fragment = OrderCreateFinishFragment.newInstance(note, paymentMethod)
+        replaceFragment(fragment, OrderCreateFinishFragment::class.java.simpleName)
+
+    }
+    fun onOrderSuccessContinousShopping(){
+        NavUtils.navigateUpFromSameTask(this)
+    }
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount > 0)
                 super.onBackPressed()
-    }
-    companion object {
-        @get:Synchronized private var instance: OrderActivity? = null
-        fun setActionBarTitle(title: String?) {
-            OrderActivity.instance?.title = title
-        }
     }
 }

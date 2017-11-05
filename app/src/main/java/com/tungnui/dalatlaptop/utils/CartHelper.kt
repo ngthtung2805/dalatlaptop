@@ -68,9 +68,9 @@ fun CartDatabaseOpenHelper.getAll(): List<Cart> = this.use {
     select("cart").exec { parseList(org.jetbrains.anko.db.classParser()) }
 }
 
-fun CartDatabaseOpenHelper.deleteAll() {
+fun CartDatabaseOpenHelper.clearAll() {
     this.use {
-        deleteAll()
+        delete("cart")
     }
 }
 

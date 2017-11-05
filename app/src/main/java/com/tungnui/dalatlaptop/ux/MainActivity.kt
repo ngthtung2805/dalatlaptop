@@ -239,11 +239,6 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
         Timber.d("Clearing backStack")
         val manager = supportFragmentManager
         if (manager.backStackEntryCount > 0) {
-            if (BuildConfig.DEBUG) {
-                for (i in 0 until manager.backStackEntryCount) {
-                    Timber.d("BackStack content_%d= id: %d, name: %s", i, manager.getBackStackEntryAt(i).id, manager.getBackStackEntryAt(i).name)
-                }
-            }
             val first = manager.getBackStackEntryAt(0)
             manager.popBackStackImmediate(first.id, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
@@ -295,7 +290,7 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
     fun onOrderCreateSelected() {
         if (SettingsMy.getActiveUser() != null) {
             val mainIntent = Intent(this@MainActivity, OrderActivity::class.java)
-            startActivityForResult(mainIntent,1)
+            startActivity(mainIntent)
         } else {
             val loginDialogFragment = LoginDialogFragment.newInstance(object : LoginDialogInterface {
                 override fun successfulLoginOrRegistration(customer: Customer) {
@@ -308,6 +303,7 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
         }
         //replaceFragment(OrderCreateFragment(),OrderCreateFragment::class.java.simpleName)
     }
+
 
     /**
      * If user is logged in then [AccountEditFragment] is launched . Otherwise is showed a login dialog.
@@ -400,6 +396,11 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
         val fragment = CategoryFragment.newInstance(category.id!!, category.name!!)
         replaceFragment(fragment, CategoryFragment::class.java.simpleName)
     }
+    fun onOrderSuccessContinousShopping(){
+//        clearBackStack()
+        val fragment = BannersFragment()
+        replaceFragment(fragment, BannersFragment::class.java.simpleName)
+    }
 
     override fun onDrawerCartSelected() {
         onCartSelected()
@@ -409,6 +410,7 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
         val fragment = CategoryFragment.newInstance(type, name)
         replaceFragment(fragment, CategoryFragment::class.java.simpleName)
     }
+
 
     companion object {
         val MSG_MAIN_ACTIVITY_INSTANCE_IS_NULL = "MainActivity instance is null."

@@ -598,15 +598,6 @@ class LoginDialogFragment : DialogFragment(), FacebookCallback<LoginResult> {
     }
 
     companion object {
-
-        val MSG_RESPONSE = "response: %s"
-
-        /**
-         * Creates dialog which handles user login, registration and forgotten password function.
-         *
-         * @param loginDialogInterface listener receiving login/registration results.
-         * @return new instance of dialog.
-         */
         fun newInstance(loginDialogInterface: LoginDialogInterface): LoginDialogFragment {
             val frag = LoginDialogFragment()
             frag.loginDialogInterface = loginDialogInterface

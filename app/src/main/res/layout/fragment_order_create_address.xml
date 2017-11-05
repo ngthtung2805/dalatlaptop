@@ -158,12 +158,17 @@
                 android:background="@color/white"/>
         </LinearLayout>
     </ScrollView>
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
     <Button
-        android:id="@+id/order_create_finish"
+        android:id="@+id/order_create_step1_next"
         style="@style/buttonPrimaryStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:text="@string/Next_step" />
+</LinearLayout>
 </LinearLayout>

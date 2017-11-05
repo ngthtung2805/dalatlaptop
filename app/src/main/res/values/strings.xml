@@ -120,7 +120,7 @@
     <string name="Order_colon">Đơn hàng:</string>
     <string name="Date_created">Ngày tạo</string>
     <string name="Date_created_colon">Ngày tạo:</string>
-    <string name="Total_price">Tổng tiền</string>
+    <string name="Total_price">Thành tiền</string>
     <string name="Order_summary">Tóm tắt đơn hàng</string>
     <string name="Order_history">Lịch sử mua hàng</string>
     <string name="Your_orders_history_is_empty">Lich sử mua hàng trống</string>
@@ -133,15 +133,16 @@
     <string name="Shipping_details">Chi tiết vận chuyển</string>
     <string name="Note">Ghi chú</string>
     <string name="Click_on_Order_to_allow_our_Terms_and_Conditions">Nhấn đặt hàng là bạn đồng ý với <![CDATA[<b><font color=#ee1f65> chính sách của chúng tôi</b>]]></string>
-    <string name="Finish_order">HOÀN TẤT</string>
+    <string name="Finish_order">TIẾN HÀNH ĐẶT HÀNG</string>
     <string name="Next_step">Tiếp tục</string>
+    <string name="Continous_shopping">Tiếp tục mua sắm</string>
+    <string name="View_order">Xem đơn hàng</string>
     <string name="Save_address">Lưu địa chỉ</string>
     <string name="Shipping_is_empty">Shipping is empty</string>
     <string name="Personal_pickup">Personal pickup</string>
     <string name="Shipping_type_colon">Shipping type:</string>
     <string name="Shipping_price_colon">Shipping price:</string>
     <string name="free">free</string>
-    <string name="Summary">Summary</string>
     <string name="Total_colon">Total:</string>
 
 
@@ -160,7 +161,7 @@
     <string name="Privacy_policy">Privacy policy</string>
     <string name="Basic_information_about_Privacy_Policy">Basic information about Privacy Policy</string>
     <string name="App_needs_to_be_restarted">To change the shop an app restart is needed.</string>
-    <string name="including_VAT">inc. VAT</string>
+    <string name="including_VAT">Đã bao gồm VAT</string>
     <string name="Thank_you_for_your_order">Thank you for your order</string>
     <string name="Wait_for_sms_or_email_order_confirmation">Wait for &lt;b>SMS&lt;/b> or &lt;b>email&lt;/b> order confirmation.</string>
     <string name="This_is_a_sample_app">This is a sample app</string>
@@ -196,6 +197,9 @@
     <string name="first_name">Tên</string>
     <string name="repassword">Nhập lại mật khẩu</string>
     <string name="featured_product">Sản phẩm nổi bật</string>
+    <string name="payment_method">Hình thức thanh toán</string>
+    <string name="receiver_address">Địa chỉ người nhận</string>
+    <string name="summary">Thông tin đơn hàng</string>
     <string name="newest_product">Sản phẩm mới nhất</string>
     <string name="hot_sale_product">Khuyến mãi hot nhất</string>
     <string name="Not_password_repassword">Mật khẩu không khớp</string>

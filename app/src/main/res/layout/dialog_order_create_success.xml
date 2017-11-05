@@ -1,48 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/order_create_success_root_view"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/order_create_success_root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/white">
 
-    <TextView
-        android:id="@+id/order_create_success_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:gravity="start"
-        android:padding="10dp"
-        android:text="@string/Thank_you_for_your_order"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/textPrimary"
-        android:textSize="20sp"/>
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/finish_order" />
 
-    <TextView
-        android:id="@+id/order_create_success_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="7dp"
-        android:autoLink="web"
-        android:gravity="center"
-        android:padding="14dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/textSecondary"
-        android:textSize="16sp"
-        tools:text="@string/Wait_for_sms_or_email_order_confirmation"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Thanh toán thành công"
+            android:textAlignment="center"
+            android:textColor="#2ca02c" />
 
-    <Button
-        android:id="@+id/order_create_success_ok"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/button_primary_action_ripple"
-        android:text="@android:string/ok"
-        android:textColor="@color/white"
-        android:textSize="16sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Cảm ơn bạn đã mua sắm tại Tiki."
+            android:textAlignment="center"
+            android:textSize="17dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <Button
+                android:id="@+id/order_success_continous_shopping"
+                style="@style/buttonPrimaryStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/Continous_shopping" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <Button
+                android:id="@+id/order_success_view_order"
+                style="@style/buttonPrimaryStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/View_order" />
+        </LinearLayout>
 </LinearLayout>

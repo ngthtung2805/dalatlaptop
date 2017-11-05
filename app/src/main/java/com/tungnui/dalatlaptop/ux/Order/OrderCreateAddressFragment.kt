@@ -69,7 +69,12 @@ class OrderCreateAddressFragment : Fragment() {
                 order_create_address_rd1.isChecked = false
             }
         }
-       
+        order_create_step1_next.setOnClickListener {
+            var note:String=""
+            if(order_create_address_rd2.isChecked)
+                note= "Nhận hàng tại cửa hàng"
+            (activity as OrderActivity).onNextStep2(note)
+        }
     }
 
     fun deleteAddress() {

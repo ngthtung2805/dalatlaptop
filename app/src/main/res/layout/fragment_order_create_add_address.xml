@@ -44,6 +44,7 @@
                         android:singleLine="true"
                         android:textColor="@color/textPrimary" />
                 </android.support.design.widget.TextInputLayout>
+
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/order_create_add_street_wrapper"
                     android:layout_width="match_parent"
@@ -86,6 +87,7 @@
                         android:singleLine="true"
                         android:textColor="@color/textPrimary" />
                 </android.support.design.widget.TextInputLayout>
+
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/order_create_add_province_wrapper"
                     android:layout_width="match_parent"
@@ -154,11 +156,18 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/order_create_add_save"
-        style="@style/buttonPrimaryStyle"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:text="@string/Save_address" />
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/order_create_add_save"
+            style="@style/buttonPrimaryStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="@string/Save_address" />
+    </LinearLayout>
 </LinearLayout>

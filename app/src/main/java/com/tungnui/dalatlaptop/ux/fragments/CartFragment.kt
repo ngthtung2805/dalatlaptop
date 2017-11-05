@@ -22,12 +22,8 @@ import com.tungnui.dalatlaptop.ux.MainActivity
 import com.tungnui.dalatlaptop.ux.adapters.CartRecyclerAdapter
 import com.tungnui.dalatlaptop.ux.dialogs.DiscountDialogFragment
 import kotlinx.android.synthetic.main.fragment_cart.*
-import kotlinx.android.synthetic.main.list_item_cart_product.*
 import com.travijuu.numberpicker.library.Enums.ActionEnum
-import com.travijuu.numberpicker.library.Interface.ValueChangedListener
 import com.tungnui.dalatlaptop.models.Cart
-import kotlinx.android.synthetic.main.list_item_cart_discount.*
-import kotlinx.android.synthetic.main.list_item_products.view.*
 import java.text.DecimalFormat
 
 

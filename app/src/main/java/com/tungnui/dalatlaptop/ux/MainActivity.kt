@@ -1,4 +1,3 @@
-
 package com.tungnui.dalatlaptop.ux
 
 import android.app.SearchManager
@@ -13,6 +12,7 @@ import android.os.Handler
 import android.provider.BaseColumns
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import android.support.v4.content.LocalBroadcastManager
 import android.support.v4.view.MenuItemCompat
 import android.support.v4.widget.DrawerLayout
@@ -31,7 +31,6 @@ import com.tungnui.dalatlaptop.models.Category
 
 import java.util.ArrayList
 
-import com.tungnui.dalatlaptop.BuildConfig
 import com.tungnui.dalatlaptop.R
 import com.tungnui.dalatlaptop.SettingsMy
 import com.tungnui.dalatlaptop.interfaces.LoginDialogInterface
@@ -41,7 +40,6 @@ import com.tungnui.dalatlaptop.utils.MsgUtils
 import com.tungnui.dalatlaptop.utils.cartHelper
 import com.tungnui.dalatlaptop.utils.totalItem
 import com.tungnui.dalatlaptop.ux.Order.OrderActivity
-import com.tungnui.dalatlaptop.ux.dialogs.LoginDialogFragment
 import com.tungnui.dalatlaptop.ux.fragments.AccountEditFragment
 import com.tungnui.dalatlaptop.ux.fragments.AccountFragment
 import com.tungnui.dalatlaptop.ux.fragments.BannersFragment
@@ -52,7 +50,9 @@ import com.tungnui.dalatlaptop.ux.fragments.OrderFragment
 import com.tungnui.dalatlaptop.ux.fragments.OrdersHistoryFragment
 import com.tungnui.dalatlaptop.ux.fragments.ProductFragment
 import com.tungnui.dalatlaptop.ux.fragments.SettingsFragment
+import com.tungnui.dalatlaptop.ux.login.LoginActivity
 import timber.log.Timber
+import java.util.logging.LoggingMXBean
 
 class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener {
 
@@ -97,15 +97,15 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
 
 
     private fun showNotifyCount() {
-       var  newCartCount =  this.cartHelper.totalItem();
-             runOnUiThread {
-                if (newCartCount != 0) {
-                    cartCountView?.text = getString(R.string.format_number, newCartCount)
-                    cartCountView?.visibility = View.VISIBLE
-                } else {
-                         cartCountView?.visibility = View.GONE
-                }
+        var newCartCount = this.cartHelper.totalItem();
+        runOnUiThread {
+            if (newCartCount != 0) {
+                cartCountView?.text = getString(R.string.format_number, newCartCount)
+                cartCountView?.visibility = View.VISIBLE
+            } else {
+                cartCountView?.visibility = View.GONE
             }
+        }
     }
 
     /**
@@ -170,33 +170,6 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
     }
 
 
-    /*   public void prepareSearchSuggestions(List<DrawerItemCategory> navigation) {
-        final String[] from = new String[]{"categories"};
-        final int[] to = new int[]{android.R.id.text1};
-
-        searchSuggestionsAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1,
-                null, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-        if (navigation != null && !navigation.isEmpty()) {
-            for (int i = 0; i < navigation.size(); i++) {
-                if (!searchSuggestionsList.contains(navigation.get(i).getName())) {
-                    searchSuggestionsList.add(navigation.get(i).getName());
-                }
-
-                if (navigation.get(i).hasChildren()) {
-                    for (int j = 0; j < navigation.get(i).getChildren().size(); j++) {
-                        if (!searchSuggestionsList.contains(navigation.get(i).getChildren().get(j).getName())) {
-                            searchSuggestionsList.add(navigation.get(i).getChildren().get(j).getName());
-                        }
-                    }
-                }
-            }
-            searchSuggestionsAdapter.notifyDataSetChanged();
-        } else {
-            Timber.e("Search suggestions loading failed.");
-            searchSuggestionsAdapter = null;
-        }
-    }
-*/
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -222,15 +195,14 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
 
 
     private fun replaceFragment(newFragment: Fragment?, transactionTag: String) {
-        if (newFragment != null) {
-            val frgManager = supportFragmentManager
-            val fragmentTransaction = frgManager.beginTransaction()
-            fragmentTransaction.setAllowOptimization(false)
-            fragmentTransaction.addToBackStack(transactionTag)
-            fragmentTransaction.replace(R.id.main_content_frame, newFragment).commit()
-            frgManager.executePendingTransactions()
-        } else {
-            Timber.e(RuntimeException(), "Replace fragments with null newFragment parameter.")
+    if(!supportFragmentManager.popBackStackImmediate(transactionTag,POP_BACK_STACK_INCLUSIVE)){
+            if (newFragment != null) {
+                val frgManager = supportFragmentManager
+                val fragmentTransaction = frgManager.beginTransaction()
+                 fragmentTransaction.addToBackStack(transactionTag)
+                fragmentTransaction.replace(R.id.main_content_frame, newFragment,transactionTag).commitAllowingStateLoss()
+                frgManager.executePendingTransactions()
+            }
         }
     }
 
@@ -247,22 +219,16 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
         //        http://stackoverflow.com/questions/12529499/problems-with-android-fragment-back-stack
     }
 
-     private fun onSearchSubmitted(searchQuery: String) {
+    private fun onSearchSubmitted(searchQuery: String) {
         clearBackStack()
         val fragment = CategoryFragment.newInstance(searchQuery)
         replaceFragment(fragment, CategoryFragment::class.java.simpleName)
     }
 
 
-
-
     override fun onAccountSelected() {
-        val fragment = AccountFragment()
-        replaceFragment(fragment, AccountFragment::class.java.simpleName)
+        launchUserSpecificFragment(AccountFragment(), AccountFragment::class.java.simpleName, ACCOUNT_REQUEST_CODE)
     }
-
-
-
 
 
     fun onProductSelected(productId: Int) {
@@ -281,10 +247,8 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
 
 
     fun onCartSelected() {
-        replaceFragment(CartFragment(),CartFragment::class.java.simpleName)
-
+        replaceFragment(CartFragment(), CartFragment::class.java.simpleName)
     }
-
 
 
     fun onOrderCreateSelected() {
@@ -292,46 +256,35 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
             val mainIntent = Intent(this@MainActivity, OrderActivity::class.java)
             startActivity(mainIntent)
         } else {
-            val loginDialogFragment = LoginDialogFragment.newInstance(object : LoginDialogInterface {
-                override fun successfulLoginOrRegistration(customer: Customer) {
-                    val mainIntent = Intent(this@MainActivity, OrderActivity::class.java)
-                    startActivityForResult(mainIntent,1)
-                }
-
-            })
-            loginDialogFragment.show(supportFragmentManager, LoginDialogFragment::class.java.simpleName)
+            val intent = Intent(this@MainActivity, LoginActivity::class.java)
+            startActivityForResult(intent, ORDER_CREATE_REQUEST_CODE)
         }
-        //replaceFragment(OrderCreateFragment(),OrderCreateFragment::class.java.simpleName)
     }
 
 
     /**
      * If user is logged in then [AccountEditFragment] is launched . Otherwise is showed a login dialog.
      */
-    fun onAccountEditSelected() {
-        launchUserSpecificFragment(AccountEditFragment(), AccountEditFragment::class.java.simpleName,object: LoginDialogInterface {
-            override fun successfulLoginOrRegistration(customer: Customer) {
-               onAccountEditSelected()
-            }
-        })
-    }
+    /* fun onAccountEditSelected() {
+         launchUserSpecificFragment(AccountEditFragment(), AccountEditFragment::class.java.simpleName,object: LoginDialogInterface {
+             override fun successfulLoginOrRegistration(customer: Customer) {
+                onAccountEditSelected()
+             }
+         })
+     }*/
 
 
     fun onOrdersHistory() {
-        launchUserSpecificFragment(OrdersHistoryFragment(), OrdersHistoryFragment::class.java.simpleName,object :LoginDialogInterface {
-            override fun successfulLoginOrRegistration(customer: Customer) {
-                onOrdersHistory()
-            }
-        })
+        launchUserSpecificFragment(OrdersHistoryFragment(), OrdersHistoryFragment::class.java.simpleName, ORDER_HISTORY_REQUEST_CODE)
     }
 
 
-    private fun launchUserSpecificFragment(fragment: Fragment, transactionTag: String, loginListener: LoginDialogInterface) {
+    private fun launchUserSpecificFragment(fragment: Fragment, transactionTag: String, requestCode: Int) {
         if (SettingsMy.getActiveUser() != null) {
             replaceFragment(fragment, transactionTag)
         } else {
-            val loginDialogFragment = LoginDialogFragment.newInstance(loginListener)
-            loginDialogFragment.show(supportFragmentManager, LoginDialogFragment::class.java.simpleName)
+            val intent = Intent(this@MainActivity, LoginActivity::class.java)
+            startActivityForResult(intent, requestCode)
         }
     }
 
@@ -345,19 +298,17 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
     }
 
     override fun onDrawerOrderSelected() {
-        launchUserSpecificFragment(OrdersHistoryFragment(), OrdersHistoryFragment::class.java.simpleName, object:LoginDialogInterface {
-            override fun successfulLoginOrRegistration(customer: Customer) {
-                onOrdersHistory()
-            }
-        })
+        onOrdersHistory()
     }
+
     override fun onDrawerHomeSelected() {
-        replaceFragment(BannersFragment(),BannersFragment::class.java.simpleName)
+        replaceFragment(BannersFragment(), BannersFragment::class.java.simpleName)
     }
 
     override fun onDrawerSettingSelected() {
-        replaceFragment(SettingsFragment(),SettingsFragment::class.java.simpleName)
+        replaceFragment(SettingsFragment(), SettingsFragment::class.java.simpleName)
     }
+
     override fun onBackPressed() {
         // If back button pressed, try close drawer if exist and is open. If drawer is already closed continue.
         if (drawerFragment == null || !drawerFragment!!.onBackHide()) {
@@ -369,6 +320,17 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
                 MsgUtils.showToast(this, MsgUtils.TOAST_TYPE_MESSAGE, getString(R.string.Another_click_for_leaving_app), MsgUtils.ToastLength.SHORT)
                 isAppReadyToFinish = true
                 Handler().postDelayed({ isAppReadyToFinish = false }, 2000)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        //Order history
+        if (resultCode == LOGIN_RESULT_CODE) {
+            when (requestCode) {
+                ORDER_HISTORY_REQUEST_CODE -> onOrdersHistory()
+                ORDER_CREATE_REQUEST_CODE -> onOrdersHistory()
+                ACCOUNT_REQUEST_CODE -> onAccountSelected()
             }
         }
     }
@@ -396,7 +358,8 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
         val fragment = CategoryFragment.newInstance(category.id!!, category.name!!)
         replaceFragment(fragment, CategoryFragment::class.java.simpleName)
     }
-    fun onOrderSuccessContinousShopping(){
+
+    fun onOrderSuccessContinousShopping() {
 //        clearBackStack()
         val fragment = BannersFragment()
         replaceFragment(fragment, BannersFragment::class.java.simpleName)
@@ -406,13 +369,21 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
         onCartSelected()
     }
 
-    fun onCategorySelected(type:String, name:String){
+    fun onCategorySelected(type: String, name: String) {
         val fragment = CategoryFragment.newInstance(type, name)
         replaceFragment(fragment, CategoryFragment::class.java.simpleName)
     }
 
 
     companion object {
+        val LOGIN_REQUEST_CODE = 1
+        val ORDER_REQUEST_CODE = 2
+        val LOGIN_RESULT_CODE = 1
+        val ORDER_RESULT_CODE = 2
+        val ORDER_HISTORY_REQUEST_CODE = 3
+        val DRAWER_ORDER_REQUEST_CODE = 4
+        val ORDER_CREATE_REQUEST_CODE = 5
+        val ACCOUNT_REQUEST_CODE = 6
         val MSG_MAIN_ACTIVITY_INSTANCE_IS_NULL = "MainActivity instance is null."
         @get:Synchronized private var instance: MainActivity? = null
 
@@ -426,7 +397,7 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
         }
 
         fun setActionBarTitle(title: String?) {
-           MainActivity.instance?.title = title
+            MainActivity.instance?.title = title
         }
 
 

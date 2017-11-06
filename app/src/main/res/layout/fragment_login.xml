@@ -1,0 +1,94 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="28dp"
+    android:paddingLeft="@dimen/base_margin_horizontal"
+    android:paddingRight="@dimen/base_margin_horizontal"
+    android:paddingTop="10dp"
+    tools:context="com.tungnui.dalatlaptop.ux.login.LoginActivity">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/login_email_email_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/Email"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:nextFocusDown="@+id/login_registration_password"
+            android:nextFocusForward="@+id/login_registration_password"
+            android:nextFocusRight="@+id/login_registration_password"
+            android:singleLine="true"
+            android:textColor="#000"
+            tools:text="ngthtung2805@gmail.com"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/login_email_password_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginTop="2dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@android:drawable/ic_menu_view"
+            android:drawableRight="@android:drawable/ic_menu_view"
+            android:hint="@string/Password"
+            android:imeActionId="124"
+            android:imeActionLabel="@string/Log_in"
+            android:imeOptions="actionSend"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="#000"
+            tools:text="123456" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/login_email_confirm"
+        style="@style/buttonPrimaryStyle"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="@string/Log_me_in" />
+
+    <TextView
+        android:id="@+id/login_email_forgotten_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="sans-serif-light"
+        android:padding="16dp"
+        android:text="@string/Forgot_your_password"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/login_form_facebook"
+        style="@style/buttonPrimaryStyle"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/base_margin_vertical_half"
+        android:background="@drawable/button_facebook_style"
+        android:drawableLeft="@drawable/facebook_icon"
+        android:drawableStart="@drawable/facebook_icon"
+        android:paddingEnd="32dp"
+        android:paddingLeft="@dimen/base_margin_horizontal"
+        android:paddingRight="32dp"
+        android:paddingStart="@dimen/base_margin_horizontal"
+        android:text="@string/FACEBOOK"
+        android:visibility="gone"/>
+</LinearLayout>
+

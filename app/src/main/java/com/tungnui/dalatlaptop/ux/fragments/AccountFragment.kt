@@ -14,9 +14,9 @@ import com.tungnui.dalatlaptop.listeners.OnSingleClickListener
 import com.tungnui.dalatlaptop.models.Customer
 import com.tungnui.dalatlaptop.utils.Utils
 import com.tungnui.dalatlaptop.ux.MainActivity
-import com.tungnui.dalatlaptop.ux.dialogs.LoginDialogFragment
 import com.tungnui.dalatlaptop.api.CustomerServices
 import com.tungnui.dalatlaptop.api.ServiceGenerator
+import com.tungnui.dalatlaptop.ux.login.LoginActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -50,8 +50,8 @@ class AccountFragment : Fragment() {
 
         account_update.setOnClickListener(object : OnSingleClickListener() {
             override fun onSingleClick(v: View) {
-                if (activity is MainActivity)
-                    (activity as MainActivity).onAccountEditSelected()
+                /*if (activity is MainActivity)
+                    (activity as MainActivity).onAccountEditSelected()*/
             }
         })
 
@@ -75,16 +75,16 @@ class AccountFragment : Fragment() {
         account_login_logout_btn.setOnClickListener(object : OnSingleClickListener() {
             override fun onSingleClick(v: View) {
                 if (SettingsMy.getActiveUser() != null) {
-                    LoginDialogFragment.logoutUser()
+                    LoginActivity.logoutUser()
                     refreshScreen(null)
                 } else {
-                    val loginDialogFragment = LoginDialogFragment.newInstance (object:LoginDialogInterface{
+                   /* val loginDialogFragment = LoginDialogFragment.newInstance (object:LoginDialogInterface{
                         override fun successfulLoginOrRegistration(customer: Customer) {
                             refreshScreen(customer)
                             MainActivity.updateCartCountNotification()
                         }
                     })
-                    loginDialogFragment.show(fragmentManager, LoginDialogFragment::class.java.simpleName)
+                    loginDialogFragment.show(fragmentManager, LoginDialogFragment::class.java.simpleName)*/
                 }
             }
         })

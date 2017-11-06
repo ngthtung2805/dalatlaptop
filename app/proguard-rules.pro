@@ -8,5 +8,14 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Add any project specific keep options here:
+#### -- Picasso --
+ -dontwarn com.squareup.picasso.**
 
+ #### -- OkHttp --
+
+ -dontwarn com.squareup.okhttp.internal.**
+
+ #### -- Apache Commons --
+
+ -dontwarn org.apache.commons.logging.**
 # http://proguard.sourceforge.net/index.html#manual/usage.html

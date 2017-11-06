@@ -31,7 +31,7 @@ class OrderCreateAddAddressFragment : Fragment() {
         customerService = ServiceGenerator.createService(CustomerServices::class.java)
     }
     private lateinit var progressDialog: ProgressDialog
-
+    private var isUpdate:Boolean=false
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_order_create_add_address, container, false)
     }
@@ -39,7 +39,21 @@ class OrderCreateAddAddressFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         progressDialog = Utils.generateProgressDialog(activity, false)
-        (activity as OrderActivity).title = "Thêm địa chỉ"
+        val startBundle = arguments
+        if (startBundle != null) {
+            isUpdate = startBundle.getBoolean(IS_UPDATE,false)
+        }
+        if(isUpdate){
+            val user = SettingsMy.getActiveUser()
+            user?.let{
+                Utils.setTextToInputLayout(order_create_add_name_wrapper,it.firstName)
+                Utils.setTextToInputLayout(order_create_add_street_wrapper,it.billing?.address1 )
+                Utils.setTextToInputLayout(order_create_add_city_wrapper,it.billing?.city )
+                Utils.setTextToInputLayout(order_create_add_province_wrapper,it.billing?.state )
+                Utils.setTextToInputLayout(order_create_add_email_wrapper,it.billing?.email )
+                Utils.setTextToInputLayout(order_create_add_phone_wrapper,it.billing?.phone)
+            }
+        }
         order_create_add_save.setOnClickListener {
             if(checkRequired()){
                 val billing = Billing()
@@ -49,6 +63,7 @@ class OrderCreateAddAddressFragment : Fragment() {
                 billing.city = Utils.getTextFromInputLayout(order_create_add_city_wrapper)
                 billing.state = Utils.getTextFromInputLayout(order_create_add_province_wrapper)
                 billing.phone = Utils.getTextFromInputLayout(order_create_add_phone_wrapper)
+                billing.email = Utils.getTextFromInputLayout(order_create_add_email_wrapper)
                 updateBilling(billing)
             }
         }
@@ -75,12 +90,12 @@ class OrderCreateAddAddressFragment : Fragment() {
         }
     }
     fun checkRequired():Boolean{
-        var nameCheck = Utils.checkTextInputLayoutValueRequirement(order_create_add_name_wrapper,"Vui lòng nhập họ tên")
-        var addressCheck = Utils.checkTextInputLayoutValueRequirement(order_create_add_street_wrapper, "Vui lòng nhập địa chỉ")
-        var cityCheck = Utils.checkTextInputLayoutValueRequirement(order_create_add_city_wrapper, "Vui lòng chọn quận/huyện")
-        var provinceCheck = Utils.checkTextInputLayoutValueRequirement(order_create_add_province_wrapper, "Vui lòng chọn tỉnh/thành phố")
-        var emailCheck = Utils.checkTextInputLayoutValueRequirement(order_create_add_email_wrapper, "Vui lòng nhập email")
-        var phoneCheck = Utils.checkTextInputLayoutValueRequirement(order_create_add_phone_wrapper, "Vui lòng nhập số điện thoại")
+        val nameCheck = Utils.checkTextInputLayoutValueRequirement(order_create_add_name_wrapper,"Vui lòng nhập họ tên")
+        val addressCheck = Utils.checkTextInputLayoutValueRequirement(order_create_add_street_wrapper, "Vui lòng nhập địa chỉ")
+        val cityCheck = Utils.checkTextInputLayoutValueRequirement(order_create_add_city_wrapper, "Vui lòng chọn quận/huyện")
+        val provinceCheck = Utils.checkTextInputLayoutValueRequirement(order_create_add_province_wrapper, "Vui lòng chọn tỉnh/thành phố")
+        val emailCheck = Utils.checkTextInputLayoutValueRequirement(order_create_add_email_wrapper, "Vui lòng nhập email")
+        val phoneCheck = Utils.checkTextInputLayoutValueRequirement(order_create_add_phone_wrapper, "Vui lòng nhập số điện thoại")
         if (nameCheck && addressCheck && provinceCheck && cityCheck && phoneCheck && emailCheck) {
             return true
         } else {
@@ -92,6 +107,15 @@ class OrderCreateAddAddressFragment : Fragment() {
         super.onStop()
         progressDialog.cancel()
     }
-
+    companion object {
+        private val IS_UPDATE = "is_update"
+        fun newInstance(isUpdate: Boolean): OrderCreateAddAddressFragment {
+            val args = Bundle()
+            args.putBoolean(IS_UPDATE, isUpdate)
+            val fragment = OrderCreateAddAddressFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
 
 }

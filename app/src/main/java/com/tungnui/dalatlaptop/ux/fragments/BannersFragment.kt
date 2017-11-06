@@ -37,16 +37,18 @@ import org.jetbrains.anko.support.v4.toast
 class BannersFragment : Fragment() {
     private var mCompositeDisposable: CompositeDisposable
     val productService: ProductService
+
     init {
         mCompositeDisposable = CompositeDisposable()
         productService = ServiceGenerator.createService(ProductService::class.java)
     }
+
     private var progressDialog: ProgressDialog? = null
 
 
     private lateinit var newestRecyclerAdapter: HomeProductRecyclerAdapter
-    private lateinit var saleRecycleAdapter:HomeProductRecyclerAdapter
-    private lateinit var featuredRecycleAdapter:HomeProductRecyclerAdapter
+    private lateinit var saleRecycleAdapter: HomeProductRecyclerAdapter
+    private lateinit var featuredRecycleAdapter: HomeProductRecyclerAdapter
     private var mAlreadyLoaded = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -56,13 +58,13 @@ class BannersFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         MainActivity.setActionBarTitle(getString(R.string.app_name))
-        progressDialog = Utils.generateProgressDialog(context,false)
+        progressDialog = Utils.generateProgressDialog(context, false)
         initCarousel()
         prepareAction()
-       // prepareEmptyContent()
+        // prepareEmptyContent()
         // Don't reload data when return from backStack. Reload if a new instance was created or data was empty.
         if (savedInstanceState == null && !mAlreadyLoaded ||
-                 saleRecycleAdapter.itemCount==0 || featuredRecycleAdapter.itemCount == 0
+                saleRecycleAdapter.itemCount == 0 || featuredRecycleAdapter.itemCount == 0
                 || newestRecyclerAdapter.itemCount == 0) {
             mAlreadyLoaded = true
 
@@ -88,20 +90,21 @@ class BannersFragment : Fragment() {
     }
 
     private fun prepareNewestAdapter(frestStart: Boolean) {
-        if(frestStart){
-        newestRecyclerAdapter = HomeProductRecyclerAdapter {
-            product-> product.id?.let{(activity as MainActivity).onProductSelected(it)}
-        }
+        if (frestStart) {
+            newestRecyclerAdapter = HomeProductRecyclerAdapter { product ->
+                product.id?.let { (activity as MainActivity).onProductSelected(it) }
+            }
         }
         home_newest_recycler.setHasFixedSize(true)
         home_newest_recycler.setLayoutManager(LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false))
         val snapHelperStart = GravitySnapHelper(Gravity.START)
         snapHelperStart.attachToRecyclerView(home_newest_recycler)
         home_newest_recycler.itemAnimator = DefaultItemAnimator()
-        home_newest_recycler.adapter =  newestRecyclerAdapter
+        home_newest_recycler.adapter = newestRecyclerAdapter
     }
+
     private fun prepareSaleAdapter(frestStart: Boolean) {
-        if(frestStart) {
+        if (frestStart) {
             saleRecycleAdapter = HomeProductRecyclerAdapter { product ->
                 product.id?.let { (activity as MainActivity).onProductSelected(it) }
             }
@@ -111,36 +114,39 @@ class BannersFragment : Fragment() {
         val snapHelperStart = GravitySnapHelper(Gravity.START)
         snapHelperStart.attachToRecyclerView(home_newest_recycler)
         home_sale_recycler.itemAnimator = DefaultItemAnimator()
-        home_sale_recycler.adapter =  saleRecycleAdapter
+        home_sale_recycler.adapter = saleRecycleAdapter
     }
-    private fun loadData(){
+
+    private fun loadData() {
         loadFeatured()
         loadNewest()
         loadSale()
     }
-    private fun prepareContentViews(frestStart:Boolean){
-        if(frestStart)
-        {
-        prepareSaleAdapter(true)
-        prepareNewestAdapter(true)
-        prepareFeaturedProduct(true)
-        }else{
+
+    private fun prepareContentViews(frestStart: Boolean) {
+        if (frestStart) {
+            prepareSaleAdapter(true)
+            prepareNewestAdapter(true)
+            prepareFeaturedProduct(true)
+        } else {
             prepareSaleAdapter(false)
             prepareNewestAdapter(false)
             prepareFeaturedProduct(false)
         }
     }
-    private fun prepareFeaturedProduct(frestStart: Boolean){
-        if(frestStart){
-        featuredRecycleAdapter = HomeProductRecyclerAdapter {
-            product-> product.id?.let{(activity as MainActivity).onProductSelected(it)}
-        }}
+
+    private fun prepareFeaturedProduct(frestStart: Boolean) {
+        if (frestStart) {
+            featuredRecycleAdapter = HomeProductRecyclerAdapter { product ->
+                product.id?.let { (activity as MainActivity).onProductSelected(it) }
+            }
+        }
         home_featured_recycler.setHasFixedSize(true)
         home_featured_recycler.setLayoutManager(LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false))
         val snapHelperStart = GravitySnapHelper(Gravity.START)
         snapHelperStart.attachToRecyclerView(home_featured_recycler)
         home_featured_recycler.itemAnimator = DefaultItemAnimator()
-        home_featured_recycler.adapter =  featuredRecycleAdapter
+        home_featured_recycler.adapter = featuredRecycleAdapter
     }
 
     private fun loadFeatured() {
@@ -175,18 +181,18 @@ class BannersFragment : Fragment() {
         mCompositeDisposable.add(disposable)
     }
 
-  /* private fun prepareEmptyContent() {
-        banners_empty_action.setOnClickListener(object : OnSingleClickListener() {
-            override fun onSingleClick(v: View) {
-                // Just open drawer menu.
-                val activity = activity
-                if (activity is MainActivity) {
-                    if (activity.drawerFragment != null)
-                        activity.drawerFragment?.toggleDrawerMenu()
-                }
-            }
-        })
-    }*/
+    /* private fun prepareEmptyContent() {
+          banners_empty_action.setOnClickListener(object : OnSingleClickListener() {
+              override fun onSingleClick(v: View) {
+                  // Just open drawer menu.
+                  val activity = activity
+                  if (activity is MainActivity) {
+                      if (activity.drawerFragment != null)
+                          activity.drawerFragment?.toggleDrawerMenu()
+                  }
+              }
+          })
+      }*/
     private fun initCarousel() {
         var adImages = listOf(
                 "https://dalatlaptop.tungnui.com/wp-content/uploads/2017/11/banner1.jpg",
@@ -199,13 +205,14 @@ class BannersFragment : Fragment() {
         }
         home_carousel_banner.setPageCount(adImages.size)
     }
-    private fun loadNewest(){
+
+    private fun loadNewest() {
         progressDialog?.show()
         val disposable = productService.getNewest()
                 .subscribeOn((Schedulers.io()))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response ->
-                   newestRecyclerAdapter.addProducts(response)
+                    newestRecyclerAdapter.addProducts(response)
                     progressDialog?.cancel()
                 },
                         { error ->

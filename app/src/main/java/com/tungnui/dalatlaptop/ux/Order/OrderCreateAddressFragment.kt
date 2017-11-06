@@ -59,6 +59,9 @@ class OrderCreateAddressFragment : Fragment() {
                 noButton {}
             }.show()
         }
+        order_create_address_update.setOnClickListener {
+            (activity as OrderActivity).onAddAddress(isUpdate = true)
+        }
         order_create_address_rd1.onCheckedChange { buttonView, isChecked ->
             if (isChecked) {
                 order_create_address_rd2.isChecked = false
@@ -111,7 +114,7 @@ class OrderCreateAddressFragment : Fragment() {
             order_create_address_add.visibility = View.GONE
             var shipAddress = user?.billing
             shipAddress?.let {
-                order_create_address_name.text = "${shipAddress.lastName} ${shipAddress.firstName}"
+                order_create_address_name.text = "${shipAddress.firstName}"
                 order_create_address_phone.text = shipAddress.phone
                 order_create_address_address.text = shipAddress.address1
             }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.NavUtils
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 import com.tungnui.dalatlaptop.R
 import kotlinx.android.synthetic.main.activity_order.*
 
@@ -31,31 +32,40 @@ class OrderActivity : AppCompatActivity() {
         if (newFragment != null) {
             val frgManager = supportFragmentManager
             val fragmentTransaction = frgManager.beginTransaction()
-            fragmentTransaction.setAllowOptimization(false)
             fragmentTransaction.addToBackStack(transactionTag)
             fragmentTransaction.replace(R.id.order_content_frame, newFragment).commit()
             frgManager.executePendingTransactions()
         }
     }
-    fun onAddAddress(){
-        var fragment = OrderCreateAddAddressFragment()
+    fun onAddAddress(isUpdate:Boolean = false){
+        val fragment = OrderCreateAddAddressFragment.newInstance(isUpdate)
         replaceFragment(fragment, OrderCreateAddAddressFragment::class.java.simpleName)
     }
     fun onNextStep2(note:String){
-        var fragment = OrderCreatePaymentFragment.newInstance(note)
+        val fragment = OrderCreatePaymentFragment.newInstance(note)
         replaceFragment(fragment, OrderCreatePaymentFragment::class.java.simpleName)
 
     }
     fun onNextStep3(note:String, paymentMethod:String){
-        var fragment = OrderCreateFinishFragment.newInstance(note, paymentMethod)
+        val fragment = OrderCreateFinishFragment.newInstance(note, paymentMethod)
         replaceFragment(fragment, OrderCreateFinishFragment::class.java.simpleName)
 
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home ->{
+                if (supportFragmentManager.backStackEntryCount > 0)
+                    this.onBackPressed()
+                else{
+                    NavUtils.navigateUpFromSameTask(this)
+                }
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
     fun onOrderSuccessContinousShopping(){
         NavUtils.navigateUpFromSameTask(this)
-    }
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount > 0)
-                super.onBackPressed()
     }
 }

@@ -4,11 +4,12 @@ import android.app.Application
 import android.content.Context
 import android.content.res.Resources
 import android.net.ConnectivityManager
+import android.support.multidex.MultiDexApplication
 import com.android.volley.RequestQueue
 import com.facebook.FacebookSdk
 
 
-class MyApplication : Application() {
+class MyApplication : MultiDexApplication() {
 
     private var mRequestQueue: RequestQueue? = null
 

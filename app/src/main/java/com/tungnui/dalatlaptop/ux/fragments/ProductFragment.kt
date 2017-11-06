@@ -9,18 +9,17 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.util.DisplayMetrics
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.ViewTreeObserver
+import android.view.*
 import android.widget.TextView
 
 import com.facebook.share.model.ShareLinkContent
 import com.facebook.share.widget.MessageDialog
+import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 
 import com.tungnui.dalatlaptop.CONST
 import com.tungnui.dalatlaptop.MyApplication
@@ -61,7 +60,6 @@ class ProductFragment : Fragment() {
     private lateinit var relatedProductsAdapter: RelatedProductsRecyclerAdapter
     private var scrollViewListener: ViewTreeObserver.OnScrollChangedListener? = null
     private  var productImages: List<Image>? = null
-    private var productRelatedIds :List<Int>? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_product, container, false)
     }
@@ -72,19 +70,14 @@ class ProductFragment : Fragment() {
         prepareButtons()
         prepareProductImagesLayout()
         prepareScrollView()
-
+        prepareRecommendAdapter()
         val productId = arguments.getInt(PRODUCT_ID, 0)
         getProduct(productId)
     }
 
-    /**
-     * Prepare buttons views and listeners.
-     *
-     * @param view fragment base view.
-     */
+
     private fun prepareButtons() {
-        product_add_to_cart_progress.indeterminateDrawable.setColorFilter(ContextCompat.getColor(activity, R.color.textIconColorPrimary), PorterDuff.Mode.MULTIPLY)
-        product_add_to_cart_layout.setOnClickListener(object : OnSingleClickListener() {
+        product_add_to_cart.setOnClickListener(object : OnSingleClickListener() {
             override fun onSingleClick(v: View) {
                 postProductToCart()
             }
@@ -151,20 +144,24 @@ class ProductFragment : Fragment() {
         } else {
             params.height = (dm.heightPixels * 0.48).toInt()
         }
-
-        // Prepare related products
-
-        product_recommended_images_recycler.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        product_recommended_images_recycler.addItemDecoration(RecyclerMarginDecorator(context, RecyclerMarginDecorator.ORIENTATION.HORIZONTAL))
-        relatedProductsAdapter = RelatedProductsRecyclerAdapter { product ->
-            product.id?.let {
-                if (activity is MainActivity) {
-                    (activity as MainActivity).onProductSelected(it)
-                }
-            }
-        }
     }
 
+    private fun prepareRecommendAdapter() {
+            relatedProductsAdapter = RelatedProductsRecyclerAdapter {
+                product ->  product.id?.let {
+                    if (activity is MainActivity) {
+                        (activity as MainActivity).onProductSelected(it)
+                    }
+                }
+            }
+
+        product_recommended_recycler.setHasFixedSize(true)
+        product_recommended_recycler.setLayoutManager(LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false))
+        val snapHelperStart = GravitySnapHelper(Gravity.START)
+        snapHelperStart.attachToRecyclerView(product_recommended_recycler)
+        product_recommended_recycler.itemAnimator = DefaultItemAnimator()
+        product_recommended_recycler.adapter =  relatedProductsAdapter
+    }
 
     /**
      * Prepare scroll view related animations and floating wishlist button.
@@ -210,11 +207,11 @@ class ProductFragment : Fragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response ->
                     MainActivity.setActionBarTitle(response.name)
-                    productRelatedIds = response.relatedIds
                     refreshScreenData(response)
                     product = response
                     productImages = response.images
                     response.images?.let { productImagesAdapter.addAll(it) }
+                    getRecommendProducts(response.relatedIds!!)
                     setContentVisible(CONST.VISIBLE.CONTENT)
                 },
                         { error ->
@@ -242,28 +239,23 @@ class ProductFragment : Fragment() {
     private fun refreshScreenData(product: Product?) {
         if (product != null) {
             product_name.text = product.name
-            val formatter = DecimalFormat("#,###")
             if (product.onSale) {
-                product_price_discount.text = "${formatter.format(product.salePrice?.toDouble())}đ"
-                product_price.visibility = View.VISIBLE
-                product_price.text = "${formatter.format(product.regularPrice?.toDouble())}đ"
-                product_price.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG or Paint.ANTI_ALIAS_FLAG
+                product_price.text = product.salePrice.toString().formatPrice()
+                product_regular_price.text = product.regularPrice.toString().formatPrice()
+                product_regular_price.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG or Paint.ANTI_ALIAS_FLAG
                 product_price_discount_percent.visibility = View.VISIBLE
                 ifNotNull(product.regularPrice?.toDouble(),product.salePrice?.toDouble()){
                     price,sale->   product_price_discount_percent.text = Utils.calculateDiscountPercent(context, price ,sale )
                 }
             } else {
-                product_price.text = "${formatter.format(product.regularPrice?.toDouble())}đ"
-                product_price.visibility = View.GONE
+                product_price.text = product.regularPrice.toString().formatPrice()
+                product_regular_price.visibility = View.GONE
                 product_price_discount_percent.visibility = View.GONE
             }
             if (product.description != null) {
                 product_info.movementMethod = LinkMovementMethod.getInstance()
                 product_info.text = Utils.safeURLSpanLinks(Html.fromHtml(product.description), activity)
             }
-        } else {
-            MsgUtils.showToast(activity, MsgUtils.TOAST_TYPE_INTERNAL_ERROR, getString(R.string.Internal_error), MsgUtils.ToastLength.LONG)
-            Timber.e(RuntimeException(), "Refresh product screen with null product")
         }
     }
 
@@ -333,8 +325,6 @@ class ProductFragment : Fragment() {
 
     override fun onStop() {
         setContentVisible(CONST.VISIBLE.CONTENT)
-        product_add_to_cart_image.visibility = View.VISIBLE
-        product_add_to_cart_progress.visibility = View.INVISIBLE
         super.onStop()
     }
 

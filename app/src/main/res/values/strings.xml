@@ -193,8 +193,7 @@
     <string name="content_description_intro_screen">Intro screen</string>
     <string name="content_description_product_image">Product image</string>
     <string name="content_description_shipping_info">Shipping info</string>
-    <string name="last_name">Họ</string>
-    <string name="first_name">Tên</string>
+    <string name="name">Họ và tên</string>
     <string name="repassword">Nhập lại mật khẩu</string>
     <string name="featured_product">Sản phẩm nổi bật</string>
     <string name="payment_method">Hình thức thanh toán</string>
@@ -205,7 +204,8 @@
     <string name="Not_password_repassword">Mật khẩu không khớp</string>
     <string name="recent_view_product">Sản phẩm vừa xem</string>
 
-    <string name="title_activity_order">OrderActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_login">Đăng nhập/ Đăng kí</string>
+
+       <string name="tab_text_1">Đăng nhập</string>
+    <string name="tab_text_2">Đăng kí</string>
 </resources>

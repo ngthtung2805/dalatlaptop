@@ -1,7 +1,9 @@
 package com.tungnui.dalatlaptop.utils
 
+import android.content.Context
 import android.support.annotation.IdRes
 import android.support.design.widget.Snackbar
+import android.support.design.widget.TextInputLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
@@ -9,6 +11,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import com.tungnui.dalatlaptop.views.ResizableImageViewHeight
 import com.squareup.picasso.Picasso
@@ -102,4 +105,31 @@ fun <T1, T2> ifNotNull(value1: T1?, value2: T2?, bothNotNull: (T1, T2) -> (Unit)
     if (value1 != null && value2 != null) {
         bothNotNull(value1, value2)
     }
+}
+
+//TExt input
+fun TextInputLayout.getTextFromInputLayout(): String {
+    return this.editText?.text.toString()
+}
+
+fun TextInputLayout.setTextToInputLayout(text: String) {
+    if (this.editText != null) {
+        this.editText?.setText(text)
+    }
+}
+
+
+fun TextInputLayout.checkTextInputLayoutValueRequirement(errorValue: String): Boolean {
+    if (this.editText != null) {
+        val text = Utils.getTextFromInputLayout(this)
+        if (text == null || text.isEmpty()) {
+            this.isErrorEnabled = true
+            this.error = errorValue
+            return false
+        } else {
+            this.isErrorEnabled = false
+            return true
+        }
+    }
+    return false
 }

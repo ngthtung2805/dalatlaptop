@@ -28,20 +28,12 @@ object ServiceGenerator {
     fun <S> createService(serviceClass: Class<S>, authToken: String): S {
         if (!TextUtils.isEmpty(authToken)) {
             val interceptor = AuthenticationInterceptor(authToken)
-           /* var logInterceptor = HttpLoggingInterceptor();
-            logInterceptor.setLevel(HttpLoggingInterceptor.Level.BASEC)*/
             if (!httpClient.interceptors().contains(interceptor)) {
                 httpClient.addInterceptor(interceptor)
-                //httpClient.addInterceptor(logInterceptor)
                 builder.client(httpClient.build())
                 retrofit = builder.build()
             }
         }
         return retrofit.create(serviceClass)
     }
-    fun <S> createNoAuthService(service:Class<S>):S{
-        retrofit = builder.client(httpClient.build()).build()
-        return retrofit.create(service)
-    }
-
 }

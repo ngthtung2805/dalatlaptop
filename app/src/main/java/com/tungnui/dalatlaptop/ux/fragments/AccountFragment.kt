@@ -27,15 +27,7 @@ import timber.log.Timber
  * Fragment provides the account screen with options such as logging, editing and more.
  */
 class AccountFragment : Fragment() {
-    private var mCompositeDisposable: CompositeDisposable
-    val customerService: CustomerServices
-
-    init {
-        mCompositeDisposable = CompositeDisposable()
-        customerService = ServiceGenerator.createService(CustomerServices::class.java)
-    }
     private lateinit var pDialog: ProgressDialog
-    private var mAlreadyLoaded = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_account, container, false)
@@ -45,8 +37,6 @@ class AccountFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         MainActivity.setActionBarTitle(getString(R.string.Profile))
         pDialog = Utils.generateProgressDialog(activity, false)
-
-
 
         account_update.setOnClickListener(object : OnSingleClickListener() {
             override fun onSingleClick(v: View) {
@@ -78,13 +68,7 @@ class AccountFragment : Fragment() {
                     LoginActivity.logoutUser()
                     refreshScreen(null)
                 } else {
-                   /* val loginDialogFragment = LoginDialogFragment.newInstance (object:LoginDialogInterface{
-                        override fun successfulLoginOrRegistration(customer: Customer) {
-                            refreshScreen(customer)
-                            MainActivity.updateCartCountNotification()
-                        }
-                    })
-                    loginDialogFragment.show(fragmentManager, LoginDialogFragment::class.java.simpleName)*/
+                    (activity as MainActivity).onAccountSelected()
                 }
             }
         })
@@ -92,37 +76,13 @@ class AccountFragment : Fragment() {
 
         val user = SettingsMy.getActiveUser()
         if (user != null) {
-            Timber.d("user: %s", user.toString())
-            // Sync user data if fragment created (not reuse from backstack)
-            if (savedInstanceState == null && !mAlreadyLoaded) {
-                mAlreadyLoaded = true
-                syncUserData(user.id)
-            } else {
-                refreshScreen(user)
-            }
-        } else {
+            refreshScreen(user)
+        }    else {
             refreshScreen(null)
         }
     }
-    private fun syncUserData(customerId:Int?) {
-        pDialog.show()
-        if (customerId == null)
-            return;
-        var disposable = customerService.single(customerId)
-                .subscribeOn((Schedulers.io()))
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ customer ->
-                    pDialog.cancel()
-                    refreshScreen(customer)
-                },
-                        { _ ->
-                            pDialog.cancel()
-                        })
-        mCompositeDisposable.add(disposable)
-    }
 
     private fun refreshScreen(customer: Customer?) {
-
         if (customer == null) {
             account_login_logout_btn.text = getString(R.string.Log_in)
             account_user_info.visibility = View.GONE
@@ -134,35 +94,10 @@ class AccountFragment : Fragment() {
             account_update.visibility = View.VISIBLE
             account_my_orders.visibility = View.VISIBLE
 
-            account_name.text = customer.username
-
-           /* var address: String? = customer.
-            address = appendCommaText(address, user.houseNumber, false)
-            address = appendCommaText(address, user.city, true)
-            address = appendCommaText(address, user.zip, true)*/
-
-           // account_address.text = address
+            account_name.text = customer.firstName
             account_email.text = customer.email
-           // account_phone.text = customer.
+            account_phone.text = customer.billing?.phone
         }
     }
 
-    private fun appendCommaText(result: String?, append: String?, addComma: Boolean): String? {
-        var result = result
-        if (result != null && !result.isEmpty()) {
-            if (append != null && !append.isEmpty()) {
-                if (addComma)
-                    result += getString(R.string.format_comma_prefix, append)
-                else
-                    result += getString(R.string.format_space_prefix, append)
-            }
-            return result
-        } else {
-            return append
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-    }
 }

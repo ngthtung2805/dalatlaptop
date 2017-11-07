@@ -195,14 +195,12 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
 
 
     private fun replaceFragment(newFragment: Fragment?, transactionTag: String) {
-    if(!supportFragmentManager.popBackStackImmediate(transactionTag,POP_BACK_STACK_INCLUSIVE)){
-            if (newFragment != null) {
-                val frgManager = supportFragmentManager
-                val fragmentTransaction = frgManager.beginTransaction()
-                 fragmentTransaction.addToBackStack(transactionTag)
-                fragmentTransaction.replace(R.id.main_content_frame, newFragment,transactionTag).commitAllowingStateLoss()
-                frgManager.executePendingTransactions()
-            }
+        if (newFragment != null) {
+            val frgManager = supportFragmentManager
+            val fragmentTransaction = frgManager.beginTransaction()
+            fragmentTransaction.addToBackStack(transactionTag)
+            fragmentTransaction.replace(R.id.main_content_frame, newFragment, transactionTag).commitAllowingStateLoss()
+            frgManager.executePendingTransactions()
         }
     }
 
@@ -329,7 +327,7 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
         if (resultCode == LOGIN_RESULT_CODE) {
             when (requestCode) {
                 ORDER_HISTORY_REQUEST_CODE -> onOrdersHistory()
-                ORDER_CREATE_REQUEST_CODE -> onOrdersHistory()
+                ORDER_CREATE_REQUEST_CODE -> onOrderCreateSelected()
                 ACCOUNT_REQUEST_CODE -> onAccountSelected()
             }
         }

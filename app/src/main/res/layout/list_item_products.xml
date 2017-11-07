@@ -30,50 +30,47 @@
             android:fontFamily="sans-serif-light"
             android:gravity="center"
             android:maxLines="2"
-            android:textSize="14sp"
-            tools:text="Kotnickove ponozky s krajkou"/>
+            android:textSize="15sp"
+            tools:text="Laptop Lenovo A301"/>
 
-        <TableLayout
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/product_item_name"
             android:layout_centerHorizontal="true"
             android:paddingBottom="3dp"
             android:paddingTop="3dp"
-            android:shrinkColumns="0">
-
-            <TableRow>
-
+            android:orientation="vertical">
                 <TextView
                     android:id="@+id/product_item_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
                     android:paddingLeft="4dp"
                     android:paddingRight="4dp"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/product_price"
                     android:textStyle="bold"
-                    android:textSize="13sp"
-                    tools:text="150 USD"/>
+                    android:textSize="16sp"
+                    tools:text="1.500.000đ"
+                    android:layout_gravity="center"/>
 
                 <TextView
-                    android:id="@+id/product_item_discount"
-                    android:layout_width="match_parent"
+                    android:id="@+id/product_item_regular_price"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ellipsize="none"
                     android:paddingLeft="4dp"
                     android:paddingRight="4dp"
-                    android:textColor="@color/colorAccent"
                     android:textSize="14sp"
-                    android:textStyle="bold"
-                    tools:text="149 USD"/>
-            </TableRow>
-            <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent">
-                <RatingBar  android:id="@+id/product_item_rating"
+                    tools:text="2.000.000đ"
+                    android:layout_gravity="center"/>
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:gravity="center">
+                <RatingBar
+                    android:id="@+id/product_item_rating"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:rating="3.5"
+                    tools:rating="3.5"
                     android:numStars="5"
                     android:layout_marginLeft="10dp"
                     style="?android:attr/ratingBarStyleSmall"/>
@@ -82,6 +79,6 @@
                     android:layout_width="wrap_content"
                     android:text="(11)"/>
             </LinearLayout>
-        </TableLayout>
+        </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

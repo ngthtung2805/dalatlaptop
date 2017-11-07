@@ -12,9 +12,10 @@ import java.util.ArrayList
 
 import com.tungnui.dalatlaptop.R
 import com.tungnui.dalatlaptop.ux.adapters.ProductImagesPagerAdapter
+import com.tungnui.dalatlaptop.views.loopViewPager.LoopViewPager
 import kotlinx.android.synthetic.main.dialog_product_detail_images.*
 
-class ProductImagesDialogFragment : DialogFragment() {
+class ProductImagesDialogFragment2 : DialogFragment() {
     private var images: List<Image> = ArrayList<Image>()
     private var defaultPosition = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +42,8 @@ class ProductImagesDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var mPagerAdapter = ProductImagesPagerAdapter(activity, images)
-       // dialog_product_detail_images_pager.adapter = mPagerAdapter
+        var loopViewPager = view?.findViewById<LoopViewPager>(R.id.dialog_product_detail_images_pager)
+        //loopViewPager.adapter = mPagerAdapter
 
         if (defaultPosition > 0 && defaultPosition < images.size)
             dialog_product_detail_images_pager.currentItem = defaultPosition
@@ -60,9 +62,9 @@ class ProductImagesDialogFragment : DialogFragment() {
         pager_close.setOnClickListener { dismiss() }
     }
     companion object {
-        fun newInstance(images: List<Image>?, defaultPosition: Int): ProductImagesDialogFragment? {
+        fun newInstance(images: List<Image>?, defaultPosition: Int): ProductImagesDialogFragment2? {
             if (images == null || images.isEmpty()) return null
-            val frag = ProductImagesDialogFragment()
+            val frag = ProductImagesDialogFragment2()
             frag.images = images
             frag.defaultPosition = defaultPosition
             return frag

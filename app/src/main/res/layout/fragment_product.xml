@@ -47,7 +47,6 @@
                     android:layout_gravity="start"
                     android:background="@color/white"
                     android:orientation="horizontal">
-                    <!-- 	imageViews here are added programmatically in ProductFragment -->
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -66,7 +65,8 @@
                     android:id="@+id/product_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:background="@color/white">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -81,7 +81,9 @@
                             android:id="@+id/product_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp"
+                            android:textSize="20sp"
+                            android:padding="5dp"
+                            android:textStyle="bold"
                             tools:text="Test product name"
                             android:layout_marginBottom="10dp"/>
 
@@ -93,20 +95,22 @@
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:layout_margin="1dp"
-                                android:layout_weight="1"
+                                android:layout_weight="0.5"
                                 android:background="@color/white"
                                 android:gravity="center"
                                 android:orientation="vertical">
 
                                 <RatingBar
+                                    android:id="@+id/product_rating"
                                     style="?android:attr/ratingBarStyleSmall"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:numStars="5"
-                                    android:rating="3.5" />
+                                    tools:rating="3.5"
+                                    android:layout_gravity="left"/>
 
                                 <TextView
+                                    android:id="@+id/product_rating_count"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:textSize="12sp"
@@ -117,8 +121,7 @@
                                 android:id="@+id/product_price_layout"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="1dp"
-                                android:layout_weight="1"
+                                android:layout_weight="1.5"
                                 android:background="@color/white"
                                 android:orientation="horizontal">
 
@@ -146,7 +149,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/product_price"
-                                        android:textSize="17sp"
+                                        android:textSize="20sp"
                                         android:textStyle="bold"
                                         tools:text="1.150.000 đ" />
 
@@ -157,72 +160,80 @@
                                         android:textSize="13sp"
                                         tools:text="1.000.000 đ" />
                                 </LinearLayout>
+
                             </LinearLayout>
                         </LinearLayout>
 
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_marginBottom="@dimen/base_margin_vertical"
-                        android:layout_marginTop="@dimen/base_margin_vertical_half"
-                        android:background="@color/line_light_grey" />
 
-
-                    <!-- Product info section-->
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_marginTop="@dimen/base_margin_vertical"
-                        android:background="@color/line_light_grey" />
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="@dimen/base_margin_horizontal">
-
+                        android:paddingTop="10dp">
+                        <TextView
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:layout_width="fill_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="@string/product_description"
+                            android:textSize="15sp"
+                            android:background="#FAFAFA"
+                            android:padding="10dp"
+                            android:textColor="#000" />
                         <TextView
                             android:id="@+id/product_info"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/base_margin_vertical"
                             android:fontFamily="sans-serif-light"
-                            android:textSize="14sp" />
-
-                        <Button
-                            android:id="@+id/product_send_to_a_friend"
-                            style="?android:attr/borderlessButtonStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/button_facebook_style"
-                            android:drawableLeft="@drawable/facebook_icon"
-                            android:drawablePadding="3dp"
-                            android:drawableStart="@drawable/facebook_icon"
-                            android:gravity="center"
-                            android:paddingLeft="@dimen/base_margin_horizontal"
-                            android:paddingRight="@dimen/base_margin_horizontal"
-                            android:singleLine="true"
-                            android:text="@string/SEND_TO_A_FRIEND"
-                            android:textColor="@color/textIconColorPrimary"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
+                            android:textSize="14sp"
+                            android:padding="10dp"/>
+                    </LinearLayout>
+                   <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                       <!-- <TextView
+                            android:id="@+id/home_featured_title"
+                            android:clickable="true"
+                            android:focusable="true"
                             android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/base_margin_vertical"
-                            android:text="@string/RECOMMENDED"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                        <!-- Recycler height set in code -->
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="@string/recomment_product"
+                            android:textSize="15sp"
+                            android:padding="10dp"
+                            android:background="#FAFAFA"
+                            android:textColor="#000" />-->
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/product_recommended_recycler"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
-
-
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="10dp">
+                        <TextView
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:layout_width="fill_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="@string/customer_review"
+                            android:textSize="15sp"
+                            android:padding="10dp"
+                            android:background="#FAFAFA"
+                            android:textColor="#000"/>
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/product_customer_review_recycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -240,7 +251,7 @@
             style="@style/buttonPrimaryStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Next_step" />
+            android:text="@string/Finish_order" />
     </LinearLayout>
 
     <LinearLayout

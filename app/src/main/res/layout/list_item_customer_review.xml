@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="5dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <TextView
+        android:id="@+id/list_item_customer_review_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        tools:text="Nguyễn Thanh Tùng" />
+
+    <RatingBar
+        android:id="@+id/list_item_customer_review_rating"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:numStars="5"
+        tools:rating="3.5" />
+    <TextView
+        android:id="@+id/list_item_customer_review_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text=" 7/11/2017" />
+    <TextView
+        android:id="@+id/list_item_customer_review_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="4dp"
+        android:paddingTop="10dp"
+        tools:text="Giao hàng tính ra còn nhanh hơn mình tự đi mua, rất tuyệt" />
+</LinearLayout>

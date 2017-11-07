@@ -84,7 +84,7 @@
 
     <!-- -->
     <style name="buttonSecondaryStyle" parent="@style/Widget.AppCompat.Button.Borderless">
-        <item name="android:background">@color/organe</item>
+        <item name="android:background">@drawable/button_secondary_action_ripple</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/textPrimary</item>
         <item name="android:textStyle">bold</item>

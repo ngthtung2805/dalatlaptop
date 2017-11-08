@@ -18,6 +18,7 @@ import com.tungnui.dalatlaptop.models.Customer
 import com.tungnui.dalatlaptop.libraryhelper.Utils
 import com.tungnui.dalatlaptop.utils.checkTextInputLayoutValueRequirement
 import com.tungnui.dalatlaptop.utils.getTextFromInputLayout
+import com.tungnui.dalatlaptop.utils.hideKeyboard
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -48,11 +49,12 @@ class RegisterFragment : Fragment() {
         progressDialog = Utils.generateProgressDialog(activity, false)
         login_registration_confirm.setOnClickListener {
             if (checkRequired()){
-                hideSoftKeyboard()
+
                 val name =login_registration_name_wrapper.getTextFromInputLayout()
                 val email = login_registration_email_wrapper.getTextFromInputLayout()
                 val password = login_registration_password_wrapper.getTextFromInputLayout()
                 registerNewUser(name, email, password)
+                activity.hideKeyboard()
             }
         }
     }
@@ -84,10 +86,5 @@ class RegisterFragment : Fragment() {
         mCompositeDisposable.add(disposable)
     }
 
-    private fun hideSoftKeyboard() {
-        if (activity != null && view != null) {
-            val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view?.windowToken, 0)
-        }
-    }
+
 }

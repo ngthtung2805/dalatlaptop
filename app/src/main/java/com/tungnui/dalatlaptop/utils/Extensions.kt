@@ -1,5 +1,7 @@
 package com.tungnui.dalatlaptop.utils
 
+import android.app.Activity
+import android.content.Context
 import android.support.annotation.IdRes
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TextInputLayout
@@ -10,6 +12,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import com.tungnui.dalatlaptop.views.ResizableImageViewHeight
 import com.squareup.picasso.Picasso
@@ -117,7 +120,14 @@ fun TextInputLayout.setTextToInputLayout(text: String) {
     }
 }
 
-
+fun TextInputLayout.isVaildForEmail():Boolean{
+    val input = editText?.text.toString()
+    if(input.isNullOrBlank()){
+        error = resources.getString(R.string.required)
+        return false
+    }
+    return false
+}
 fun TextInputLayout.checkTextInputLayoutValueRequirement(errorValue: String): Boolean {
     if (this.editText != null) {
         val text = Utils.getTextFromInputLayout(this)
@@ -129,6 +139,16 @@ fun TextInputLayout.checkTextInputLayoutValueRequirement(errorValue: String): Bo
             this.isErrorEnabled = false
             return true
         }
+    }
+    return false
+}
+
+//HideKeyboard
+fun Activity.hideKeyboard():Boolean{
+    val view= currentFocus
+    view?.let{
+        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        return inputMethodManager.hideSoftInputFromWindow(view.windowToken,InputMethodManager.HIDE_NOT_ALWAYS)
     }
     return false
 }

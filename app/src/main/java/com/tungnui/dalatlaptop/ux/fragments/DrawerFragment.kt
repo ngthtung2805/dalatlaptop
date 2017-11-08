@@ -50,7 +50,6 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
     private lateinit var mDrawerToggle: ActionBarDrawerToggle
     private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var drawerMenuRecyclerAdapter: DrawerRecyclerAdapter
-    private lateinit var drawerSubmenuLayout: LinearLayout
     private lateinit var drawerSubmenuRecyclerAdapter: DrawerRecyclerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -163,7 +162,7 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
     fun onBackHide(): Boolean {
         mDrawerLayout.let {
             if (it.isDrawerVisible(GravityCompat.START)) {
-                if (drawerSubmenuLayout.visibility == View.VISIBLE) {
+                if (drawer_submenu_layout.visibility == View.VISIBLE) {
                     animateSubMenuHide()
                 } else
                     it.closeDrawer(GravityCompat.START)

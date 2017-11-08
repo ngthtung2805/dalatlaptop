@@ -25,6 +25,8 @@
                 android:singleLine="true"
                 android:textColor="#000"
                 tools:text="Nguyễn Ngọc Hoàng Vũ"/>
+
+
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout

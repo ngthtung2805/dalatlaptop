@@ -204,26 +204,26 @@ class ProductFragment : Fragment() {
     }
     private fun refreshScreenData(product: Product?) {
         if (product != null) {
-            product_name.text = product.name
+            product_name?.text = product.name
             if (product.onSale) {
-                product_price.text = product.salePrice.toString().formatPrice()
-                product_regular_price.text = product.regularPrice.toString().formatPrice()
-                product_regular_price.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG or Paint.ANTI_ALIAS_FLAG
-                product_price_discount_percent.visibility = View.VISIBLE
+                product_price?.text = product.salePrice.toString().formatPrice()
+                product_regular_price?.text = product.regularPrice.toString().formatPrice()
+                product_regular_price?.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG or Paint.ANTI_ALIAS_FLAG
+                product_price_discount_percent?.visibility = View.VISIBLE
 
                 ifNotNull(product.regularPrice?.toDouble(),product.salePrice?.toDouble()){
-                    price,sale->   product_price_discount_percent.text = Utils.calculateDiscountPercent(context, price ,sale )
+                    price,sale->   product_price_discount_percent?.text = Utils.calculateDiscountPercent(context, price ,sale )
                 }
             } else {
-                product_price.text = product.regularPrice.toString().formatPrice()
-                product_regular_price.visibility = View.INVISIBLE
-                product_price_discount_percent.visibility = View.INVISIBLE
+                product_price?.text = product.regularPrice.toString().formatPrice()
+                product_regular_price?.visibility = View.INVISIBLE
+                product_price_discount_percent?.visibility = View.INVISIBLE
             }
-            product_rating_count.text="(${product.ratingCount} nhận xét)"
+            product_rating_count?.text="(${product.ratingCount} nhận xét)"
             product.averageRating?.let{product_rating.rating = it.toFloat()}
             if (product.description != null) {
-                product_info.movementMethod = LinkMovementMethod.getInstance()
-                product_info.text = Html.fromHtml(product.description)
+                product_info?.movementMethod = LinkMovementMethod.getInstance()
+                product_info?.text = Html.fromHtml(product.description)
             }
         }
     }
@@ -255,20 +255,20 @@ class ProductFragment : Fragment() {
         if (product_empty_layout != null && product_scroll_layout != null && product_progress != null) {
             when (visible) {
                 CONST.VISIBLE.EMPTY -> {
-                    product_empty_layout.visibility = View.VISIBLE
-                    product_scroll_layout.visibility = View.INVISIBLE
-                    product_progress.visibility = View.GONE
+                    product_empty_layout?.visibility = View.VISIBLE
+                    product_scroll_layout?.visibility = View.INVISIBLE
+                    product_progress?.visibility = View.GONE
                 }
                 CONST.VISIBLE.PROGRESS -> {
-                    product_empty_layout.visibility = View.GONE
-                    product_scroll_layout.visibility = View.INVISIBLE
-                    product_progress.visibility = View.VISIBLE
+                    product_empty_layout?.visibility = View.GONE
+                    product_scroll_layout?.visibility = View.INVISIBLE
+                    product_progress?.visibility = View.VISIBLE
                 }
                 else // Content
                 -> {
-                    product_empty_layout.visibility = View.GONE
-                    product_scroll_layout.visibility = View.VISIBLE
-                    product_progress.visibility = View.GONE
+                    product_empty_layout?.visibility = View.GONE
+                    product_scroll_layout?.visibility = View.VISIBLE
+                    product_progress?.visibility = View.GONE
                 }
 
             }
@@ -276,12 +276,12 @@ class ProductFragment : Fragment() {
     }
 
     override fun onResume() {
-        product_scroll_layout.viewTreeObserver.addOnScrollChangedListener(scrollViewListener)
+        product_scroll_layout?.viewTreeObserver?.addOnScrollChangedListener(scrollViewListener)
         super.onResume()
     }
 
     override fun onPause() {
-        product_scroll_layout.viewTreeObserver.removeOnScrollChangedListener(scrollViewListener)
+        product_scroll_layout?.viewTreeObserver?.removeOnScrollChangedListener(scrollViewListener)
         super.onPause()
     }
 
@@ -301,4 +301,3 @@ class ProductFragment : Fragment() {
         }
     }
 }
-

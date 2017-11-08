@@ -117,7 +117,7 @@
     <string name="Total_colon">Total:</string>
     <string name="Select">Select</string>
     <string name="including_VAT">Đã bao gồm VAT</string>
-        <string name="Wait_for_sms_or_email_order_confirmation">Wait for &lt;b>SMS&lt;/b> or &lt;b>email&lt;/b> order confirmation.</string>
+
     <string name="Min">Min</string>
     <string name="Max">Max</string>
     <string name="format_space_prefix"> %1$s</string>
@@ -156,4 +156,5 @@
        <string name="tab_text_1">Đăng nhập</string>
     <string name="tab_text_2">Đăng kí</string>
     <string name="Province">Tỉnh/Thành phố</string>
+    <string name="required">Trường bắt buộc</string>
 </resources>

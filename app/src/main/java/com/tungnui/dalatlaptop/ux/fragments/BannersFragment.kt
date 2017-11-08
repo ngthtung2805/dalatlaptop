@@ -41,9 +41,9 @@ class BannersFragment : Fragment() {
     private var progressDialog: ProgressDialog? = null
 
 
-    private lateinit var newestRecyclerAdapter: HomeProductRecyclerAdapter
-    private lateinit var saleRecycleAdapter: HomeProductRecyclerAdapter
-    private lateinit var featuredRecycleAdapter: HomeProductRecyclerAdapter
+    private  var newestRecyclerAdapter: HomeProductRecyclerAdapter? = null
+    private  var saleRecycleAdapter: HomeProductRecyclerAdapter? = null
+    private  var featuredRecycleAdapter: HomeProductRecyclerAdapter? = null
     private var mAlreadyLoaded = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -59,8 +59,8 @@ class BannersFragment : Fragment() {
         // prepareEmptyContent()
         // Don't reload data when return from backStack. Reload if a new instance was created or data was empty.
         if (savedInstanceState == null && !mAlreadyLoaded ||
-                saleRecycleAdapter.itemCount == 0 || featuredRecycleAdapter.itemCount == 0
-                || newestRecyclerAdapter.itemCount == 0) {
+                saleRecycleAdapter ==null || featuredRecycleAdapter==null
+                || newestRecyclerAdapter ==null) {
             mAlreadyLoaded = true
 
             // Prepare views and listeners
@@ -150,7 +150,7 @@ class BannersFragment : Fragment() {
                 .subscribeOn((Schedulers.io()))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response ->
-                    featuredRecycleAdapter.addProducts(response)
+                    featuredRecycleAdapter?.addProducts(response)
                     progressDialog?.cancel()
                 },
                         { error ->
@@ -166,7 +166,7 @@ class BannersFragment : Fragment() {
                 .subscribeOn((Schedulers.io()))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response ->
-                    saleRecycleAdapter.addProducts(response)
+                    saleRecycleAdapter?.addProducts(response)
                     progressDialog?.cancel()
                 },
                         { error ->
@@ -207,7 +207,7 @@ class BannersFragment : Fragment() {
                 .subscribeOn((Schedulers.io()))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response ->
-                    newestRecyclerAdapter.addProducts(response)
+                    newestRecyclerAdapter?.addProducts(response)
                     progressDialog?.cancel()
                 },
                         { error ->
@@ -219,9 +219,7 @@ class BannersFragment : Fragment() {
 
 
     override fun onStop() {
-        if (progressDialog != null) {
-            progressDialog?.cancel()
-        }
+        progressDialog?.cancel()
         super.onStop()
     }
 }

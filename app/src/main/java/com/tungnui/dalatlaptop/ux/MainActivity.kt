@@ -12,7 +12,6 @@ import android.os.Handler
 import android.provider.BaseColumns
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import android.support.v4.content.LocalBroadcastManager
 import android.support.v4.view.MenuItemCompat
 import android.support.v4.widget.DrawerLayout
@@ -33,26 +32,20 @@ import java.util.ArrayList
 
 import com.tungnui.dalatlaptop.R
 import com.tungnui.dalatlaptop.SettingsMy
-import com.tungnui.dalatlaptop.interfaces.LoginDialogInterface
-import com.tungnui.dalatlaptop.models.Customer
 import com.tungnui.dalatlaptop.models.Order
-import com.tungnui.dalatlaptop.utils.MsgUtils
+import com.tungnui.dalatlaptop.libraryhelper.MsgUtils
 import com.tungnui.dalatlaptop.utils.cartHelper
 import com.tungnui.dalatlaptop.utils.totalItem
 import com.tungnui.dalatlaptop.ux.Order.OrderActivity
-import com.tungnui.dalatlaptop.ux.fragments.AccountEditFragment
 import com.tungnui.dalatlaptop.ux.fragments.AccountFragment
 import com.tungnui.dalatlaptop.ux.fragments.BannersFragment
 import com.tungnui.dalatlaptop.ux.fragments.CartFragment
 import com.tungnui.dalatlaptop.ux.fragments.CategoryFragment
 import com.tungnui.dalatlaptop.ux.fragments.DrawerFragment
-import com.tungnui.dalatlaptop.ux.fragments.OrderFragment
 import com.tungnui.dalatlaptop.ux.fragments.OrdersHistoryFragment
 import com.tungnui.dalatlaptop.ux.fragments.ProductFragment
-import com.tungnui.dalatlaptop.ux.fragments.SettingsFragment
 import com.tungnui.dalatlaptop.ux.login.LoginActivity
 import timber.log.Timber
-import java.util.logging.LoggingMXBean
 
 class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener {
 
@@ -239,8 +232,7 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
 
 
     fun startSettingsFragment() {
-        val fragment = SettingsFragment()
-        replaceFragment(fragment, SettingsFragment::class.java.simpleName)
+
     }
 
 
@@ -287,12 +279,7 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
     }
 
     fun onOrderSelected(order: Order?) {
-        if (order != null) {
-            val fragment = OrderFragment.newInstance(order.id!!)
-            replaceFragment(fragment, OrderFragment::class.java.simpleName)
-        } else {
-            Timber.e("Creating order detail with null data.")
-        }
+
     }
 
     override fun onDrawerOrderSelected() {
@@ -304,7 +291,7 @@ class MainActivity : AppCompatActivity(), DrawerFragment.FragmentDrawerListener 
     }
 
     override fun onDrawerSettingSelected() {
-        replaceFragment(SettingsFragment(), SettingsFragment::class.java.simpleName)
+
     }
 
     override fun onBackPressed() {

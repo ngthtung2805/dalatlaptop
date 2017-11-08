@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Cảm ơn bạn đã mua sắm tại Tiki."
+            android:text="Cảm ơn bạn đã mua sắm tại ABC Computer."
             android:textAlignment="center"
             android:textSize="17dp" />
 

@@ -19,9 +19,7 @@ import com.tungnui.dalatlaptop.utils.loadImg
 import kotlinx.android.synthetic.main.list_item_cart_product.view.*
 
 
-/**
- * Adapter handling list of cart items.
- */
+
 class CartRecyclerAdapter( private val cartRecyclerInterface: CartRecyclerInterface) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val cartItems = ArrayList<Cart>()
     override fun getItemCount(): Int {

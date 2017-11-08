@@ -14,9 +14,9 @@ import com.tungnui.dalatlaptop.SettingsMy
 import com.tungnui.dalatlaptop.api.EndPoints
 import com.tungnui.dalatlaptop.api.ServiceGenerator
 import com.tungnui.dalatlaptop.models.Order
-import com.tungnui.dalatlaptop.utils.EndlessRecyclerScrollListener
-import com.tungnui.dalatlaptop.utils.RecyclerMarginDecorator
-import com.tungnui.dalatlaptop.utils.Utils
+import com.tungnui.dalatlaptop.libraryhelper.EndlessRecyclerScrollListener
+import com.tungnui.dalatlaptop.libraryhelper.RecyclerMarginDecorator
+import com.tungnui.dalatlaptop.libraryhelper.Utils
 import com.tungnui.dalatlaptop.utils.getNextUrl
 import com.tungnui.dalatlaptop.ux.MainActivity
 import com.tungnui.dalatlaptop.ux.adapters.OrdersHistoryRecyclerAdapter
@@ -54,13 +54,6 @@ class OrdersHistoryFragment : Fragment() {
         loadOrders(null)
     }
 
-
-
-    /**
-     * Prepare content recycler. Create custom adapter and endless scroll.
-     *
-     * @param view root fragment view.
-     */
     private fun prepareOrdersHistoryRecycler() {
         ordersHistoryRecyclerAdapter = OrdersHistoryRecyclerAdapter{
             val activity = activity
@@ -122,9 +115,7 @@ class OrdersHistoryFragment : Fragment() {
 
     override fun onStop() {
         if (progressDialog != null) {
-            // Hide progress dialog if exist.
             if (progressDialog!!.isShowing && endlessRecyclerScrollListener != null) {
-                // Fragment stopped during loading data. Allow new loading on return.
                 endlessRecyclerScrollListener!!.resetLoading()
             }
             progressDialog!!.cancel()

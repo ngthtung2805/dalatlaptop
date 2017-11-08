@@ -1,4 +1,4 @@
-package com.tungnui.dalatlaptop.utils;
+package com.tungnui.dalatlaptop.libraryhelper;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -19,19 +19,13 @@ public class RecyclerDividerDecorator extends RecyclerView.ItemDecoration {
 
     private Drawable mDivider;
 
-    /**
-     * Default divider will be used
-     */
-    public RecyclerDividerDecorator(Context context) {
+     public RecyclerDividerDecorator(Context context) {
         final TypedArray styledAttributes = context.obtainStyledAttributes(ATTRS);
         mDivider = styledAttributes.getDrawable(0);
         styledAttributes.recycle();
         this.marginHorizontal = context.getResources().getDimensionPixelSize(R.dimen.base_recycler_margin);
     }
 
-    /**
-     * Custom divider will be used
-     */
     public RecyclerDividerDecorator(Context context, int resId) {
         mDivider = ContextCompat.getDrawable(context, resId);
         this.marginHorizontal = context.getResources().getDimensionPixelSize(R.dimen.base_recycler_margin);

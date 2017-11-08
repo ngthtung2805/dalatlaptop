@@ -1,6 +1,5 @@
 package com.tungnui.dalatlaptop.utils
 
-import android.content.Context
 import android.support.annotation.IdRes
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TextInputLayout
@@ -11,11 +10,11 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import com.tungnui.dalatlaptop.views.ResizableImageViewHeight
 import com.squareup.picasso.Picasso
 import com.tungnui.dalatlaptop.R
+import com.tungnui.dalatlaptop.libraryhelper.Utils
 import com.tungnui.dalatlaptop.models.Image
 import java.text.DecimalFormat
 import java.util.regex.Pattern

@@ -1,4 +1,4 @@
-package com.tungnui.dalatlaptop.utils;
+package com.tungnui.dalatlaptop.libraryhelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -59,10 +59,7 @@
                         android:layout_marginBottom="8dp"
                         android:hint="@string/Street"
                         android:inputType="textPostalAddress"
-                        android:nextFocusDown="@+id/order_create_houseNumber"
-                        android:nextFocusForward="@+id/order_create_houseNumber"
-                        android:nextFocusRight="@+id/order_create_houseNumber"
-                        android:singleLine="true"
+                                      android:singleLine="true"
                         android:textColor="@color/textPrimary" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -100,7 +97,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
-                        android:hint="@string/City"
+                        android:hint="@string/Province"
                         android:inputType="textPostalAddress"
                         android:nextFocusDown="@+id/order_create_zip"
                         android:nextFocusForward="@+id/order_create_zip"

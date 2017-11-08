@@ -11,16 +11,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.ProgressBar
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 
-import com.tungnui.dalatlaptop.CONST
-import com.tungnui.dalatlaptop.MyApplication
 import com.tungnui.dalatlaptop.R
 import com.tungnui.dalatlaptop.api.ProductService
 import com.tungnui.dalatlaptop.api.ServiceGenerator
-import com.tungnui.dalatlaptop.listeners.OnSingleClickListener
-import com.tungnui.dalatlaptop.utils.Utils
+import com.tungnui.dalatlaptop.libraryhelper.Utils
 import com.tungnui.dalatlaptop.utils.loadImg
 import com.tungnui.dalatlaptop.ux.MainActivity
 import com.tungnui.dalatlaptop.ux.adapters.HomeProductRecyclerAdapter
@@ -28,7 +24,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_banners.*
-import org.jetbrains.anko.support.v4.progressDialog
 import org.jetbrains.anko.support.v4.toast
 
 /**

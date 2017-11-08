@@ -17,7 +17,7 @@ import com.tungnui.dalatlaptop.models.Customer
 import com.tungnui.dalatlaptop.ux.MainActivity
 import com.tungnui.dalatlaptop.ux.MainActivity.Companion.LOGIN_RESULT_CODE
 import kotlinx.android.synthetic.main.activity_login.*
-import android.content.Intent
+
 
 
 

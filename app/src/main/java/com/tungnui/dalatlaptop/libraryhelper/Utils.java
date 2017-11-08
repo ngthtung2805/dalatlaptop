@@ -1,22 +1,14 @@
-package com.tungnui.dalatlaptop.utils;
+package com.tungnui.dalatlaptop.libraryhelper;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.provider.Browser;
 import android.support.design.widget.TextInputLayout;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.URLSpan;
 import android.util.DisplayMetrics;
-import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -91,26 +83,6 @@ public class Utils {
         }
     }
 
-    /**
-     * Method replace ordinary {@link URLSpan} with {@link DefensiveURLSpan}.
-     *
-     * @param spannedText text, where link spans should be replaced.
-     * @param activity    activity for displaying problems.
-     * @return text, where link spans are replaced.
-     */
-    public static SpannableString safeURLSpanLinks(Spanned spannedText, Activity activity) {
-        final SpannableString current = new SpannableString(spannedText);
-        final URLSpan[] spans = current.getSpans(0, current.length(), URLSpan.class);
-        int start, end;
-
-        for (URLSpan span : spans) {
-            start = current.getSpanStart(span);
-            end = current.getSpanEnd(span);
-            current.removeSpan(span);
-            current.setSpan(new DefensiveURLSpan(span.getURL(), activity), start, end, 0);
-        }
-        return current;
-    }
 
     public static int dpToPx(Context context, int dp) {
         return Math.round(dp * getPixelScaleFactor(context));
@@ -219,32 +191,5 @@ public class Utils {
         }
     }
 
-    /**
-     * URLSpan which handles bad url format exception.
-     */
-    private static class DefensiveURLSpan extends URLSpan {
 
-        Activity activity;
-
-        public DefensiveURLSpan(String url, Activity activity) {
-            super(url);
-            this.activity = activity;
-        }
-
-        @Override
-        public void onClick(View widget) {
-            Uri uri = Uri.parse(getURL());
-            Context context = widget.getContext();
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            intent.putExtra(Browser.EXTRA_APPLICATION_ID, context.getPackageName());
-            try {
-                context.startActivity(intent);
-            } catch (ActivityNotFoundException e) {
-                if (activity != null && !activity.isFinishing()) {
-                    MsgUtils.showToast(activity, MsgUtils.TOAST_TYPE_MESSAGE, activity.getString(R.string.Link_is_invalid), MsgUtils.ToastLength.SHORT);
-                    Timber.e(e, "Invoked invalid web link: %s", uri);
-                }
-            }
-        }
-    }
 }

@@ -1,4 +1,4 @@
-package com.tungnui.dalatlaptop.utils;
+package com.tungnui.dalatlaptop.libraryhelper;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;

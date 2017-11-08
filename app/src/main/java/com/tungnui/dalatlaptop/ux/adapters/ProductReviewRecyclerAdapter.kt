@@ -14,9 +14,7 @@ import com.tungnui.dalatlaptop.utils.inflate
 import kotlinx.android.synthetic.main.list_item_customer_review.view.*
 import java.util.ArrayList
 
-/**
- * Adapter handling list of cart items.
- */
+
 class ProductReviewRecyclerAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val productReviews = ArrayList<ProductReview>()
     override fun getItemCount(): Int {

@@ -40,7 +40,7 @@
             <item
                 android:id="@+id/nav_instruc"
                 android:icon="@drawable/ic_menu_info"
-                android:title="Về Tiki" />
+                android:title="Về ABC Computer" />
         </menu>
     </item>
 

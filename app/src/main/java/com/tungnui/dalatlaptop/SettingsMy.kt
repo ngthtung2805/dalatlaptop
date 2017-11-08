@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 import com.tungnui.dalatlaptop.models.Customer
-import com.tungnui.dalatlaptop.utils.Utils
+import com.tungnui.dalatlaptop.libraryhelper.Utils
 
 object SettingsMy {
     val PREF_ACTIVE_USER = "pref_active_user"

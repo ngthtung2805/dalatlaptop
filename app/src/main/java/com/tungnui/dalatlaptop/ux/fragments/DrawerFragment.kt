@@ -97,11 +97,7 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
         invalidateHeader()
     }
 
-    /**
-     * Prepare drawer menu content views, adapters and listeners.
-     *
-     * @param view fragment base view.
-     */
+
     private fun prepareDrawerRecycler() {
         drawerMenuRecyclerAdapter = DrawerRecyclerAdapter { category ->
             if (category.display != "subcategories") {
@@ -125,13 +121,7 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
     }
 
 
-    /**
-     * Base method for layout preparation. Also set a listener that will respond to events that occurred on the menu.
-     *
-     * @param drawerLayout   drawer layout, which will be managed.
-     * @param toolbar        toolbar bundled with a side menu.
-     * @param eventsListener corresponding listener class.
-     */
+
     fun setUp(drawerLayout: DrawerLayout, toolbar: Toolbar, eventsListener: FragmentDrawerListener) {
         mDrawerLayout = drawerLayout
         this.drawerListener = eventsListener
@@ -158,9 +148,6 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
         mDrawerLayout.post { mDrawerToggle.syncState() }
     }
 
-    /**
-     * When the drawer menu is open, close it. Otherwise open it.
-     */
     fun toggleDrawerMenu() {
         if (mDrawerLayout.isDrawerVisible(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START)
@@ -186,9 +173,7 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
         return false
     }
 
-    /*
-     * Method invalidates a drawer menu header. It is used primarily on a login state change.
-    */
+
     fun invalidateHeader() {
         val headerView = nav_view.getHeaderView(0)
         val txtUserName = headerView.findViewById<TextView>(R.id.navigation_drawer_list_header_text)
@@ -353,15 +338,7 @@ class DrawerFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
         super.onDestroy()
     }
 
-    companion object {
 
-        private val BANNERS_ID = -123
-        val NULL_DRAWER_LISTENER_WTF = "Null drawer listener. WTF."
-    }
-
-    /**
-     * Interface defining events initiated by [DrawerFragment].
-     */
     interface FragmentDrawerListener {
         fun onDrawerItemCategorySelected(category: Category)
         fun onAccountSelected()

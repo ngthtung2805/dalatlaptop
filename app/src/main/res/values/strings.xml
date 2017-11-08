@@ -1,10 +1,8 @@
 <resources>
 
-    <string name="app_name" translatable="false">ABC Computers</string>
+    <string name="app_name" translatable="false">ABC Computer</string>
     <string name="facebook_app_id" translatable="false">183521248888183</string>
     <string name="android_key" translatable="false">AIzaSyB4b2hBDqGh6yakmERv95JNMuSGbvf20jo</string>
-
-    <!-- General strings-->
     <string name="No_network_connection">Không có kết nối mạng</string>
     <string name="Internal_error">Lỗi kết nối, vui lòng thử lại sau</string>
     <string name="Loading">Đang tải …</string>
@@ -17,17 +15,12 @@
     <string name="Required_field">Bắt buộc</string>
     <string name="The_entries_must_match">The entries must match</string>
     <string name="Content_is_empty">Không có nội dung</string>
-
-    <!-- Main activity related -->
     <string name="Another_click_for_leaving_app">Kích thêm lần nữa để thoát</string>
     <string name="All_categories">Tất cả thể loại</string>
     <string name="menu_action_search">Tìm kiếm</string>
     <string name="Type_your_wish">Nhập nội dung tìm kiếm</string>
     <string name="menu_action_cart">Giỏ hàng</string>
     <string name="menu_action_wishlist">Wishlist</string>
-
-
-    <!-- Products related strings -->
     <string name="Just_arrived">Sản phẩm mới nhất</string>
     <string name="No_banners">No banners</string>
     <string name="Show_offers">Show offers</string>
@@ -42,43 +35,26 @@
     <string name="RECOMMENDED">Có thể bạn quan tâm</string>
     <string name="Product">Sản phẩm </string>
     <string name="All">All</string>
-
-    <!-- Products sort options -->
-    <string name="Recommended">Recommended</string>
-    <string name="Whats_new">What\'s new</string>
-    <string name="Highest_price">Highest price</string>
-    <string name="Lowest_price">Lowest price</string>
-
-
-    <!-- User related strings -->
     <string name="Unknown_user">Xin chào, khách!</string>
-    <string name="Profile">Hồ sơ</string>
+    <string name="Profile">Thông tin</string>
     <string name="Name_colon">Tên</string>
     <string name="Address_colon">Địa chỉ:</string>
     <string name="Email_colon">Email:</string>
     <string name="Phone_colon">SĐT:</string>
-
     <string name="Account">Tài khoản</string>
     <string name="Email">Email</string>
     <string name="Phone">SĐT</string>
     <string name="Street">Địa chỉ</string>
-    <string name="House_code">House code</string>
-    <string name="City">Thành phố</string>
-    <string name="ZIP">ZIP</string>
-
+    <string name="City">Quận/huyện</string>
     <string name="Changing_the_password">Thay đổi mật khẩu</string>
     <string name="Password">Mật khẩu</string>
     <string name="New_password">Mật khẩu mới</string>
     <string name="Password_again">Nhập lại mật khẩu</string>
     <string name="Change_password">Thay đổi mật khẩu</string>
     <string name="Save">Lưu lại</string>
-
     <string name="My_orders">Lịch sử mua hàng</string>
     <string name="Branches">Branches</string>
     <string name="Settings">Cài đặt</string>
-
-
-    <!-- Login related strings-->
     <string name="Log_in">Đăng nhập</string>
     <string name="Log_out">Đăng xuất</string>
     <string name="Dont_have_an_account">Không có tài khoản?</string>
@@ -97,9 +73,6 @@
     <string name="Receiving_facebook_profile_failed">Receiving facebook profile failed</string>
     <string name="Oops_login_expired">Oops login expired</string>
     <string name="Your_session_has_expired_Please_log_in_again">Your session has expired Please log in again.</string>
-
-
-    <!-- Cart and order related strings -->
     <string name="Shopping_cart">Giỏ hàng</string>
     <string name="Your_cart_is_empty">Giỏ hàng trống</string>
     <string name="START_SHOPPING">Bắt đầu mua sắm</string>
@@ -114,8 +87,6 @@
     <string name="Do_you_have_a_discount_code">Bạn có mã giảm giá?</string>
     <string name="Enter_the_discount_code">Nhập mã giảm giá</string>
     <string name="Internal_error_reload_cart_please">Lỗi kết nối. Vui lòng tải lại giỏ hàng.</string>
-
-    <!-- Order related strings-->
     <string name="Order">Đơn hàng</string>
     <string name="Order_colon">Đơn hàng:</string>
     <string name="Date_created">Ngày tạo</string>
@@ -144,34 +115,11 @@
     <string name="Shipping_price_colon">Shipping price:</string>
     <string name="free">free</string>
     <string name="Total_colon">Total:</string>
-
-
-    <!-- Wishlist related -->
-    <string name="Your_wishlist_is_empty">Your wishlist is empty.</string>
-    <string name="Wishlist">Wishlist</string>
-    <string name="Product_deleted_from_wishlist">Product deleted from wishlist</string>
-    <string name="Product_added_to_wishlist">Product added to wishlist</string>
-    <string name="Go_to_wishlist">Go to wishlist</string>
-
-
-    <!-- Others -->
     <string name="Select">Select</string>
-    <string name="Open_source_libraries">Open source libraries</string>
-    <string name="License_details_for_open_source_software">License details for open source software</string>
-    <string name="Privacy_policy">Privacy policy</string>
-    <string name="Basic_information_about_Privacy_Policy">Basic information about Privacy Policy</string>
-    <string name="App_needs_to_be_restarted">To change the shop an app restart is needed.</string>
     <string name="including_VAT">Đã bao gồm VAT</string>
-    <string name="Thank_you_for_your_order">Thank you for your order</string>
-    <string name="Wait_for_sms_or_email_order_confirmation">Wait for &lt;b>SMS&lt;/b> or &lt;b>email&lt;/b> order confirmation.</string>
-    <string name="This_is_a_sample_app">This is a sample app</string>
-    <string name="Sample_app_description">Thank you for your time. To find out more about this project, please visit us here: <a href="http://openshop.io/">Openshop.io</a>.</string>
-    <string name="Link_is_invalid">Link is invalid</string>
+        <string name="Wait_for_sms_or_email_order_confirmation">Wait for &lt;b>SMS&lt;/b> or &lt;b>email&lt;/b> order confirmation.</string>
     <string name="Min">Min</string>
     <string name="Max">Max</string>
-
-
-    <!-- Format strings -->
     <string name="format_space_prefix"> %1$s</string>
     <string name="format_comma_prefix">, %1$s</string>
     <string name="format_string_division">%1$s / %2$s</string>
@@ -181,8 +129,6 @@
     <string name="format_number">%1$d</string>
     <string name="format_price_range">%1$d %2$s - %3$d %4$s</string>
     <string name="format_price_discount_percents">-%1$d %%</string>
-
-    <!-- Content description strings -->
     <string name="content_description_open_navigation_drawer">Open navigation drawer</string>
     <string name="content_description_close_navigation_drawer">Close navigation drawer</string>
     <string name="content_description_submenu">Populate submenu</string>
@@ -206,9 +152,8 @@
     <string name="hot_sale_product">Khuyến mãi hot nhất</string>
     <string name="Not_password_repassword">Mật khẩu không khớp</string>
     <string name="recent_view_product">Sản phẩm vừa xem</string>
-
     <string name="title_activity_login">Đăng nhập/ Đăng kí</string>
-
        <string name="tab_text_1">Đăng nhập</string>
     <string name="tab_text_2">Đăng kí</string>
+    <string name="Province">Tỉnh/Thành phố</string>
 </resources>

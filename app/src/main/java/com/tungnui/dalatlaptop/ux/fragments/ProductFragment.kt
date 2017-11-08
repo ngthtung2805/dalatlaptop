@@ -22,23 +22,20 @@ import com.tungnui.dalatlaptop.utils.*
 import com.tungnui.dalatlaptop.ux.MainActivity
 import com.tungnui.dalatlaptop.ux.adapters.ProductImagesRecyclerAdapter
 import com.tungnui.dalatlaptop.ux.adapters.RelatedProductsRecyclerAdapter
-import com.tungnui.dalatlaptop.ux.dialogs.ProductImagesDialogFragment2
 import com.tungnui.dalatlaptop.api.ProductService
 import com.tungnui.dalatlaptop.api.ServiceGenerator
+import com.tungnui.dalatlaptop.libraryhelper.Utils
 import com.tungnui.dalatlaptop.models.Image
 import com.tungnui.dalatlaptop.models.Product
 import com.tungnui.dalatlaptop.utils.getFeaturedImage
 import com.tungnui.dalatlaptop.ux.adapters.ProductReviewRecyclerAdapter
-import com.tungnui.dalatlaptop.ux.dialogs.ProductImagesDialogFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_product.*
 import org.jetbrains.anko.support.v4.toast
 
-/**
- * Fragment shows a detail of the product.
- */
+
 class ProductFragment : Fragment() {
     private var mCompositeDisposable: CompositeDisposable
     val productService: ProductService
@@ -226,7 +223,7 @@ class ProductFragment : Fragment() {
             product.averageRating?.let{product_rating.rating = it.toFloat()}
             if (product.description != null) {
                 product_info.movementMethod = LinkMovementMethod.getInstance()
-                product_info.text = Utils.safeURLSpanLinks(Html.fromHtml(product.description), activity)
+                product_info.text = Html.fromHtml(product.description)
             }
         }
     }

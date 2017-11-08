@@ -13,7 +13,7 @@ import android.widget.EditText
 
 import com.tungnui.dalatlaptop.R
 import com.tungnui.dalatlaptop.interfaces.RequestListener
-import com.tungnui.dalatlaptop.utils.MsgUtils
+import com.tungnui.dalatlaptop.libraryhelper.MsgUtils
 import kotlinx.android.synthetic.main.dialog_discount_fragment.*
 import timber.log.Timber
 

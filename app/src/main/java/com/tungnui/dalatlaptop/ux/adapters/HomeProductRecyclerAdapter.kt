@@ -17,9 +17,7 @@ import com.tungnui.dalatlaptop.utils.loadImg
 import kotlinx.android.synthetic.main.list_item_home.view.*
 import java.text.DecimalFormat
 
-/**
- * Adapter handling list of product items.
- */
+
 class HomeProductRecyclerAdapter(val listener: (Product) -> Unit) : RecyclerView.Adapter<HomeProductRecyclerAdapter.ViewHolder>() {
     private val products = ArrayList<Product>()
     override fun getItemCount(): Int {
@@ -45,7 +43,7 @@ class HomeProductRecyclerAdapter(val listener: (Product) -> Unit) : RecyclerView
 
 
 
-    // Provide a reference to the views for each data item
+
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         fun blind(item:Product,listener: (Product) -> Unit)=with(itemView){
             home_product_item_name.text = item.name

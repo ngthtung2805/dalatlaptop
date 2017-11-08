@@ -1,12 +1,10 @@
 package com.tungnui.dalatlaptop.ux.fragments
 
 import android.app.ProgressDialog
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +21,9 @@ import com.tungnui.dalatlaptop.ux.adapters.CartRecyclerAdapter
 import com.tungnui.dalatlaptop.ux.dialogs.DiscountDialogFragment
 import kotlinx.android.synthetic.main.fragment_cart.*
 import com.travijuu.numberpicker.library.Enums.ActionEnum
+import com.tungnui.dalatlaptop.libraryhelper.MsgUtils
+import com.tungnui.dalatlaptop.libraryhelper.RecyclerDividerDecorator
+import com.tungnui.dalatlaptop.libraryhelper.Utils
 import com.tungnui.dalatlaptop.models.Cart
 import java.text.DecimalFormat
 

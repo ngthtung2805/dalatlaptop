@@ -13,9 +13,6 @@ import com.tungnui.dalatlaptop.R
 import com.tungnui.dalatlaptop.views.TouchImageView
 import com.tungnui.dalatlaptop.utils.loadImg
 
-/**
- * Simple images pager adapter. Uses [com.tungnui.dalatlaptop.views.TouchImageView] for zooming single images.
- */
 class ProductImagesPagerAdapter(private val context: Context, private val images: List<Image>) : PagerAdapter() {
     override fun getCount(): Int {
         return this.images.size

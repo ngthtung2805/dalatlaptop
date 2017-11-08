@@ -17,9 +17,7 @@ import com.tungnui.dalatlaptop.utils.inflate
 import com.tungnui.dalatlaptop.utils.loadImg
 import kotlinx.android.synthetic.main.list_item_recommended_products.view.*
 
-/**
- * Adapter handling list of related products.
- */
+
 class RelatedProductsRecyclerAdapter(val listener: (Product)->Unit) : RecyclerView.Adapter<RelatedProductsRecyclerAdapter.ViewHolder>() {
     private val relatedProducts: MutableList<Product>
     init {
@@ -42,12 +40,7 @@ class RelatedProductsRecyclerAdapter(val listener: (Product)->Unit) : RecyclerVi
         return relatedProducts.size
     }
 
-    /**
-     * Add the product to the list.
-     *
-     * @param position list position where item should be added.
-     * @param product  item to add.
-     */
+
     fun add(position: Int, product: Product) {
         relatedProducts.add(position, product)
         notifyItemInserted(position)
@@ -56,17 +49,13 @@ class RelatedProductsRecyclerAdapter(val listener: (Product)->Unit) : RecyclerVi
         relatedProducts.addAll(items)
         notifyDataSetChanged()
     }
-    /**
-     * Add the product at the end of the list.
-     *
-     * @param product item to add.
-     */
+
     fun addLast(product: Product) {
         relatedProducts.add(relatedProducts.size, product)
         notifyItemInserted(relatedProducts.size)
     }
 
-    // Provide a reference to the views for each data item
+
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         internal var position: Int = 0
             fun blind(item:Product,listener: (Product) -> Unit)=with(itemView){

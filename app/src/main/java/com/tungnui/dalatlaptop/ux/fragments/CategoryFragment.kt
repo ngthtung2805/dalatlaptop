@@ -22,9 +22,9 @@ import java.net.URLEncoder
 import com.tungnui.dalatlaptop.R
 import com.tungnui.dalatlaptop.api.EndPoints
 import com.tungnui.dalatlaptop.listeners.OnSingleClickListener
-import com.tungnui.dalatlaptop.utils.EndlessRecyclerScrollListener
-import com.tungnui.dalatlaptop.utils.MsgUtils
-import com.tungnui.dalatlaptop.utils.RecyclerMarginDecorator
+import com.tungnui.dalatlaptop.libraryhelper.EndlessRecyclerScrollListener
+import com.tungnui.dalatlaptop.libraryhelper.MsgUtils
+import com.tungnui.dalatlaptop.libraryhelper.RecyclerMarginDecorator
 import com.tungnui.dalatlaptop.ux.MainActivity
 import com.tungnui.dalatlaptop.ux.adapters.ProductsRecyclerAdapter
 import com.tungnui.dalatlaptop.api.ProductService

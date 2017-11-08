@@ -12,7 +12,7 @@ import com.facebook.appevents.AppEventsLogger
 
 import com.tungnui.dalatlaptop.MyApplication
 import com.tungnui.dalatlaptop.R
-import com.tungnui.dalatlaptop.utils.Utils
+import com.tungnui.dalatlaptop.libraryhelper.Utils
 import kotlinx.android.synthetic.main.activity_splash.*
 import timber.log.Timber
 class SplashActivity : AppCompatActivity() {
@@ -30,9 +30,7 @@ class SplashActivity : AppCompatActivity() {
         init()
     }
 
-    /**
-     * Prepares activity view and handles incoming intent(Notification, utm data).
-     */
+
 
     private fun init() {
         // Check if data connected.
@@ -48,9 +46,7 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * SetContentView to activity and prepare layout views.
-     */
+
     private fun initSplashLayout() {
         if (!layoutCreated) {
             setContentView(R.layout.activity_splash)
@@ -73,15 +69,11 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-
-        // Logs 'install' and 'app activate' App Events.
         AppEventsLogger.activateApp(this)
     }
 
     override fun onPause() {
         super.onPause()
-
-        // Logs 'app deactivate' App Event.
         AppEventsLogger.deactivateApp(this)
     }
 

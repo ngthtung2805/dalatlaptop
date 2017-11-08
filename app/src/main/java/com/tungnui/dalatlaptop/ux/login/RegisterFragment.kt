@@ -9,24 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import com.facebook.CallbackManager
 import com.tungnui.dalatlaptop.R
-import com.tungnui.dalatlaptop.SettingsMy
 import com.tungnui.dalatlaptop.api.CustomerServices
 import com.tungnui.dalatlaptop.api.JSONAuthService
 import com.tungnui.dalatlaptop.api.ServiceGenerator
 import com.tungnui.dalatlaptop.interfaces.LoginDialogInterface
 import com.tungnui.dalatlaptop.models.Customer
-import com.tungnui.dalatlaptop.utils.Utils
+import com.tungnui.dalatlaptop.libraryhelper.Utils
 import com.tungnui.dalatlaptop.utils.checkTextInputLayoutValueRequirement
 import com.tungnui.dalatlaptop.utils.getTextFromInputLayout
-import com.tungnui.dalatlaptop.ux.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_register.*
-import java.util.*
 
 /**
  * Created by thanh on 06/11/2017.

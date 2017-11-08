@@ -33,15 +33,6 @@ class OrderCreateSuccessDialogFragment : DialogFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-      /*  toolbar.setTitle("Thông báo đơn hàng")
-        (getActivity() as AppCompatActivity).setSupportActionBar(toolbar)
-        val actionBar = (getActivity() as AppCompatActivity).supportActionBar
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setHomeButtonEnabled(true)
-            actionBar.setHomeAsUpIndicator(android.R.drawable.ic_menu_close_clear_cancel)
-        }
-        setHasOptionsMenu(true)*/
         order_success_continous_shopping.setOnClickListener {
             if (activity is OrderActivity)
                 (activity as OrderActivity).onOrderSuccessContinousShopping()

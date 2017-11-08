@@ -9,23 +9,14 @@ import android.view.ViewGroup
 
 import com.tungnui.dalatlaptop.R
 import com.tungnui.dalatlaptop.SettingsMy
-import com.tungnui.dalatlaptop.interfaces.LoginDialogInterface
 import com.tungnui.dalatlaptop.listeners.OnSingleClickListener
 import com.tungnui.dalatlaptop.models.Customer
-import com.tungnui.dalatlaptop.utils.Utils
+import com.tungnui.dalatlaptop.libraryhelper.Utils
 import com.tungnui.dalatlaptop.ux.MainActivity
-import com.tungnui.dalatlaptop.api.CustomerServices
-import com.tungnui.dalatlaptop.api.ServiceGenerator
 import com.tungnui.dalatlaptop.ux.login.LoginActivity
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_account.*
-import timber.log.Timber
 
-/**
- * Fragment provides the account screen with options such as logging, editing and more.
- */
+
 class AccountFragment : Fragment() {
     private lateinit var pDialog: ProgressDialog
 

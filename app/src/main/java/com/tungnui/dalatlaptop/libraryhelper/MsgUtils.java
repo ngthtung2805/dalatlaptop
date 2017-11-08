@@ -1,4 +1,4 @@
-package com.tungnui.dalatlaptop.utils;
+package com.tungnui.dalatlaptop.libraryhelper;
 
 import android.app.Activity;
 import android.util.Log;

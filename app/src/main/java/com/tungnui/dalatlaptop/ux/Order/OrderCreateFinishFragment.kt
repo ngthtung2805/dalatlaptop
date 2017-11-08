@@ -10,9 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.tungnui.dalatlaptop.R
 import com.tungnui.dalatlaptop.SettingsMy
-import com.tungnui.dalatlaptop.api.CustomerServices
 import com.tungnui.dalatlaptop.api.OrderService
 import com.tungnui.dalatlaptop.api.ServiceGenerator
+import com.tungnui.dalatlaptop.libraryhelper.RecyclerDividerDecorator
+import com.tungnui.dalatlaptop.libraryhelper.Utils
 import com.tungnui.dalatlaptop.models.*
 import com.tungnui.dalatlaptop.utils.*
 import com.tungnui.dalatlaptop.ux.adapters.OrderCreateFinishAdapter
@@ -22,9 +23,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_order_create_finish.*
 import org.jetbrains.anko.support.v4.toast
 
-/**
- * Fragment allowing the user to create order.
- */
+
 class OrderCreateFinishFragment : Fragment() {
     private var mCompositeDisposable: CompositeDisposable
     val orderService: OrderService

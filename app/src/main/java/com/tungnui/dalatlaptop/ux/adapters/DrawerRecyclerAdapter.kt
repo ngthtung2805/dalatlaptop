@@ -11,9 +11,7 @@ import com.tungnui.dalatlaptop.R
 import com.tungnui.dalatlaptop.utils.inflate
 import kotlinx.android.synthetic.main.list_item_drawer_category.view.*
 
-/**
- * Adapter handling list of drawer sub-items.
- */
+
 class DrawerRecyclerAdapter(val listener: (Category) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val listCategory = ArrayList<Category>()
 
@@ -25,7 +23,7 @@ class DrawerRecyclerAdapter(val listener: (Category) -> Unit) : RecyclerView.Ada
         (holder as ViewHolderItemCategory).blind(listCategory[position],listener)
     }
 
-    // This method returns the number of items present in the list
+
     override fun getItemCount(): Int {
         return listCategory.size
     }
@@ -37,7 +35,6 @@ class DrawerRecyclerAdapter(val listener: (Category) -> Unit) : RecyclerView.Ada
     }
 
 
-    // Provide a reference to the views for each data item
     class ViewHolderItemCategory(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun blind(item:Category,listener: (Category) -> Unit)=with(itemView){
             drawer_list_item_text.text = item.name

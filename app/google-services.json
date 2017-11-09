@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1021234967604-7fh6tdlu9b1l9qns0b0sm2ligm3dr05k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tungnui.dalatlaptop",
+            "certificate_hash": "8eeb128aac48c0b23940ac11b5e243c32611f47e"
+          }
+        },
+        {
           "client_id": "1021234967604-bpkd5dk2itb10fv3ojbv5rhpckeimdcj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

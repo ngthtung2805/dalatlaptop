@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+<<<<<<< HEAD
+=======
+apply plugin: 'io.fabric'
+>>>>>>> 97422abfc62d075589ca35934bd1ba3c6f220d01
 android {
     lintOptions{
         checkReleaseBuilds false

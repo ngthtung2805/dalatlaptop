@@ -2,16 +2,16 @@
     android:layout_width="@dimen/navigation_drawer_size"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/windowBackground">
+    android:background="@color/white">
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header"
+        app:headerLayout="@layout/nav_header_main"
         app:itemTextColor="#000"
-        app:menu="@menu/drawer_actions" />
+        app:menu="@menu/drawer_menu" />
     <LinearLayout
         android:id="@+id/drawer_menu_layout"
         android:layout_width="match_parent"
@@ -50,7 +50,7 @@
 
     <Button
         android:id="@+id/drawer_menu_retry_btn"
-        style="@style/buttonPrimaryStyle"
+        style="@style/MessengerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -96,7 +96,7 @@
 
     <Button
         android:id="@+id/drawer_submenu_retry_btn"
-        style="@style/buttonPrimaryStyle"
+        style="@style/MessengerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

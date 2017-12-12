@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * Created by thanh on 22/09/2017.
  */
 object ServiceGenerator {
-    val API_BASE_URL ="https://dalatlaptop.tungnui.com"
+    val API_BASE_URL ="https://abccomputer.tungnui.com"
     val CONSUMER_KEY ="ck_9c06a645be257c36f5b8545064559caf7d7eab05"
     val CONSUMER_SECRET = "cs_eba612121c821ba1fb8c3ba50692a27c204a0226"
     private val httpClient = OkHttpClient.Builder()

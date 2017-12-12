@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="10dp">
+
+    <ImageView
+        android:id="@+id/ivReviewIcon"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="3dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_review" />
+
+    <LinearLayout
+        android:id="@+id/lytHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/ivReviewIcon"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="1.0">
+
+        <com.tungnui.abccomputer.view.RobotoTextView
+            android:id="@+id/tvCustomerName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".60"
+            android:text="Xiaomi power bank"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".3">
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:numStars="5"
+                android:progressTint="#FF9800"
+                android:rating="3"
+                android:stepSize="0.1" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvRatingValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:gravity="right"
+            android:text="0"
+            android:textColor="@color/rating_text"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lytHeader"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/ivReviewIcon"
+        android:text="Customer review description"
+        android:textSize="12sp" />
+
+</RelativeLayout>

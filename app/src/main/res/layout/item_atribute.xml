@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/selectedBoarderView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/tvAttributeName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".25"
+            android:gravity="center_vertical"
+            android:text="M"
+            android:textSize="@dimen/txt_size_14sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvAttributeValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".75"
+            android:nestedScrollingEnabled="false" />
+
+    </LinearLayout>
+
+</RelativeLayout>

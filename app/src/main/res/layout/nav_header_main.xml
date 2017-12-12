@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nav_header_height"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/transparentBlack">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/cvProfilePicture"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@drawable/ic_my_account"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="3dp" />
+
+            <TextView
+                android:id="@+id/tvNavProfileName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/Unknown_user"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/btnLoginDrawer"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginRight="@dimen/pad_margin_5dp"
+            android:layout_marginBottom="@dimen/pad_margin_5dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/facebook_rounded"
+            android:text="@string/login"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
+        <Button
+            android:id="@+id/btnLogoutDrawer"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginRight="@dimen/pad_margin_5dp"
+            android:layout_marginBottom="@dimen/pad_margin_5dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/facebook_rounded"
+            android:text="ĐĂNG XUẤT"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:visibility="gone"/>
+    </RelativeLayout>
+</RelativeLayout>
+

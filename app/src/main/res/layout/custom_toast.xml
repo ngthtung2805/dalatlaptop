@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="@dimen/height_width_30dp"
+            android:layout_height="@dimen/height_width_30dp"
+            android:src="@drawable/ic_app_logo" />
+        <TextView
+            android:id="@+id/tvToastMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/toast_txt_padding"
+            android:text="custom toast text"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_size_16sp" />
+                        
+    </LinearLayout>
+</RelativeLayout>

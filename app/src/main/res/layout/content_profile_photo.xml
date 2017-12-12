@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lytProfilePhoto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_weight="2.0">
+
+    <ImageView
+        android:id="@+id/ivProfilePhoto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_my_account" />
+
+    <ImageView
+        android:id="@+id/pickImage"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/ic_plus_pink" />
+
+</RelativeLayout>

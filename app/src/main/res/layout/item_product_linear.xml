@@ -1,0 +1,113 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/page_bg_dim"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:id="@+id/ivProductImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:scaleType="centerCrop"
+                android:src="@color/imgPlaceholder" />
+
+            <LinearLayout
+                android:id="@+id/lytProductName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/ivProductImage"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/pad_margin_5dp"
+                android:paddingTop="@dimen/pad_margin_10dp">
+
+                <com.tungnui.abccomputer.view.MontserratTextView
+                    android:id="@+id/tvProductName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Xiaomi power bank "
+                    android:textColor="@color/product_name_color"
+                    android:textSize="14sp" />
+
+               </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bottomPanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lytProductName"
+                android:layout_toRightOf="@+id/ivProductImage"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="10dp"
+                android:weightSum="1.0">
+
+                <LinearLayout
+                    android:layout_width="@dimen/height_width_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".4"
+                    android:paddingTop="2dp">
+
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:progressTint="#FF9800"
+                        android:rating="4.2"
+                        android:stepSize="0.1" />
+                    <com.tungnui.abccomputer.view.RobotoTextView
+                        android:id="@+id/tvRattingCount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight=".30"
+                        android:gravity="end"
+                        android:paddingRight="3dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/rating_text"
+                        android:text="4.2" />
+                </LinearLayout>
+                <com.tungnui.abccomputer.view.RobotoTextView
+                    android:id="@+id/tvProductPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right"
+                    android:text="80"
+                    android:textColor="@color/product_name_color"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@color/toolbar_boarder" />
+
+    </LinearLayout>
+
+</LinearLayout>

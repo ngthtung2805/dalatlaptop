@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.tungnui.abccomputer.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/shipping_address"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_size_16sp"
+            android:textStyle="bold" />
+
+        <!--First Name-->
+        <com.tungnui.abccomputer.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pad_margin_15dp"
+            android:text="@string/first_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_size_14sp" />
+
+        <EditText
+            android:id="@+id/edtFirstNameShip"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/pad_margin_5dp"
+            android:background="@drawable/edt_back_border"
+            android:paddingLeft="@dimen/pad_margin_10dp"
+            android:paddingRight="@dimen/pad_margin_10dp"/>
+
+        <!--Last Name-->
+        <com.tungnui.abccomputer.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pad_margin_10dp"
+            android:text="@string/last_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_size_14sp" />
+
+        <EditText
+            android:id="@+id/edtLastNameShip"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/pad_margin_5dp"
+            android:background="@drawable/edt_back_border"
+            android:paddingLeft="@dimen/pad_margin_10dp"
+            android:paddingRight="@dimen/pad_margin_10dp"/>
+
+        <!--Address-->
+        <com.tungnui.abccomputer.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pad_margin_10dp"
+            android:text="@string/address"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_size_14sp" />
+
+        <EditText
+            android:id="@+id/edtAddressShip"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="@dimen/pad_margin_5dp"
+            android:background="@drawable/edt_back_border"
+            android:paddingLeft="@dimen/pad_margin_10dp"
+            android:paddingRight="@dimen/pad_margin_10dp"/>
+
+        <!--Country-->
+        <com.tungnui.abccomputer.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pad_margin_10dp"
+            android:text="@string/country"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_size_14sp" />
+
+        <LinearLayout
+            android:id="@+id/spinnerCountryShip"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/pad_margin_5dp"
+            android:background="@drawable/edt_back_border"
+            android:clickable="true"
+            android:gravity="center"
+            android:weightSum="1">
+
+            <com.tungnui.abccomputer.view.RobotoTextView
+                android:id="@+id/tvCountryShip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".1"
+                android:background="@android:color/transparent"
+                android:gravity="left"
+                android:paddingLeft="@dimen/pad_margin_10dp"
+                android:paddingRight="@dimen/pad_margin_10dp"
+                android:text="@string/country"
+                android:textSize="@dimen/txt_size_14sp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginLeft="7dp"
+                android:layout_weight=".9"
+                android:paddingRight="@dimen/pad_margin_10dp"
+                android:src="@drawable/ic_spin" />
+
+        </LinearLayout>
+
+        <!--State-->
+        <com.tungnui.abccomputer.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pad_margin_10dp"
+            android:text="@string/state"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_size_14sp" />
+
+        <LinearLayout
+            android:id="@+id/spinnerStateShip"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/pad_margin_5dp"
+            android:background="@drawable/edt_back_border"
+            android:clickable="true"
+            android:gravity="center"
+            android:weightSum="1">
+
+            <com.tungnui.abccomputer.view.RobotoTextView
+                android:id="@+id/tvStateNameShip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".1"
+                android:background="@android:color/transparent"
+                android:gravity="left"
+                android:paddingLeft="@dimen/pad_margin_10dp"
+                android:paddingRight="@dimen/pad_margin_10dp"
+                android:text="@string/state"
+                android:textSize="@dimen/txt_size_14sp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginLeft="7dp"
+                android:layout_weight=".9"
+                android:paddingRight="@dimen/pad_margin_10dp"
+                android:src="@drawable/ic_spin" />
+
+        </LinearLayout>
+
+        <!--City-->
+        <com.tungnui.abccomputer.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pad_margin_10dp"
+            android:text="@string/city"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_size_14sp" />
+
+        <EditText
+            android:id="@+id/edtCityShip"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/pad_margin_5dp"
+            android:background="@drawable/edt_back_border"
+            android:paddingLeft="@dimen/pad_margin_10dp"
+            android:paddingRight="@dimen/pad_margin_10dp"/>
+
+        <!--Zip/Postal-->
+        <com.tungnui.abccomputer.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pad_margin_10dp"
+            android:text="@string/zip_postal"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_size_14sp" />
+
+        <EditText
+            android:id="@+id/edtPostCodeShip"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/pad_margin_5dp"
+            android:background="@drawable/edt_back_border"
+            android:inputType="number"
+            android:paddingLeft="@dimen/pad_margin_10dp"
+            android:paddingRight="@dimen/pad_margin_10dp"/>
+
+
+        <!--Telephone-->
+        <com.tungnui.abccomputer.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/pad_margin_10dp"
+            android:text="@string/telephone"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_size_14sp" />
+
+        <EditText
+            android:id="@+id/edtPhoneNumberShip"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/pad_margin_5dp"
+            android:background="@drawable/edt_back_border"
+            android:inputType="number"
+            android:paddingLeft="@dimen/pad_margin_10dp"
+            android:paddingRight="@dimen/pad_margin_10dp"/>
+    </LinearLayout>
+</RelativeLayout>

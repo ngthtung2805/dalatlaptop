@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_home_search_bar"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="@dimen/pad_margin_15dp"
+        android:layout_marginRight="@dimen/pad_margin_15dp"
+        android:layout_marginTop="@dimen/pad_margin_10dp"
+        android:background="@drawable/shape_search"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingRight="@dimen/pad_margin_5dp"
+        android:weightSum="1.0">
+
+        <EditText
+            android:id="@+id/edtSearchProduct"
+            android:layout_width="@dimen/height_width_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".90"
+            android:background="@drawable/bg_transparent"
+            android:hint="@string/search_anything"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/hint_color"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/ivSearchIcon"
+            android:layout_width="@dimen/height_width_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".10"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/pad_margin_5dp"
+            android:src="@drawable/ic_search_home" />
+
+    </LinearLayout>
+
+</RelativeLayout>

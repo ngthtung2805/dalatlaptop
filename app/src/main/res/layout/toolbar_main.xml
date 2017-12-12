@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        app:elevation="0dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:weightSum="1"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            android:elevation="0dp"
+            app:elevation="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_toLeftOf="@+id/doneButtonContainer">
+
+                    <com.tungnui.abccomputer.view.PhenomenaTextView
+                        android:id="@+id/toolbarTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:text="@string/app_name"
+                        android:textColor="@color/title_color"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/doneButtonContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_alignParentRight="true">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imgToolbarCart"
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            android:padding="12dp"
+                            android:gravity="center_vertical"
+                            android:src="@drawable/ic_cart" />
+
+                        <TextView
+                            android:id="@+id/tvCartCounter"
+                            android:layout_width="@dimen/height_width_20dp"
+                            android:layout_height="@dimen/height_width_20dp"
+                            android:layout_alignRight="@id/imgToolbarCart"
+                            android:background="@drawable/badge_circle"
+                            android:gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:text="10"
+                            android:textColor="@color/white"
+                            android:textSize="6sp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/notificationLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp">
+
+                        <ImageView
+                            android:id="@+id/imgNotification"
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            android:padding="12dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_notification" />
+
+                        <TextView
+                            android:id="@+id/tvNotificationCounter"
+                            android:layout_width="@dimen/height_width_20dp"
+                            android:layout_height="@dimen/height_width_20dp"
+                            android:layout_alignRight="@id/imgNotification"
+                            android:background="@drawable/badge_circle"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:text="10"
+                            android:textColor="@color/white"
+                            android:textSize="6sp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@color/toolbar_boarder" />
+
+    </android.support.design.widget.AppBarLayout>
+
+</android.support.design.widget.CoordinatorLayout>

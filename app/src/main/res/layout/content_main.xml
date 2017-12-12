@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parentPanel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:fitsSystemWindows="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--search view-->
+            <include
+                android:id="@+id/searchView"
+                layout="@layout/content_search_view" />
+
+            <!--set view pager-->
+            <include layout="@layout/content_view_pager" />
+
+            <!--set common list vertically-->
+            <include
+                android:id="@+id/lytCategoryList"
+                layout="@layout/content_main_list" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.7dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/toolbar_boarder" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/page_bg"
+                android:orientation="vertical">
+
+                <include
+                    android:id="@+id/lytFeaturedList"
+                    layout="@layout/content_main_list" />
+
+                <include
+                    android:id="@+id/lytRecentList"
+                    layout="@layout/content_main_list" />
+
+                <include
+                    android:id="@+id/lytPopularList"
+                    layout="@layout/content_main_list" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <include layout="@layout/view_common_loader" />
+
+</RelativeLayout>

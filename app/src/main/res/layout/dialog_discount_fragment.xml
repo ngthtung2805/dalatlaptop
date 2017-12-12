@@ -22,7 +22,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/Enter_the_discount_code"
+                android:text="Mã giảm giá"
                 android:textSize="18sp"/>
 
             <ImageView
@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/Cancel"
+                android:contentDescription="Hủy"
                 android:padding="5dp"
                 android:src="@drawable/close_black"/>
         </LinearLayout>
@@ -49,7 +49,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/base_margin_vertical"
                 android:layout_marginTop="@dimen/base_margin_vertical"
-                android:hint="@string/Discount_code"
+                android:hint="Nhập mã giảm giá của bạn tại đây"
                 android:inputType="textNoSuggestions"
                 android:textColor="@color/textPrimary"
                 android:textSize="16sp"/>
@@ -58,10 +58,9 @@
 
         <Button
             android:id="@+id/discount_code_confirm"
-            style="@style/buttonPrimaryStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Ok"/>
+            android:text="OK"/>
     </LinearLayout>
 
     <LinearLayout

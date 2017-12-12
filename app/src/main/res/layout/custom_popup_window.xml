@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_custom_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent50black">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@color/white"
+        android:layout_marginLeft="@dimen/window_padding"
+        android:layout_marginRight="@dimen/window_padding">
+    <ImageButton
+        android:id="@+id/btnSourceClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_close"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@null" />
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnSourceClose"
+        android:gravity="left"
+        android:text="Title"
+        android:textSize="@dimen/txt_size_22sp"
+        android:textStyle="bold"
+        android:padding="@dimen/window_msg_padding"/>
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:text="Popup window message"
+        android:padding="@dimen/window_msg_padding"/>
+    </RelativeLayout>
+</RelativeLayout>

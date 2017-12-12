@@ -17,13 +17,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.3">
 
-        <com.tungnui.dalatlaptop.views.ResizableImageView
+        <ImageView
             android:id="@+id/order_finish_item_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_gravity="center|bottom"
             android:adjustViewBounds="true"
-            android:contentDescription="@string/Product" />
+
+            />
     </RelativeLayout>
 
     <LinearLayout
@@ -62,7 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:textColor="@color/product_price"
+                    android:textColor="@color/btnMain"
                     android:textSize="15sp"
                     tools:text="1500 USD" />
 

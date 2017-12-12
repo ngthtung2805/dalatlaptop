@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/ic_menu_home"
+        android:title="Trang chủ" />
+    <item
+        android:id="@+id/action_admin"
+        android:icon="@drawable/ic_menu_home"
+        android:title="Admin"/>
+    <item
+        android:id="@+id/action_category"
+        android:icon="@drawable/ic_menu_category"
+        android:title="Danh mục" />
+    <item
+        android:id="@+id/action_cart"
+        android:icon="@drawable/ic_menu_mycart"
+        android:title="Giỏ hàng của tôi" />
+
+    <item
+        android:id="@+id/action_wish"
+        android:icon="@drawable/ic_menu_wishlist"
+        android:title="@string/menu_wish" />
+
+    <item
+        android:id="@+id/action_orders"
+        android:icon="@drawable/ic_order_list"
+        android:title="@string/menu_order" />
+
+
+    <item android:title="@string/support">
+        <menu>
+            <item
+                android:id="@+id/action_call"
+                android:icon="@drawable/ic_call"
+                android:title="@string/call" />
+
+            <item
+                android:id="@+id/action_message"
+                android:icon="@drawable/ic_message"
+                android:title="@string/message" />
+
+            <item
+                android:id="@+id/action_messenger"
+                android:icon="@drawable/ic_messenger"
+                android:title="@string/messenger" />
+
+            <item
+                android:id="@+id/action_email"
+                android:icon="@drawable/ic_menu_email"
+                android:title="@string/email_support" />
+
+        </menu>
+    </item>
+
+    <item android:title="@string/others">
+        <menu>
+            <item
+                android:id="@+id/action_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/share" />
+
+            <item
+                android:id="@+id/action_rate_app"
+                android:icon="@drawable/ic_menu_rating"
+                android:title="@string/rate" />
+
+            <item
+                android:id="@+id/action_settings"
+                android:icon="@drawable/ic_settings"
+                android:title="@string/menu_setting" />
+
+
+        </menu>
+    </item>
+
+</menu>

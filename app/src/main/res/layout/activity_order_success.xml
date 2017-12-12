@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbarConfirm"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbarConfirm"
+        android:layout_marginTop="@dimen/pad_margin_15dp"
+        android:orientation="vertical"
+        android:padding="@dimen/pad_margin_10dp">
+
+        <com.tungnui.abccomputer.view.MontserratTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/order_successful_message"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_size_20sp" />
+
+        <ImageView
+            android:layout_width="@dimen/height_width_80dp"
+            android:layout_height="@dimen/height_width_80dp"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/pad_margin_30dp"
+            android:src="@drawable/ic_order_success" />
+
+        <com.tungnui.abccomputer.view.PhenomenaTextView
+            android:id="@+id/tvOrderId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/pad_margin_10dp"
+            android:textColor="@color/title_color_deep"
+            android:textSize="24sp" />
+
+        <com.tungnui.abccomputer.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/order_contact_message"
+            android:textColor="@color/green"
+            android:textSize="@dimen/txt_size_20sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnClose"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/pad_margin_20dp"
+        android:background="@drawable/btn_red"
+        android:text="@string/close"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

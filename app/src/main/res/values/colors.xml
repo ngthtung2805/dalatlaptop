@@ -1,40 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimaryLight">#b4b4b4</color>
-    <!-- Toolbar -->
-    <color name="colorPrimary">#039BE5</color>
-    <!-- Status bar -->
-    <color name="colorPrimaryDark">#0288D1</color>
-    <!-- Navigation bar-->
-    <color name="navigationBarColor">#29b6f6</color>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#FF3F80</color>
+    <color name="colorPrimary21">#cccccc</color>
 
-    <color name="windowBackground">#FFFFFF</color>
-    <color name="textIconColorPrimary">#FFFFFF</color>
-    <color name="textBlack">#000000</color>
-    <color name="textPrimary">#212121</color>
-    <color name="textSecondary">#727272</color>
+    <!--Common colors-->
+    <color name="white">#FFFFFF</color>
+    <color name="blue">#34439B</color>
+    <color name="black">#000000</color>
+    <color name="red">#FF0000</color>
+    <color name="redHover">#f74747</color>
+    <color name="green">#008000</color>
+    <color name="transparent50black">#CC000000</color>
+    <color name="transparent10black">#1A000000</color>
+    <color name="transparent50White">#88AAAAAA</color>
+    <color name="fullTransparent">#00000000</color>
+    <color name="btn_back_light">#959699</color>
+    <color name="btn_back_dark">#6F7073</color>
+    <color name="grey_light">#D3D3D3</color>
+    <color name="list_background_color">#F5F2F4</color>
 
-    <color name="colorAccentLight">#F8BBD0</color>
-    <color name="colorAccent">#ee1f65</color>
-    <color name="colorAccentDark">#c2185b</color>
+    <!--Common colors with specific name-->
+    <color name="badge_color">#43C34D</color>
+    <color name="cart_color">#7182B7</color>
+    <color name="search_list_item_back">#f7f5f5</color>
+    <color name="product_name_color">#556eaf</color>
+    <color name="order_number_color">#00be59</color>
+    <color name="ratting_number_color">#7f7f7f</color>
+    <color name="colorSelectedItem">#77000000</color>
+    <color name="wish_list_bg_color">#f7f5f5</color>
 
-    <color name="facebook_bg">#3b5998</color>
-    <color name="facebook_bg_pressed">#2a406e</color>
+    <!--Home page-->
+    <color name="homeBackground">#EDEDED</color>
 
+    <color name="transparentBlack">#77000000</color>
+
+    <color name="gray">#B0BEC5</color>
+
+    <!--<color name="imgPlaceholder">#dfdfdf</color>-->
+    <color name="imgPlaceholder">#ffffff</color>
+
+    <!--<color name="page_bg">#EBEBEC</color>-->
+    <color name="page_bg">#F7F5F6</color>
+    <color name="page_bg_dim">#FAFAFA</color>
+    <color name="url_text">#4285F4</color>
+    <color name="button_color">#FF4747</color>
+    <color name="title_color">#5C6CA8</color>
+    <color name="title_color_deep">#3c4e94</color>
+    <color name="title_color_welcome">#57B4DD</color>
+    <color name="price_color">#b30000</color>
+    <color name="toolbar_boarder">#e5e6ea</color>
+    <color name="boarder">#cbd0e1</color>
+    <color name="hint_color">#C1C7DE</color>
+
+    <color name="search_attr">#7E82ED</color>
+    <color name="rating_text">#ED8A19</color>
+
+    <color name="btn_email">#FF6A88</color>
+    <color name="btn_email_hover">#fd7e97</color>
+    <color name="accKitPrimary">#cccccc</color>
+    <color name="accKitPrimaryDark">#775C6CA8</color>
+
+    <color name="btnMain">#6a9ae6</color>
+    <color name="btnMainHover">#79a8f2</color>
+
+    <color name="colorCompleted">#7ABA01</color>
+    <color name="colorPending">#FF5600</color>
+    <color name="colorProcessing">#ED8A19</color>
+
+    <color name="detailsToolbar">#55000000</color>
+    <color name="counterBoarder">#C7CFF6</color>
+
+    <color name="detailsBoarder">#D5D8E1</color>
     <color name="transparent">#00000000</color>
     <color name="semi_transparent">#bd000000</color>
     <color name="black_transparent_70percent">#B3000000</color>
     <color name="semi_light_transparent">#5a000000</color>
     <color name="semi_lighter_transparent">#2d000000</color>
+    <color name="line_lighter_grey">#dedede</color>
+    <color name="textPrimary">#212121</color>
+    <color name="item_grey">#eeeeee</color>
+    <color name="textSecondary">#727272</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="textIconColorPrimary">#FFFFFF</color>
+    <color name="textBlack">#000000</color>
+
+    <color name="colorPrimaryLight">#b4b4b4</color>
+    <color name="colorAccentLight">#F8BBD0</color>
+    <color name="colorAccentDark">#c2185b</color>
+
+    <color name="facebook_bg">#3b5998</color>
+    <color name="facebook_bg_pressed">#2a406e</color>
+
 
     <color name="background_grey">#f2f2f2</color>
-    <color name="line_lighter_grey">#dedede</color>
     <color name="line_light_grey">#d7a7a7a7</color>
-    <color name="item_grey">#eeeeee</color>
+
     <color name="grey_lighter">#bcbcbc</color>
     <color name="grey">#d7666666</color>
 
-    <color name="white">#FFFFFF</color>
+
     <color name="organe">#F60</color>
     <color name="product_price">#B00</color>
 
